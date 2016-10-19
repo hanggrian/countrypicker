@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/country-picker-dialog.iml" filepath="$PROJECT_DIR$/country-picker-dialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/country-picker-dialog/country-picker-dialog-country-picker-dialog.iml" filepath="$PROJECT_DIR$/country-picker-dialog/country-picker-dialog-country-picker-dialog.iml" />
+      <module fileurl="file://$PROJECT_DIR$/country-picker-dialog-example/country-picker-dialog-example.iml" filepath="$PROJECT_DIR$/country-picker-dialog-example/country-picker-dialog-example.iml" />
+    </modules>
+  </component>
+</project>
