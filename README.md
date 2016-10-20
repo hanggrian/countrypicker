@@ -3,12 +3,9 @@ Android Country Picker Dialog
 
 Material design dialog to pick country.
 
-[simple] [showingcountrycode] [customizedscroller]
-
-[simple]: https://raw.githubusercontent.com/hendraanggrian/country-picker-dialog/master/screenshot/simple.png "Simple"
-[showingcountrycode]: https://raw.githubusercontent.com/hendraanggrian/country-picker-dialog/master/screenshot/showingcountrycode.png "Showing country code"
-[customizedscroller]: https://raw.githubusercontent.com/hendraanggrian/country-picker-dialog/master/screenshot/customizedscroller.png "Customized scroller"
-
+<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/country-picker-dialog/master/screenshot/simple.png">
+<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/country-picker-dialog/master/screenshot/showingcountrycode.png">
+<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/country-picker-dialog/master/screenshot/customizedscroller.png">
 
 Download
 --------
