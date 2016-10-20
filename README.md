@@ -18,8 +18,6 @@ compile 'io.github.hendraanggrian:country-picker-dialog:0.1.0'
 Usage
 -----
 
-Request single or multiple permissions:
-
 ```java
 new CountryPickerDialog.Builder(context, "Pick country")
     .onPicked(new CountryPickerDialog.OnPickedListener() {
