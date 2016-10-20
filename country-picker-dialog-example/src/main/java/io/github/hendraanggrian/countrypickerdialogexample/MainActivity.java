@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
                         .onPicked(new CountryPickerDialog.OnPickedListener() {
                             @Override
                             public void onPicked(Country country) {
-                                Toast.makeText(MainActivity.this, country.getName(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, country.getName(MainActivity.this), Toast.LENGTH_SHORT).show();
                             }
                         }).show();
             }
@@ -32,11 +32,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 new CountryPickerDialog.Builder(MainActivity.this, "Pick country code")
-                        .showCallingCode(true)
+                        .showDialCode(true)
                         .onPicked(new CountryPickerDialog.OnPickedListener() {
                             @Override
                             public void onPicked(Country country) {
-                                Toast.makeText(MainActivity.this, country.getCallingCode(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, country.getDialCode(), Toast.LENGTH_SHORT).show();
                             }
                         }).show();
             }
@@ -53,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         .onPicked(new CountryPickerDialog.OnPickedListener() {
                             @Override
                             public void onPicked(Country country) {
-                                Toast.makeText(MainActivity.this, country.getCallingCode(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, country.getDialCode(), Toast.LENGTH_SHORT).show();
                             }
                         }).show();
             }

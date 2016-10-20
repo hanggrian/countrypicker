@@ -30,7 +30,7 @@ ext {
     bintrayUserOrg = 'hendraanggrian'
     bintrayGroupId = 'io.github.hendraanggrian'
     bintrayArtifactId = 'country-picker-dialog'
-    bintrayPublishVersion = '0.1.0'
+    bintrayPublishVersion = '0.1.1'
     bintrayDesc = 'Material design dialog to pick country.'
     bintrayWebsite = 'https://github.com/hendraanggrian/country-picker-dialog'
 }

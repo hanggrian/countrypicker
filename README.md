@@ -11,14 +11,14 @@ Download
 --------
 
 ```gradle
-compile 'io.github.hendraanggrian:country-picker-dialog:0.1.0'
+compile 'io.github.hendraanggrian:country-picker-dialog:0.1.1'
 ```
 
 
 Usage
 -----
 
-
+Use 'CountryPickerDialog.Builder' to show 'CountryPickerDialog'.
 
 ```java
 new CountryPickerDialog.Builder(context, "Pick country")
@@ -35,6 +35,8 @@ All customization properties that can be applied:
 
 ```java
 new CountryPickerDialog.Builder(context, title)
+    .showDialCode(true)                     // shows country name with dial code, default is false
+    .exclude("ID", "IN", "US")              // exclude some countries on the list
     .cancellable(true)                      // default is false
     .scrollerThumbColor(color)              // default is colorAccent of your theme
     .scrollerTrackColor(color)              // default is transparent 
@@ -54,4 +56,4 @@ Acknowledges
 Thanks to:
 
  * [FastScroll](https://github.com/FutureMind/recycler-fast-scroll) for its awesome scroller.
- * [Android-country-picker](https://github.com/heetch/Android-country-picker) for its country data.
+ * [Android-country-picker](https://github.com/heetch/Android-country-picker) for its country data and flags.

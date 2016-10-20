@@ -15,13 +15,6 @@ import android.util.TypedValue;
 
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
-import java.text.Collator;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-
 import io.github.hendraanggrian.countrypicker.R;
 import io.github.hendraanggrian.countrypickerdialog.internal.CountryRecyclerAdapter;
 
@@ -35,25 +28,11 @@ public class CountryPickerDialog extends AppCompatDialog {
     @NonNull private final CountryRecyclerAdapter adapter;
     @NonNull private final FastScrollerProperties properties;
 
-    private CountryPickerDialog(@NonNull Context context, @Nullable String title, boolean cancellable, boolean showDialingCode, @Nullable OnPickedListener listener, @NonNull FastScrollerProperties properties) {
+    private CountryPickerDialog(@NonNull Context context, @Nullable String title, boolean cancellable, @Nullable String[] exclude, boolean showDialCode, @Nullable OnPickedListener listener, @NonNull FastScrollerProperties properties) {
         super(context);
-        List<Country> countries = new ArrayList<>();
-        for (String line : context.getResources().getStringArray(R.array.countries))
-            countries.add(new Country(context, line));
-        Collections.sort(countries, new Comparator<Country>() {
-            @Override
-            public int compare(Country country1, Country country2) {
-                final Locale locale = getContext().getResources().getConfiguration().locale;
-                final Collator collator = Collator.getInstance(locale);
-                collator.setStrength(Collator.PRIMARY);
-                return collator.compare(
-                        new Locale(locale.getLanguage(), country1.getIsoCode()).getDisplayCountry(),
-                        new Locale(locale.getLanguage(), country2.getIsoCode()).getDisplayCountry());
-            }
-        });
         this.title = title;
         this.cancellable = cancellable;
-        this.adapter = new CountryRecyclerAdapter(countries, showDialingCode, listener, this);
+        this.adapter = new CountryRecyclerAdapter(context, exclude, showDialCode, listener, this);
         this.properties = properties;
     }
 
@@ -91,10 +70,11 @@ public class CountryPickerDialog extends AppCompatDialog {
     public static class Builder {
         @NonNull Context context;
         @NonNull String title;
-        boolean showCallingCode = false;
+        boolean cancellable = true;
+        @Nullable String[] exclude;
+        boolean showDialCode = false;
         @Nullable OnPickedListener listener;
         @NonNull FastScrollerProperties properties;
-        boolean cancellable = true;
 
         public Builder(@NonNull Context context, @NonNull String title) {
             this.context = context;
@@ -102,8 +82,13 @@ public class CountryPickerDialog extends AppCompatDialog {
             this.properties = new FastScrollerProperties(context);
         }
 
-        public Builder showCallingCode(boolean showCallingCode) {
-            this.showCallingCode = showCallingCode;
+        public Builder exclude(String... exclude) {
+            this.exclude = exclude;
+            return this;
+        }
+
+        public Builder showDialCode(boolean showCallingCode) {
+            this.showDialCode = showCallingCode;
             return this;
         }
 
@@ -164,7 +149,7 @@ public class CountryPickerDialog extends AppCompatDialog {
         }
 
         public CountryPickerDialog build() {
-            return new CountryPickerDialog(context, title, cancellable, showCallingCode, listener, properties);
+            return new CountryPickerDialog(context, title, cancellable, exclude, showDialCode, listener, properties);
         }
 
         public CountryPickerDialog show() {

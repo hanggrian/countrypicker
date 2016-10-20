@@ -1,5 +1,6 @@
 package io.github.hendraanggrian.countrypickerdialog.internal;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -24,14 +25,16 @@ import io.github.hendraanggrian.countrypickerdialog.CountryPickerDialog;
  */
 public final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter<CountryRecyclerAdapter.ViewHolder> implements FastScrollRecyclerView.SectionedAdapter {
 
+    @NonNull private final Context context;
     @NonNull private final List<Country> countries;
-    private final boolean showCountryCode;
+    private final boolean showDialCode;
     @Nullable private final CountryPickerDialog.OnPickedListener listener;
     @NonNull private final DialogInterface dialog;
 
-    public CountryRecyclerAdapter(@NonNull List<Country> countries, boolean showCountryCode, @Nullable CountryPickerDialog.OnPickedListener listener, @NonNull DialogInterface dialog) {
-        this.countries = countries;
-        this.showCountryCode = showCountryCode;
+    public CountryRecyclerAdapter(@NonNull Context context, @Nullable String[] exclude, boolean showDialCode, @Nullable CountryPickerDialog.OnPickedListener listener, @NonNull DialogInterface dialog) {
+        this.context = context;
+        this.countries = Country.listAll(context, exclude);
+        this.showDialCode = showDialCode;
         this.listener = listener;
         this.dialog = dialog;
     }
@@ -51,10 +54,10 @@ public final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter
                 dialog.dismiss();
             }
         });
-        holder.imageView.setImageResource(countries.get(position).getFlagRes());
-        holder.textView.setText(showCountryCode
-                ? String.format("%s (%s)", countries.get(position).getName(), countries.get(position).getCallingCode())
-                : String.format("%s", countries.get(position).getName()));
+        holder.imageView.setImageResource(countries.get(position).getFlagRes(context));
+        holder.textView.setText(showDialCode
+                ? String.format("%s (%s)", countries.get(position).getName(context), countries.get(position).getDialCode())
+                : String.format("%s", countries.get(position).getName(context)));
     }
 
     @Override
@@ -65,7 +68,7 @@ public final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter
     @NonNull
     @Override
     public String getSectionName(int position) {
-        return countries.get(position).getName().substring(0, 1).toUpperCase(Locale.ENGLISH);
+        return countries.get(position).getName(context).substring(0, 1).toUpperCase(Locale.ENGLISH);
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
