@@ -28,3 +28,12 @@ new CountryPickerDialog.Builder(context, "Pick country")
     })
     .show();
 ```
+
+
+Acknowledges
+------------
+
+Thanks to:
+
+ * [FastScroll](https://github.com/FutureMind/recycler-fast-scroll) for its awesome scroller.
+ * [Android-country-picker](https://github.com/heetch/Android-country-picker) for its country data.
