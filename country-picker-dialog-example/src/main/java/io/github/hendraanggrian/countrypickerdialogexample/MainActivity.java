@@ -2,6 +2,7 @@ package io.github.hendraanggrian.countrypickerdialogexample;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Toast;
 
 import io.github.hendraanggrian.countrypickerdialog.Country;
@@ -14,13 +15,48 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        new CountryPickerDialog.Builder(this)
-                .title("Hello!")
-                .onPicked(new CountryPickerDialog.OnPickedListener() {
-                    @Override
-                    public void onPicked(Country country) {
-                        Toast.makeText(MainActivity.this, country.getName(), Toast.LENGTH_SHORT).show();
-                    }
-                }).show();
+        findViewById(R.id.button_simple).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new CountryPickerDialog.Builder(MainActivity.this, "Pick country")
+                        .onPicked(new CountryPickerDialog.OnPickedListener() {
+                            @Override
+                            public void onPicked(Country country) {
+                                Toast.makeText(MainActivity.this, country.getName(), Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
+            }
+        });
+
+        findViewById(R.id.button_showcallingcode).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new CountryPickerDialog.Builder(MainActivity.this, "Pick country code")
+                        .showCallingCode(true)
+                        .onPicked(new CountryPickerDialog.OnPickedListener() {
+                            @Override
+                            public void onPicked(Country country) {
+                                Toast.makeText(MainActivity.this, country.getCallingCode(), Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
+            }
+        });
+
+        findViewById(R.id.button_customizedscroller).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new CountryPickerDialog.Builder(MainActivity.this, "Awesome Scroller")
+                        .scrollerAutoHide(false)
+                        .scrollerThumbColor(R.color.colorPrimary)
+                        .scrollerPopupBackgroundColor(R.color.colorPrimary)
+                        .scrollerPopupTextColor(android.R.color.white)
+                        .onPicked(new CountryPickerDialog.OnPickedListener() {
+                            @Override
+                            public void onPicked(Country country) {
+                                Toast.makeText(MainActivity.this, country.getCallingCode(), Toast.LENGTH_SHORT).show();
+                            }
+                        }).show();
+            }
+        });
     }
 }

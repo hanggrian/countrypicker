@@ -1,7 +1,8 @@
-package io.github.hendraanggrian.countrypickerdialog;
+package io.github.hendraanggrian.countrypickerdialog.internal;
 
 import android.content.DialogInterface;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,22 +10,25 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
+
 import java.util.List;
 
 import io.github.hendraanggrian.countrypicker.R;
-import io.github.hendraanggrian.countrypickerdialog.internal.FastScrollRecyclerView;
+import io.github.hendraanggrian.countrypickerdialog.Country;
+import io.github.hendraanggrian.countrypickerdialog.CountryPickerDialog;
 
 /**
- * Created by hendraanggrian on 19/10/2016.
+ * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-class CountryRecyclerAdapter extends RecyclerView.Adapter<CountryRecyclerAdapter.ViewHolder> implements FastScrollRecyclerView.SectionedAdapter {
+public final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter<CountryRecyclerAdapter.ViewHolder> implements FastScrollRecyclerView.SectionedAdapter {
 
-    private final List<Country> countries;
+    @NonNull private final List<Country> countries;
     private final boolean showCountryCode;
-    private final CountryPickerDialog.OnPickedListener listener;
-    private final DialogInterface dialog;
+    @Nullable private final CountryPickerDialog.OnPickedListener listener;
+    @NonNull private final DialogInterface dialog;
 
-    CountryRecyclerAdapter(List<Country> countries, boolean showCountryCode, CountryPickerDialog.OnPickedListener listener, DialogInterface dialog) {
+    public CountryRecyclerAdapter(@NonNull List<Country> countries, boolean showCountryCode, @Nullable CountryPickerDialog.OnPickedListener listener, @NonNull DialogInterface dialog) {
         this.countries = countries;
         this.showCountryCode = showCountryCode;
         this.listener = listener;
@@ -41,7 +45,8 @@ class CountryRecyclerAdapter extends RecyclerView.Adapter<CountryRecyclerAdapter
         holder.container.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onPicked(countries.get(holder.getAdapterPosition()));
+                if (listener != null)
+                    listener.onPicked(countries.get(holder.getAdapterPosition()));
                 dialog.dismiss();
             }
         });

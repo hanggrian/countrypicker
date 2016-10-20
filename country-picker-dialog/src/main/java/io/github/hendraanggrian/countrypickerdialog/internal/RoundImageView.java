@@ -9,15 +9,13 @@ import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
 /**
- * Created by hendraanggrian on 19/10/2016.
+ * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-
-public class RoundImageView extends ImageView {
+public final class RoundImageView extends ImageView {
 
     public RoundImageView(Context context) {
         super(context);
@@ -33,24 +31,11 @@ public class RoundImageView extends ImageView {
 
     @Override
     protected void onDraw(Canvas canvas) {
-
-        Drawable drawable = getDrawable();
-
-        if (drawable == null) {
-            return;
+        if (getDrawable() != null && getWidth() != 0 && getHeight() != 0) {
+            Bitmap bitmap = ((BitmapDrawable) getDrawable()).getBitmap().copy(Bitmap.Config.ARGB_8888, true);
+            Bitmap roundBitmap = getCroppedBitmap(bitmap, getWidth());
+            canvas.drawBitmap(roundBitmap, 0, 0, null);
         }
-
-        if (getWidth() == 0 || getHeight() == 0) {
-            return;
-        }
-        Bitmap b = ((BitmapDrawable) drawable).getBitmap();
-        Bitmap bitmap = b.copy(Bitmap.Config.ARGB_8888, true);
-
-        int w = getWidth(), h = getHeight();
-
-        Bitmap roundBitmap = getCroppedBitmap(bitmap, w);
-        canvas.drawBitmap(roundBitmap, 0, 0, null);
-
     }
 
     public static Bitmap getCroppedBitmap(Bitmap bmp, int radius) {
@@ -64,11 +49,9 @@ public class RoundImageView extends ImageView {
             sbmp = bmp;
         }
 
-        Bitmap output = Bitmap.createBitmap(radius, radius,
-                Bitmap.Config.ARGB_8888);
+        Bitmap output = Bitmap.createBitmap(radius, radius, Bitmap.Config.ARGB_8888);
         Canvas canvas = new Canvas(output);
 
-        final int color = 0xffa19774;
         final Paint paint = new Paint();
         final Rect rect = new Rect(0, 0, radius, radius);
 
@@ -84,5 +67,4 @@ public class RoundImageView extends ImageView {
 
         return output;
     }
-
 }
