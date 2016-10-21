@@ -19,18 +19,18 @@ task clean(type: Delete) {
 }
 
 ext {
-    compileSdkVersion = 24
-    buildToolsVersion = '24.0.3'
+    compileSdkVersion = 25
+    buildToolsVersion = '25'
     minSdkVersion = 11
-    targetSdkVersion = 24
+    targetSdkVersion = 25
 
-    supportLibraryVersion = '24.2.1'
+    supportLibraryVersion = '25.0.0'
     fastScrollVersion = '1.0.11'
 
     bintrayUserOrg = 'hendraanggrian'
     bintrayGroupId = 'io.github.hendraanggrian'
     bintrayArtifactId = 'countrypickerdialog'
-    bintrayPublishVersion = '0.1.0'
+    bintrayPublishVersion = '0.1.1'
     bintrayDesc = 'Material design dialog to pick country.'
     bintrayWebsite = 'https://github.com/hendraanggrian/countrypickerdialog'
 }

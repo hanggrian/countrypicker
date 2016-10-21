@@ -12,14 +12,14 @@ Download
 --------
 
 ```gradle
-compile 'io.github.hendraanggrian:countrypickerdialog:0.1.0'
+compile 'io.github.hendraanggrian:countrypickerdialog:0.1.1'
 ```
 
 This library is dependent on [FastScroll](https://github.com/FutureMind/recycler-fast-scroll).
 Therefore if you have `FastScroll` on your project, use this gradle instead:
 
 ```gradle
-compile('io.github.hendraanggrian:countrypickerdialog:0.1.0') {
+compile('io.github.hendraanggrian:countrypickerdialog:0.1.1') {
     transitive = false
 }
 ```
