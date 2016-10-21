@@ -3,15 +3,25 @@ Android Country Picker Dialog
 
 Material design dialog to pick country.
 
-<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/country-picker-dialog/master/screenshot/simple.png">
-<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/country-picker-dialog/master/screenshot/showingcountrycode.png">
-<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/country-picker-dialog/master/screenshot/customizedscroller.png">
+<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/countrypickerdialog/master/screenshot/simple.png">
+<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/countrypickerdialog/master/screenshot/showingcountrycode.png">
+<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/countrypickerdialog/master/screenshot/customizedscroller.png">
+
 
 Download
 --------
 
 ```gradle
-compile 'io.github.hendraanggrian:country-picker-dialog:0.1.1'
+compile 'io.github.hendraanggrian:countrypickerdialog:0.1.0'
+```
+
+This library is dependent on [FastScroll](https://github.com/FutureMind/recycler-fast-scroll).
+Therefore if you have `FastScroll` on your project, use this gradle instead:
+
+```gradle
+compile('io.github.hendraanggrian:countrypickerdialog:0.1.0') {
+    transitive = false
+}
 ```
 
 
@@ -48,12 +58,3 @@ new CountryPickerDialog.Builder(context, title)
     .onPicked(listener)
     .show();
 ```
-
-
-Acknowledges
-------------
-
-Thanks to:
-
- * [FastScroll](https://github.com/FutureMind/recycler-fast-scroll) for its awesome scroller.
- * [Android-country-picker](https://github.com/heetch/Android-country-picker) for its country data and flags.

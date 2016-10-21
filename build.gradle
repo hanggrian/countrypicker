@@ -19,20 +19,20 @@ task clean(type: Delete) {
 }
 
 ext {
-    compileSdkVersion = 25
-    buildToolsVersion = '25'
+    compileSdkVersion = 24
+    buildToolsVersion = '24.0.3'
     minSdkVersion = 11
-    targetSdkVersion = 25
+    targetSdkVersion = 24
 
-    supportLibraryVersion = '25.0.0'
+    supportLibraryVersion = '24.2.1'
     fastScrollVersion = '1.0.11'
 
     bintrayUserOrg = 'hendraanggrian'
     bintrayGroupId = 'io.github.hendraanggrian'
-    bintrayArtifactId = 'country-picker-dialog'
-    bintrayPublishVersion = '0.1.1'
+    bintrayArtifactId = 'countrypickerdialog'
+    bintrayPublishVersion = '0.1.0'
     bintrayDesc = 'Material design dialog to pick country.'
-    bintrayWebsite = 'https://github.com/hendraanggrian/country-picker-dialog'
+    bintrayWebsite = 'https://github.com/hendraanggrian/countrypickerdialog'
 }
 
 //$ ./gradlew bintrayUpload -PbintrayUser=hendraanggrian -PbintrayKey= -PdryRun=false

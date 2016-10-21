@@ -15,9 +15,6 @@ import android.util.TypedValue;
 
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
-import io.github.hendraanggrian.countrypicker.R;
-import io.github.hendraanggrian.countrypickerdialog.internal.CountryRecyclerAdapter;
-
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */

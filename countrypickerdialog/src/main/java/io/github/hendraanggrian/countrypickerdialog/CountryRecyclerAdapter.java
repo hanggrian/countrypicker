@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.countrypickerdialog.internal;
+package io.github.hendraanggrian.countrypickerdialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -16,14 +16,10 @@ import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 import java.util.List;
 import java.util.Locale;
 
-import io.github.hendraanggrian.countrypicker.R;
-import io.github.hendraanggrian.countrypickerdialog.Country;
-import io.github.hendraanggrian.countrypickerdialog.CountryPickerDialog;
-
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter<CountryRecyclerAdapter.ViewHolder> implements FastScrollRecyclerView.SectionedAdapter {
+final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter<CountryRecyclerAdapter.ViewHolder> implements FastScrollRecyclerView.SectionedAdapter {
 
     @NonNull private final Context context;
     @NonNull private final List<Country> countries;
@@ -31,7 +27,7 @@ public final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter
     @Nullable private final CountryPickerDialog.OnPickedListener listener;
     @NonNull private final DialogInterface dialog;
 
-    public CountryRecyclerAdapter(@NonNull Context context, @Nullable String[] exclude, boolean showDialCode, @Nullable CountryPickerDialog.OnPickedListener listener, @NonNull DialogInterface dialog) {
+    CountryRecyclerAdapter(@NonNull Context context, @Nullable String[] exclude, boolean showDialCode, @Nullable CountryPickerDialog.OnPickedListener listener, @NonNull DialogInterface dialog) {
         this.context = context;
         this.countries = Country.listAll(context, exclude);
         this.showDialCode = showDialCode;

@@ -8,7 +8,7 @@
     android:paddingBottom="@dimen/dialog_country_padding_bottom"
     android:paddingTop="@dimen/dialog_country_padding_top">
 
-    <io.github.hendraanggrian.countrypickerdialog.internal.RoundImageView
+    <io.github.hendraanggrian.countrypickerdialog.RoundImageView
         android:id="@+id/imageview_country_flag"
         android:layout_width="@dimen/dialog_country_flag_size"
         android:layout_height="@dimen/dialog_country_flag_size"

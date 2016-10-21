@@ -1,4 +1,4 @@
-package io.github.hendraanggrian.countrypickerdialog.internal;
+package io.github.hendraanggrian.countrypickerdialog;
 
 import android.content.Context;
 import android.graphics.Bitmap;
