@@ -8,8 +8,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/countrypickerdialog" />
-            <option value="$PROJECT_DIR$/countrypickerdialog-example" />
+            <option value="$PROJECT_DIR$/countrypickerdialog-commons" />
+            <option value="$PROJECT_DIR$/countrypickerdialog-core" />
+            <option value="$PROJECT_DIR$/countrypickerdialog-demo" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

@@ -1,22 +1,19 @@
-Android Country Picker Dialog
-=============================
-
+CountryPickerDialog
+===================
 Material design dialog to pick country.
 
-<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/countrypickerdialog/master/screenshot/simple.png">
-<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/countrypickerdialog/master/screenshot/showingcountrycode.png">
-<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/countrypickerdialog/master/screenshot/customizedscroller.png">
+<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/countrypickerdialog/master/screenshot/ss_feature_simple.png">
+<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/countrypickerdialog/master/screenshot/ss_feature_showingcountrycode.png">
+<img width="256" src="https://raw.githubusercontent.com/hendraanggrian/countrypickerdialog/master/screenshot/ss_feature_customizedscroller.png">
 
 Download
 --------
-
 ```gradle
 compile 'io.github.hendraanggrian:countrypickerdialog:0.1.1@aar'
 ```
 
 Usage
 -----
-
 Use 'CountryPickerDialog.Builder' to show 'CountryPickerDialog'.
 
 ```java
@@ -38,9 +35,9 @@ new CountryPickerDialog.Builder(context, title)
     .exclude("ID", "IN", "US")              // exclude some countries on the list
     .cancellable(true)                      // default is false
     .scrollerThumbColor(color)              // default is colorAccent of your theme
-    .scrollerTrackColor(color)              // default is transparent 
+    .scrollerTrackColor(color)              // default is transparent
     .scrollerPopupBackgroundColor(color)    // default is colorAccent of your theme
-    .scrollerPopupTextColor(color)          // default is colorControlNormal of your theme 
+    .scrollerPopupTextColor(color)          // default is colorControlNormal of your theme
     .scrollerPopupTextSize(14, true)        // use false to use 14px or true to use 14dp
     .scrollerPopupTextTypeface(typeface)
     .scrollerAutoHide(false, 0)             // default is true with 1500ms delay
