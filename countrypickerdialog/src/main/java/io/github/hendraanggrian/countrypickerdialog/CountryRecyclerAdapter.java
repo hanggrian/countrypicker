@@ -19,55 +19,69 @@ import java.util.Locale;
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter<CountryRecyclerAdapter.Holder> implements FastScrollRecyclerView.SectionedAdapter {
+final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter<CountryRecyclerAdapter.TextHolder> implements FastScrollRecyclerView.SectionedAdapter {
 
-    private final static int TYPE_IMAGE = 1;
-    private final static int TYPE_EMOJI = 2;
+    private final static int TYPE_TEXT = 1;
+    private final static int TYPE_IMAGE = 2;
+    private final static int TYPE_EMOJI = 3;
 
     @NonNull private final Context context;
     @NonNull private final List<Country> countries;
+    private final boolean showFlags;
     private final boolean showDialCode;
     @Nullable private final CountryPickerDialog.OnPickedListener listener;
     @NonNull private final DialogInterface dialog;
 
-    CountryRecyclerAdapter(@NonNull Context context, @NonNull List<Country> countries, boolean showDialCode, @Nullable CountryPickerDialog.OnPickedListener listener, @NonNull DialogInterface dialog) {
+    CountryRecyclerAdapter(
+            @NonNull Context context,
+            @NonNull List<Country> countries,
+            boolean showFlags,
+            boolean showDialCode,
+            @Nullable CountryPickerDialog.OnPickedListener listener,
+            @NonNull DialogInterface dialog) {
         this.context = context;
         this.countries = countries;
+        this.showFlags = showFlags;
         this.showDialCode = showDialCode;
         this.listener = listener;
         this.dialog = dialog;
     }
 
     @Override
-    public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return viewType == TYPE_IMAGE
-                ? new ImageHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_country_image, parent, false))
-                : new EmojiHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_country_emoji, parent, false));
+    public TextHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        switch (viewType) {
+            case TYPE_TEXT:
+                return new TextHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_country_text, parent, false));
+            case TYPE_EMOJI:
+                return new EmojiHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_country_emoji, parent, false));
+            default:
+                return new ImageHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_country_image, parent, false));
+        }
     }
 
     @Override
-    public void onBindViewHolder(final CountryRecyclerAdapter.Holder holder, int position) {
-        holder.viewGroup.setOnClickListener(new View.OnClickListener() {
+    public void onBindViewHolder(final TextHolder textHolder, int position) {
+        textHolder.viewGroup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (listener != null)
-                    listener.onPicked(countries.get(holder.getAdapterPosition()));
+                    listener.onPicked(countries.get(textHolder.getAdapterPosition()));
                 dialog.dismiss();
             }
         });
-        holder.textViewName.setText(showDialCode
+        textHolder.textViewName.setText(showDialCode
                 ? String.format("%s (%s)", countries.get(position).toString(context), countries.get(position).getDialCode())
                 : String.format("%s", countries.get(position).toString(context)));
 
-        if (holder instanceof ImageHolder)
-            ((ImageHolder) holder).imageViewFlag.setImageResource(countries.get(position).getFlagDrawableRes(context));
-        else if (holder instanceof EmojiHolder)
-            ((EmojiHolder) holder).textViewFlag.setText(countries.get(position).getFlagEmoji());
+        if (textHolder instanceof ImageHolder)
+            ((ImageHolder) textHolder).imageViewFlag.setImageResource(countries.get(position).getFlagDrawableRes(context));
+        else if (textHolder instanceof EmojiHolder)
+            ((EmojiHolder) textHolder).textViewFlag.setText(countries.get(position).getFlagEmoji());
     }
 
     @Override
     public int getItemViewType(int position) {
-        return countries.get(position).isFlagDrawableAvailable(context)
+        return !showFlags ? TYPE_TEXT : countries.get(position).isFlagDrawableAvailable(context)
                 ? TYPE_IMAGE
                 : TYPE_EMOJI;
     }
@@ -83,7 +97,7 @@ final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter<Countr
         return countries.get(position).toString(context).substring(0, 1).toUpperCase(Locale.ENGLISH);
     }
 
-    static final class ImageHolder extends Holder {
+    private static final class ImageHolder extends TextHolder {
         private final ImageView imageViewFlag;
 
         ImageHolder(View itemView) {
@@ -92,7 +106,7 @@ final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter<Countr
         }
     }
 
-    static final class EmojiHolder extends Holder {
+    private static final class EmojiHolder extends TextHolder {
         private final TextView textViewFlag;
 
         EmojiHolder(View itemView) {
@@ -101,11 +115,11 @@ final class CountryRecyclerAdapter extends FastScrollRecyclerView.Adapter<Countr
         }
     }
 
-    static abstract class Holder extends RecyclerView.ViewHolder {
+    static class TextHolder extends RecyclerView.ViewHolder {
         private final ViewGroup viewGroup;
         private final TextView textViewName;
 
-        Holder(View itemView) {
+        TextHolder(View itemView) {
             super(itemView);
             viewGroup = (ViewGroup) itemView.findViewById(R.id.viewgroup_country);
             textViewName = (TextView) itemView.findViewById(R.id.textview_country_name);

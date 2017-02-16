@@ -7,13 +7,14 @@ import android.support.annotation.NonNull;
 
 import java.util.Locale;
 
+import io.github.hendraanggrian.countrypickerdialog.internal.RegionalIndicatorSymbol;
+
 import static android.os.Build.VERSION_CODES.N;
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
 public enum Country {
-
     AD("AD", "376"),
     AE("AE", "971"),
     AF("AF", "93"),
@@ -273,14 +274,6 @@ public enum Country {
     }
 
     @NonNull
-    public String toString(@NonNull Context context) {
-        if (Build.VERSION.SDK_INT < N)
-            return new Locale(context.getResources().getConfiguration().locale.getLanguage(), isoCode).getDisplayCountry();
-        else
-            return new Locale(context.getResources().getConfiguration().getLocales().get(0).getLanguage(), isoCode).getDisplayCountry();
-    }
-
-    @NonNull
     public String getDialCode() {
         return "+" + dialCode;
     }
@@ -296,64 +289,29 @@ public enum Country {
 
     @NonNull
     public String getFlagEmoji() {
-        return RegionalIndicatorSymbolLetter.valueOf(isoCode.charAt(0)).toString()
-                + RegionalIndicatorSymbolLetter.valueOf(isoCode.charAt(1)).toString();
+        return RegionalIndicatorSymbol.valueOf(isoCode.charAt(0)).toString() + RegionalIndicatorSymbol.valueOf(isoCode.charAt(1)).toString();
     }
 
     @NonNull
-    public static Country fromIsoCode(@NonNull String isoCode) {
-        for (Country value : values())
-            if (value.isoCode.equals(isoCode))
-                return value;
-        throw new RuntimeException(String.format("String '%s' is not a valid country iso code!", isoCode));
+    public String toString(@NonNull Context context) {
+        return toLocale(context).getDisplayCountry();
     }
 
-    public enum RegionalIndicatorSymbolLetter {
-        A('A', 0x1F1E6),
-        B('B', 0x1F1E7),
-        C('C', 0x1F1E8),
-        D('D', 0x1F1E9),
-        E('E', 0x1F1EA),
-        F('F', 0x1F1EB),
-        G('G', 0x1F1EC),
-        H('H', 0x1F1ED),
-        I('I', 0x1F1EE),
-        J('J', 0x1F1EF),
-        K('K', 0x1F1F0),
-        L('L', 0x1F1F1),
-        M('M', 0x1F1F2),
-        N('N', 0x1F1F3),
-        O('O', 0x1F1F4),
-        P('P', 0x1F1F5),
-        Q('Q', 0x1F1F6),
-        R('R', 0x1F1F7),
-        S('S', 0x1F1F8),
-        T('T', 0x1F1F9),
-        U('U', 0x1F1FA),
-        V('V', 0x1F1FB),
-        W('W', 0x1F1FC),
-        X('X', 0x1F1FD),
-        Y('Y', 0x1F1FE),
-        Z('Z', 0x1F1FF);
+    @NonNull
+    public Locale toLocale(@NonNull Context context) {
+        if (Build.VERSION.SDK_INT < N)
+            return new Locale(context.getResources().getConfiguration().locale.getLanguage(), isoCode);
+        else
+            return new Locale(context.getResources().getConfiguration().getLocales().get(0).getLanguage(), isoCode);
+    }
 
-        private final char letter;
-        private final int codepoint;
-
-        RegionalIndicatorSymbolLetter(char letter, int codepoint) {
-            this.letter = letter;
-            this.codepoint = codepoint;
-        }
-
-        @Override
-        public String toString() {
-            return String.valueOf(Character.toChars(codepoint));
-        }
-
-        public static RegionalIndicatorSymbolLetter valueOf(char letter) {
-            for (RegionalIndicatorSymbolLetter value : values())
-                if (value.letter == letter)
-                    return value;
-            throw new RuntimeException(String.format("char '%s' is not a valid letter!", letter));
-        }
+    @NonNull
+    public static Country valueOf(@NonNull String name, boolean isIsoCode) {
+        if (!isIsoCode)
+            return valueOf(name);
+        for (Country value : values())
+            if (value.isoCode.equals(name))
+                return value;
+        throw new RuntimeException(String.format("String '%s' is not a valid country iso code!", name));
     }
 }

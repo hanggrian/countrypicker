@@ -3,8 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/countrypickerdialog.iml" filepath="$PROJECT_DIR$/countrypickerdialog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/countrypickerdialog-commons/countrypickerdialog-commons.iml" filepath="$PROJECT_DIR$/countrypickerdialog-commons/countrypickerdialog-commons.iml" />
-      <module fileurl="file://$PROJECT_DIR$/countrypickerdialog-core/countrypickerdialog-core.iml" filepath="$PROJECT_DIR$/countrypickerdialog-core/countrypickerdialog-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/countrypickerdialog/countrypickerdialog-countrypickerdialog.iml" filepath="$PROJECT_DIR$/countrypickerdialog/countrypickerdialog-countrypickerdialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/countrypickerdialog-demo/countrypickerdialog-demo.iml" filepath="$PROJECT_DIR$/countrypickerdialog-demo/countrypickerdialog-demo.iml" />
     </modules>
   </component>

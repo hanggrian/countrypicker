@@ -33,7 +33,7 @@ public class CountryPickerDialog extends AppCompatDialog {
         super(builder.context);
         this.title = builder.title;
         this.cancellable = builder.cancellable;
-        this.adapter = new CountryRecyclerAdapter(builder.context, Arrays.asList(Country.values()), builder.showDialCode, builder.listener, this);
+        this.adapter = new CountryRecyclerAdapter(builder.context, Arrays.asList(Country.values()), builder.showFlags, builder.showDialCode, builder.listener, this);
         this.properties = builder.properties;
     }
 
@@ -66,7 +66,7 @@ public class CountryPickerDialog extends AppCompatDialog {
     }
 
     public interface OnPickedListener {
-        void onPicked(Country country);
+        void onPicked(@NonNull Country country);
     }
 
     public static class Builder {
@@ -74,8 +74,9 @@ public class CountryPickerDialog extends AppCompatDialog {
         @NonNull private final String title;
         @NonNull private final List<Country> countries;
         @NonNull private final FastScrollerProperties properties;
-        private boolean cancellable = true;
+        private boolean showFlags = true;
         private boolean showDialCode = false;
+        private boolean cancellable = true;
         @Nullable OnPickedListener listener;
 
         public Builder(@NonNull Context context, @NonNull String title) {
@@ -89,47 +90,62 @@ public class CountryPickerDialog extends AppCompatDialog {
             this.properties = new FastScrollerProperties(context);
         }
 
+        @NonNull
         public Builder exclude(@NonNull String... isoCodes) {
             for (String isoCode : isoCodes)
-                this.countries.remove(Country.fromIsoCode(isoCode));
+                this.countries.remove(Country.valueOf(isoCode, true));
             return this;
         }
 
-        public Builder cancellable(boolean cancellable) {
-            this.cancellable = cancellable;
+        @NonNull
+        public Builder showFlags(boolean showFlags) {
+            this.showFlags = showFlags;
             return this;
         }
 
+        @NonNull
         public Builder showDialCode(boolean showCallingCode) {
             this.showDialCode = showCallingCode;
             return this;
         }
 
+        @NonNull
+        public Builder cancellable(boolean cancellable) {
+            this.cancellable = cancellable;
+            return this;
+        }
+
+        @NonNull
         public Builder onPicked(OnPickedListener listener) {
             this.listener = listener;
             return this;
         }
 
+        @NonNull
         public Builder scrollerThumbColor(@ColorRes int color) {
             this.properties.thumbColor = ContextCompat.getColor(context, color);
             return this;
         }
 
+        @NonNull
         public Builder scrollerTrackColor(@ColorRes int color) {
             this.properties.trackColor = ContextCompat.getColor(context, color);
             return this;
         }
 
+        @NonNull
         public Builder scrollerPopupBackgroundColor(@ColorRes int color) {
             this.properties.popupBgColor = ContextCompat.getColor(context, color);
             return this;
         }
 
+        @NonNull
         public Builder scrollerPopupTextColor(@ColorRes int color) {
             this.properties.popupTextColor = ContextCompat.getColor(context, color);
             return this;
         }
 
+        @NonNull
         public Builder scrollerPopupTextSize(int textSize, boolean useDp) {
             this.properties.popupTextSize = useDp
                     ? (int) (textSize * context.getResources().getDisplayMetrics().density)
@@ -137,29 +153,35 @@ public class CountryPickerDialog extends AppCompatDialog {
             return this;
         }
 
+        @NonNull
         public Builder scrollerPopupTextSize(int textSize) {
             return scrollerPopupTextSize(textSize, false);
         }
 
+        @NonNull
         public Builder scrollerPopupTextTypeface(Typeface typeface) {
             this.properties.popupTextTypeface = typeface;
             return this;
         }
 
+        @NonNull
         public Builder scrollerAutoHide(boolean autoHideEnabled, int autoHideDelay) {
             this.properties.autoHideEnabled = autoHideEnabled;
             this.properties.autoHideDelay = autoHideDelay;
             return this;
         }
 
+        @NonNull
         public Builder scrollerAutoHide(boolean autoHideEnabled) {
             return scrollerAutoHide(autoHideEnabled, 1500);
         }
 
+        @NonNull
         public CountryPickerDialog build() {
             return new CountryPickerDialog(this);
         }
 
+        @NonNull
         public CountryPickerDialog show() {
             CountryPickerDialog dialog = build();
             dialog.show();
@@ -184,7 +206,7 @@ public class CountryPickerDialog extends AppCompatDialog {
             popupTextColor = getThemeColor(context, R.attr.colorControlNormal);
         }
 
-        private int getThemeColor(@NonNull final Context context, @AttrRes final int attributeColor) {
+        private int getThemeColor(@NonNull Context context, @AttrRes int attributeColor) {
             final TypedValue value = new TypedValue();
             context.getTheme().resolveAttribute(attributeColor, value, true);
             return value.data;

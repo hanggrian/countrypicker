@@ -15,10 +15,16 @@
         android:text="Simple"/>
 
     <Button
-        android:id="@+id/button_showcallingcode"
+        android:id="@+id/button_noflag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show Calling Code"/>
+        android:text="Without flags"/>
+
+    <Button
+        android:id="@+id/button_showdialcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="With Dial Code"/>
 
     <Button
         android:id="@+id/button_customizedscroller"

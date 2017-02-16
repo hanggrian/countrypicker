@@ -1,1 +1,1 @@
-include ':countrypickerdialog-core', ':countrypickerdialog-commons', ':countrypickerdialog-demo'
+include ':countrypickerdialog', ':countrypickerdialog-demo'

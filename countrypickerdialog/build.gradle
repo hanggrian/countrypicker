@@ -18,7 +18,7 @@ dependencies {
     deps.androidTest.each {
         androidTestCompile it
     }
-    deps.core.each {
+    deps.main.each {
         compile it
     }
 }
@@ -26,7 +26,7 @@ dependencies {
 publish {
     userOrg = bintray.user
     groupId = bintray.group
-    artifactId = bintray.artifact.core
+    artifactId = bintray.artifact
     publishVersion = bintray.version
     desc = bintray.desc
     website = bintray.website
