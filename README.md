@@ -1,5 +1,5 @@
-![logo](/art/logo.png) CountryPickerDialog
-==========================================
+![logo](/art/logo.png) CountryDialog
+====================================
 Material design dialog to pick country.
 
 ![Simple](/art/ss_feature_simple.png)
@@ -16,11 +16,11 @@ dependencies {
 
 Usage
 -----
-Use 'CountryPickerDialog.Builder' to show 'CountryPickerDialog'.
+Use 'CountryDialog.Builder' to build or show 'CountryDialog'.
 ```java
-new CountryPickerDialog.Builder(context, "Pick country")
+new CountryDialog.Builder(context)
     .title("Pick country")
-    .onSelected(new CountryPickerDialog.OnSelectedListener() {
+    .onSelected(new CountryDialog.OnSelectedListener() {
         @Override
         public void onSelected(@NonNull Country country) {
             // do something
@@ -31,7 +31,8 @@ new CountryPickerDialog.Builder(context, "Pick country")
 
 All customization properties that can be applied:
 ```java
-new CountryPickerDialog.Builder(context, title)
+new CountryDialog.Builder(context)
+    .title(title)                           // when not set or empty, title bar is hidden
     .showFlags(false)                       // show flag images, default is true
     .showDialCode(true)                     // shows country name with dial code, default is false
     .exclude(Country.ID, Country.US)        // exclude some countries on the list
