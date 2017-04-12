@@ -9,7 +9,9 @@ Material design dialog to pick country.
 Download
 --------
 ```gradle
-compile 'io.github.hendraanggrian:countrypickerdialog-core:0.2.0'
+dependencies {
+    compile 'com.hendraanggrian:countrydialog:0.3.0'
+}
 ```
 
 Usage
@@ -17,9 +19,10 @@ Usage
 Use 'CountryPickerDialog.Builder' to show 'CountryPickerDialog'.
 ```java
 new CountryPickerDialog.Builder(context, "Pick country")
-    .onPicked(new CountryPickerDialog.OnPickedListener() {
+    .title("Pick country")
+    .onSelected(new CountryPickerDialog.OnSelectedListener() {
         @Override
-        public void onPicked(@NonNull Country country) {
+        public void onSelected(@NonNull Country country) {
             // do something
         }
     })
