@@ -90,8 +90,12 @@ public class CountryDialog extends AppCompatDialog {
         @Nullable private OnSelectedListener listener;
 
         public Builder(@NonNull Context context) {
+            this(context, Arrays.asList(Country.values()));
+        }
+
+        public Builder(@NonNull Context context, @NonNull List<Country> countries) {
             this.context = context;
-            this.countries = Arrays.asList(Country.values());
+            this.countries = countries;
             this.properties = new FastScrollerProperties(context);
         }
 
