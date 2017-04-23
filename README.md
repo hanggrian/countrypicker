@@ -1,16 +1,16 @@
-![logo](/art/logo.png) CountryDialog
-====================================
+CountryDialog
+=============
 Material design dialog to pick country.
 
-![Simple](/art/ss_feature_simple.png)
-![With Country Code](/art/ss_feature_showingcountrycode.png)
-![Customized Scroller](/art/ss_feature_customizedscroller.png)
+![Simple](/art/screenshot_feature_simple.png)
+![With Country Code](/art/screenshot_feature_showingcountrycode.png)
+![Customized Scroller](/art/screenshot_feature_customizedscroller.png)
 
 Download
 --------
 ```gradle
 dependencies {
-    compile 'com.hendraanggrian:countrydialog:0.3.1'
+    compile 'com.hendraanggrian:countrydialog:0.3.2'
 }
 ```
 
@@ -50,13 +50,13 @@ new CountryDialog.Builder(context)
 
 Country flags
 -------------
-![Emoji flags](/art/ss_type_emoji.png)
+![Emoji flags](/art/screenshot_type_emoji.png)
 
 By default, country flags are represented in emoji to achieve lowest library size.
 
-![Image flags](/art/ss_type_image.png)
+![Image flags](/art/screenshot_type_image.png)
 
 To use custom flag images, have a drawable with name format `flag_{2-digit iso code}` in your project.
 For example if you want to display US flag, the drawable name should be `flag_us`.
 
-See [Country.java](/countrypickerdialog/src/main/java/io/github/hendraanggrian/countrypickerdialog/Country.java) for all available country codes.
+See [Country.java](/countrydialog/src/main/java/com/hendraanggrian/countrydialog/Country.java) for all available country codes.

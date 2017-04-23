@@ -18,7 +18,7 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext.android = [
+ext.config = [
         sdk       : [
                 'min'   : 11,
                 'target': 25
@@ -27,26 +27,30 @@ ext.android = [
         testRunner: 'android.support.test.runner.AndroidJUnitRunner'
 ]
 
+def versionJunit = '4.12'
+def versionTestRunner = '0.5'
+def versionTestEspresso = '2.2.2'
+def versionSupport = '25.3.1'
+def versionFastScroll = '1.0.14'
+
 ext.deps = [
-        test       : [
-                'junit:junit:4.12'
-        ],
-        androidTest: [
-                'com.android.support.test:runner:0.5',
-                'com.android.support.test.espresso:espresso-core:2.2.2'
-        ],
-        main       : [
-                'com.android.support:appcompat-v7:25.3.1',
-                'com.android.support:recyclerview-v7:25.3.1',
-                'com.simplecityapps:recyclerview-fastscroll:1.0.14'
-        ]
+        // test
+        junit              : "junit:junit:$versionJunit",
+        // android test
+        testRunner         : "com.android.support.test:runner:$versionTestRunner",
+        testEspresso       : "com.android.support.test.espresso:espresso-core:$versionTestEspresso",
+        // android
+        supportAppcompat   : "com.android.support:appcompat-v7:$versionSupport",
+        supportRecyclerview: "com.android.support:recyclerview-v7:$versionSupport",
+        // third-party
+        fastScroll         : "com.simplecityapps:recyclerview-fastscroll:$versionFastScroll"
 ]
 
 ext.bintray = [
         user    : 'hendraanggrian',
         group   : 'com.hendraanggrian',
         artifact: 'countrydialog',
-        version : '0.3.1',
+        version : '0.3.2',
         desc    : 'Material design dialog to pick country.',
         website : 'https://github.com/hendraanggrian/countrydialog'
 ]

@@ -11,6 +11,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.Window;
 
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
@@ -36,10 +37,16 @@ public class CountryDialog extends AppCompatDialog {
         this.properties = builder.properties;
         this.adapter = new CountryAdapter(builder.context, builder.countries, builder.showFlags, builder.showDialCode) {
             @Override
-            public void onSelected(@NonNull Country country) {
-                if (listener != null)
-                    listener.onSelected(country);
-                dismiss();
+            public void onBindViewHolder(final TextHolder holder, int position) {
+                super.onBindViewHolder(holder, position);
+                holder.viewGroup.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (listener != null)
+                            listener.onSelected(countries.get(holder.getAdapterPosition()));
+                        dismiss();
+                    }
+                });
             }
         };
         if (TextUtils.isEmpty(title))

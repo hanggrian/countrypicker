@@ -12,22 +12,24 @@ import android.widget.TextView;
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
 
 /**
  * @author Hendra Anggrian (hendraanggrian@gmail.com)
  */
-public abstract class CountryAdapter extends FastScrollRecyclerView.Adapter<CountryAdapter.TextHolder> implements CountryDialog.OnSelectedListener, FastScrollRecyclerView.SectionedAdapter {
+public class CountryAdapter extends FastScrollRecyclerView.Adapter<CountryAdapter.TextHolder> implements FastScrollRecyclerView.SectionedAdapter {
 
     private final static int TYPE_TEXT = 1;
     private final static int TYPE_IMAGE = 2;
     private final static int TYPE_EMOJI = 3;
 
-    @NonNull private final Context context;
-    @NonNull private final List<Country> countries;
-    private final boolean showFlags;
-    private final boolean showDialCode;
+    @NonNull protected final Context context;
+    @NonNull protected final List<Country> countries;
+    protected final boolean showFlags;
+    protected final boolean showDialCode;
 
     public CountryAdapter(@NonNull Context context) {
         this(context, true, false);
@@ -37,7 +39,13 @@ public abstract class CountryAdapter extends FastScrollRecyclerView.Adapter<Coun
         this(context, Arrays.asList(Country.values()), showFlags, showDialCode);
     }
 
-    public CountryAdapter(@NonNull Context context, @NonNull List<Country> countries, boolean showFlags, boolean showDialCode) {
+    public CountryAdapter(@NonNull final Context context, @NonNull List<Country> countries, boolean showFlags, boolean showDialCode) {
+        Collections.sort(countries, new Comparator<Country>() {
+            @Override
+            public int compare(Country o1, Country o2) {
+                return o1.getName(context).compareTo(o2.getName(context));
+            }
+        });
         this.context = context;
         this.countries = countries;
         this.showFlags = showFlags;
@@ -57,21 +65,14 @@ public abstract class CountryAdapter extends FastScrollRecyclerView.Adapter<Coun
     }
 
     @Override
-    public void onBindViewHolder(final TextHolder textHolder, int position) {
-        textHolder.viewGroup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onSelected(countries.get(textHolder.getAdapterPosition()));
-            }
-        });
-        textHolder.textViewName.setText(showDialCode
+    public void onBindViewHolder(final TextHolder holder, int position) {
+        holder.textViewName.setText(showDialCode
                 ? String.format("%s (%s)", countries.get(position).getName(context), countries.get(position).getDialCode())
-                : String.format("%s", countries.get(position).getName(context)));
-
-        if (textHolder instanceof ImageHolder)
-            ((ImageHolder) textHolder).imageViewFlag.setImageResource(countries.get(position).getFlagDrawableRes(context));
-        else if (textHolder instanceof EmojiHolder)
-            ((EmojiHolder) textHolder).textViewFlag.setText(countries.get(position).getFlagEmoji());
+                : countries.get(position).getName(context));
+        if (holder instanceof ImageHolder)
+            ((ImageHolder) holder).imageViewFlag.setImageResource(countries.get(position).getFlagDrawableRes(context));
+        else if (holder instanceof EmojiHolder)
+            ((EmojiHolder) holder).textViewFlag.setText(countries.get(position).getFlagEmoji());
     }
 
     @Override
@@ -93,7 +94,7 @@ public abstract class CountryAdapter extends FastScrollRecyclerView.Adapter<Coun
     }
 
     protected static final class ImageHolder extends TextHolder {
-        private final ImageView imageViewFlag;
+        protected final ImageView imageViewFlag;
 
         ImageHolder(View itemView) {
             super(itemView);
@@ -102,7 +103,7 @@ public abstract class CountryAdapter extends FastScrollRecyclerView.Adapter<Coun
     }
 
     protected static final class EmojiHolder extends TextHolder {
-        private final TextView textViewFlag;
+        protected final TextView textViewFlag;
 
         EmojiHolder(View itemView) {
             super(itemView);
@@ -111,8 +112,8 @@ public abstract class CountryAdapter extends FastScrollRecyclerView.Adapter<Coun
     }
 
     protected static class TextHolder extends RecyclerView.ViewHolder {
-        private final ViewGroup viewGroup;
-        private final TextView textViewName;
+        protected final ViewGroup viewGroup;
+        protected final TextView textViewName;
 
         TextHolder(View itemView) {
             super(itemView);

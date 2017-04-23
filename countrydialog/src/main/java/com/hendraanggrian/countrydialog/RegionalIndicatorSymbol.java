@@ -51,6 +51,6 @@ enum RegionalIndicatorSymbol {
         for (RegionalIndicatorSymbol value : values())
             if (value.letter == letter)
                 return value;
-        throw new RuntimeException(String.format("char '%s' is not a valid letter!", letter));
+        throw new IllegalArgumentException(letter + " is not a valid Regional indicator symbol!");
     }
 }

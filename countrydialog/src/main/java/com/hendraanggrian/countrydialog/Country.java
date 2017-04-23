@@ -263,8 +263,8 @@ public enum Country {
     ZM("ZM", "260"),
     ZW("ZW", "263");
 
-    @NonNull private final String isoCode;
-    @NonNull private final String dialCode;
+    @NonNull public final String isoCode;
+    @NonNull public final String dialCode;
 
     Country(@NonNull String isoCode, @NonNull String dialCode) {
         this.isoCode = isoCode;
@@ -273,7 +273,7 @@ public enum Country {
 
     @NonNull
     public String getDialCode() {
-        return "+" + dialCode;
+        return '+' + dialCode;
     }
 
     public boolean isFlagDrawableAvailable(@NonNull Context context) {
@@ -307,6 +307,6 @@ public enum Country {
         for (Country value : values())
             if (value.isoCode.equals(isoCode))
                 return value;
-        throw new RuntimeException(String.format("String '%s' is not a valid country iso code!", isoCode));
+        throw new IllegalArgumentException(isoCode + " is not a valid country iso code!");
     }
 }
