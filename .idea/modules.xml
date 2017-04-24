@@ -3,13 +3,10 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/countrydialog.iml" filepath="$PROJECT_DIR$/countrydialog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/countrydialog.iml" filepath="$PROJECT_DIR$/countrydialog.iml" />
-      <module fileurl="file://$PROJECT_DIR$/countrydialog/countrydialog-countrydialog.iml" filepath="$PROJECT_DIR$/countrydialog/countrydialog-countrydialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/countrydialog/countrydialog-countrydialog.iml" filepath="$PROJECT_DIR$/countrydialog/countrydialog-countrydialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/countrypickerdialog.iml" filepath="$PROJECT_DIR$/countrypickerdialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/countrypickerdialog/countrypickerdialog-countrypickerdialog.iml" filepath="$PROJECT_DIR$/countrypickerdialog/countrypickerdialog-countrypickerdialog.iml" />
       <module fileurl="file://$PROJECT_DIR$/countrypickerdialog-demo/countrypickerdialog-demo.iml" filepath="$PROJECT_DIR$/countrypickerdialog-demo/countrypickerdialog-demo.iml" />
-      <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
       <module fileurl="file://$PROJECT_DIR$/example/example.iml" filepath="$PROJECT_DIR$/example/example.iml" />
     </modules>
   </component>

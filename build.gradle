@@ -50,7 +50,7 @@ ext.bintray = [
         user    : 'hendraanggrian',
         group   : 'com.hendraanggrian',
         artifact: 'countrydialog',
-        version : '0.3.2',
+        version : '0.3.3',
         desc    : 'Material design dialog to pick country.',
         website : 'https://github.com/hendraanggrian/countrydialog'
 ]

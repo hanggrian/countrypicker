@@ -10,7 +10,7 @@ Download
 --------
 ```gradle
 dependencies {
-    compile 'com.hendraanggrian:countrydialog:0.3.2'
+    compile 'com.hendraanggrian:countrydialog:0.3.3'
 }
 ```
 

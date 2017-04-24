@@ -219,7 +219,7 @@ public class CountryDialog extends AppCompatDialog {
             thumbColor = AttrsUtils.getColor(context, R.attr.colorAccent);
             trackColor = ContextCompat.getColor(context, android.R.color.transparent);
             popupBgColor = AttrsUtils.getColor(context, R.attr.colorAccent);
-            popupTextColor = AttrsUtils.getColor(context, R.attr.colorControlNormal);
+            popupTextColor = AttrsUtils.getColor(context, android.R.attr.windowBackground);
         }
     }
 }
