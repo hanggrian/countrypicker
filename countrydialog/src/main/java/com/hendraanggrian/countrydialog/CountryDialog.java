@@ -16,7 +16,9 @@ import android.view.Window;
 
 import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -100,9 +102,9 @@ public class CountryDialog extends AppCompatDialog {
             this(context, Arrays.asList(Country.values()));
         }
 
-        public Builder(@NonNull Context context, @NonNull List<Country> countries) {
+        public Builder(@NonNull Context context, @NonNull Collection<Country> countries) {
             this.context = context;
-            this.countries = countries;
+            this.countries = new ArrayList<>(countries); // ensure collection is mutable
             this.properties = new FastScrollerProperties(context);
         }
 
