@@ -3,7 +3,11 @@ package com.hendraanggrian.appcompat.countrydialog;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.TextUtils;
+import android.text.TextWatcher;
+import android.view.View;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -16,16 +20,19 @@ import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.SearchView2;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.Window.FEATURE_NO_TITLE;
 
-public class CountryDialog extends AppCompatDialog implements SearchView.OnQueryTextListener {
+public class CountryDialog extends AppCompatDialog implements TextWatcher,
+        SearchView.OnQueryTextListener, View.OnClickListener {
 
     private OnSelectedListener listener;
     private final CountryAdapter adapter;
 
-    private SearchView input;
+    private SearchView2 input;
+    private ImageButton button;
     private RecyclerView list;
 
     public CountryDialog(@NonNull Context context) {
@@ -63,17 +70,31 @@ public class CountryDialog extends AppCompatDialog implements SearchView.OnQuery
         setContentView(R.layout.countrydialog_content);
 
         input = findViewById(android.R.id.input);
-        if (input == null) {
-            throw new IllegalStateException();
-        }
+        assert input != null;
+        input.getEditText().addTextChangedListener(this);
         input.setOnQueryTextListener(this);
 
+        button = findViewById(android.R.id.button1);
+        assert button != null;
+        button.setOnClickListener(this);
+
         list = findViewById(android.R.id.list);
-        if (list == null) {
-            throw new IllegalStateException();
-        }
+        assert list != null;
         list.setAdapter(adapter);
         list.setHasFixedSize(true);
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+    }
+
+    @Override
+    public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+        button.setVisibility(TextUtils.isEmpty(charSequence) ? View.VISIBLE : View.GONE);
+    }
+
+    @Override
+    public void afterTextChanged(Editable editable) {
     }
 
     @Override
@@ -86,6 +107,11 @@ public class CountryDialog extends AppCompatDialog implements SearchView.OnQuery
     public boolean onQueryTextChange(String newText) {
         adapter.getFilter().filter(newText);
         return false;
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 
     @NonNull
