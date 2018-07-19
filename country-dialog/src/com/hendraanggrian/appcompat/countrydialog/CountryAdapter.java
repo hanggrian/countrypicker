@@ -7,21 +7,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.simplecityapps.recyclerview_fastscroll.views.FastScrollRecyclerView;
-
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Locale;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-/**
- * @author Hendra Anggrian (hendraanggrian@gmail.com)
- */
-public class CountryAdapter extends FastScrollRecyclerView.Adapter<CountryAdapter.TextHolder> implements FastScrollRecyclerView.SectionedAdapter {
+public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHolder> {
 
     private final static int TYPE_TEXT = 1;
     private final static int TYPE_IMAGE = 2;
@@ -53,8 +47,9 @@ public class CountryAdapter extends FastScrollRecyclerView.Adapter<CountryAdapte
         this.showDialCode = showDialCode;
     }
 
+    @NonNull
     @Override
-    public TextHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public TextHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         switch (viewType) {
             case TYPE_TEXT:
                 return new TextHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_country_text, parent, false));
@@ -66,7 +61,7 @@ public class CountryAdapter extends FastScrollRecyclerView.Adapter<CountryAdapte
     }
 
     @Override
-    public void onBindViewHolder(final TextHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final TextHolder holder, int position) {
         holder.textViewName.setText(showDialCode
                 ? String.format("%s (%s)", countries.get(position).getName(context), countries.get(position).getDialCode())
                 : countries.get(position).getName(context));
@@ -88,38 +83,32 @@ public class CountryAdapter extends FastScrollRecyclerView.Adapter<CountryAdapte
         return countries.size();
     }
 
-    @NonNull
-    @Override
-    public String getSectionName(int position) {
-        return countries.get(position).getName(context).substring(0, 1).toUpperCase(Locale.ENGLISH);
-    }
-
     protected static final class ImageHolder extends TextHolder {
-        protected final ImageView imageViewFlag;
+        public final ImageView imageViewFlag;
 
         ImageHolder(View itemView) {
             super(itemView);
-            imageViewFlag = (ImageView) itemView.findViewById(com.hendraanggrian.appcompat.countrydialog.R.id.imageview_country_flag);
+            imageViewFlag = itemView.findViewById(R.id.imageview_country_flag);
         }
     }
 
     protected static final class EmojiHolder extends TextHolder {
-        protected final TextView textViewFlag;
+        public final TextView textViewFlag;
 
         EmojiHolder(View itemView) {
             super(itemView);
-            textViewFlag = (TextView) itemView.findViewById(com.hendraanggrian.appcompat.countrydialog.R.id.textview_country_flag);
+            textViewFlag = itemView.findViewById(R.id.textview_country_flag);
         }
     }
 
     protected static class TextHolder extends RecyclerView.ViewHolder {
-        protected final ViewGroup viewGroup;
-        protected final TextView textViewName;
+        public final ViewGroup viewGroup;
+        public final TextView textViewName;
 
         TextHolder(View itemView) {
             super(itemView);
-            viewGroup = (ViewGroup) itemView.findViewById(com.hendraanggrian.appcompat.countrydialog.R.id.viewgroup_country);
-            textViewName = (TextView) itemView.findViewById(com.hendraanggrian.appcompat.countrydialog.R.id.textview_country_name);
+            viewGroup = itemView.findViewById(R.id.viewgroup_country);
+            textViewName = itemView.findViewById(R.id.textview_country_name);
         }
     }
 }

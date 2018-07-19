@@ -10,9 +10,6 @@ import androidx.annotation.NonNull;
 
 import static android.os.Build.VERSION_CODES.N;
 
-/**
- * @author Hendra Anggrian (hendraanggrian@gmail.com)
- */
 public enum Country {
     AD("AD", "376"),
     AE("AE", "971"),
@@ -264,8 +261,8 @@ public enum Country {
     ZM("ZM", "260"),
     ZW("ZW", "263");
 
-    @NonNull public final String isoCode;
-    @NonNull public final String dialCode;
+    public final String isoCode;
+    public final String dialCode;
 
     Country(@NonNull String isoCode, @NonNull String dialCode) {
         this.isoCode = isoCode;
@@ -305,9 +302,11 @@ public enum Country {
 
     @NonNull
     public static Country fromIsoCode(@NonNull String isoCode) {
-        for (Country value : values())
-            if (value.isoCode.equals(isoCode))
+        for (Country value : values()) {
+            if (value.isoCode.equals(isoCode)) {
                 return value;
+            }
+        }
         throw new IllegalArgumentException(isoCode + " is not a valid country iso code!");
     }
 }

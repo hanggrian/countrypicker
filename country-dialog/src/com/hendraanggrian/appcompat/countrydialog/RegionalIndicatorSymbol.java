@@ -2,9 +2,6 @@ package com.hendraanggrian.appcompat.countrydialog;
 
 import androidx.annotation.NonNull;
 
-/**
- * @author Hendra Anggrian (hendraanggrian@gmail.com)
- */
 enum RegionalIndicatorSymbol {
     A('A', 0x1F1E6),
     B('B', 0x1F1E7),
@@ -48,9 +45,11 @@ enum RegionalIndicatorSymbol {
 
     @NonNull
     public static RegionalIndicatorSymbol valueOf(char letter) {
-        for (RegionalIndicatorSymbol value : values())
-            if (value.letter == letter)
+        for (RegionalIndicatorSymbol value : values()) {
+            if (value.letter == letter) {
                 return value;
+            }
+        }
         throw new IllegalArgumentException(letter + " is not a valid Regional indicator symbol!");
     }
 }

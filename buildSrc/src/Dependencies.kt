@@ -10,8 +10,6 @@ fun DependencyHandler.androidx(
     version: String = VERSION_ANDROIDX
 ): String = "androidx.$repository:$module:$version"
 
-fun DependencyHandler.fastScroll() = "com.simplecityapps:recyclerview-fastscroll:$VERSION_FASTSCROLL"
-
 fun DependencyHandler.hendraanggrian(
     repository: String,
     module: String = repository,

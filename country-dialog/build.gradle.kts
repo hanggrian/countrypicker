@@ -37,10 +37,8 @@ android {
 }
 
 dependencies {
-    implementation(androidx("annotation"))
     implementation(androidx("appcompat"))
     implementation(androidx("recyclerview"))
-    implementation(fastScroll())
 
     testImplementation(junit())
     testImplementation(truth())
