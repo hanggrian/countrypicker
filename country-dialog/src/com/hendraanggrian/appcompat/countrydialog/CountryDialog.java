@@ -15,7 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatDialog;
-import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.widget.SearchView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.Window.FEATURE_NO_TITLE;
@@ -25,8 +25,8 @@ public class CountryDialog extends AppCompatDialog {
     private OnSelectedListener listener;
     private final CountryAdapter adapter;
 
-    private Toolbar toolbar;
-    private RecyclerView recyclerView;
+    private SearchView input;
+    private RecyclerView list;
 
     public CountryDialog(@NonNull Context context) {
         this(context, true, false);
@@ -62,14 +62,17 @@ public class CountryDialog extends AppCompatDialog {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.countrydialog_content);
 
-        toolbar = findViewById(R.id.toolbar);
-
-        recyclerView = findViewById(android.R.id.list);
-        if (recyclerView == null) {
+        input = findViewById(android.R.id.input);
+        if (input == null) {
             throw new IllegalStateException();
         }
-        recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
+
+        list = findViewById(android.R.id.list);
+        if (list == null) {
+            throw new IllegalStateException();
+        }
+        list.setAdapter(adapter);
+        list.setHasFixedSize(true);
     }
 
     @NonNull
@@ -78,13 +81,8 @@ public class CountryDialog extends AppCompatDialog {
     }
 
     @NonNull
-    public Toolbar getToolbar() {
-        return toolbar;
-    }
-
-    @NonNull
-    public RecyclerView getRecyclerView() {
-        return recyclerView;
+    public RecyclerView getList() {
+        return list;
     }
 
     public void setOnSelectedListener(@Nullable OnSelectedListener listener) {
@@ -97,13 +95,17 @@ public class CountryDialog extends AppCompatDialog {
     }
 
     public static class Builder {
-        @NonNull private final Context context;
-        @NonNull private final List<Country> countries = new ArrayList<>(Arrays.asList(Country.values())); // ensure collection is mutable
+        @NonNull
+        private final Context context;
+        @NonNull
+        private final List<Country> countries = new ArrayList<>(Arrays.asList(Country.values())); // ensure collection is mutable
         private boolean showFlags = true;
         private boolean showDialCode = false;
 
-        @Nullable private String title;
-        @Nullable private OnSelectedListener listener;
+        @Nullable
+        private String title;
+        @Nullable
+        private OnSelectedListener listener;
 
         public Builder(@NonNull Context context) {
             this.context = context;

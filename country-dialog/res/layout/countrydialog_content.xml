@@ -5,24 +5,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+    <androidx.appcompat.widget.SearchView
+        android:id="@android:id/input"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        app:navigationIcon="@drawable/countrydialog_search">
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </androidx.appcompat.widget.Toolbar>
+        app:defaultQueryHint="Search"
+        app:iconifiedByDefault="false" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:clipToPadding="false"
-        android:paddingTop="@dimen/countrydialog_padding_vertical"
-        android:paddingBottom="@dimen/countrydialog_padding_vertical"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </LinearLayout>
