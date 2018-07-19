@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -26,14 +25,6 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
     protected final boolean showFlags;
     protected final boolean showDialCode;
 
-    public CountryAdapter(@NonNull Context context) {
-        this(context, true, false);
-    }
-
-    public CountryAdapter(@NonNull Context context, boolean showFlags, boolean showDialCode) {
-        this(context, Arrays.asList(Country.values()), showFlags, showDialCode);
-    }
-
     public CountryAdapter(@NonNull final Context context, @NonNull List<Country> countries, boolean showFlags, boolean showDialCode) {
         Collections.sort(countries, new Comparator<Country>() {
             @Override
@@ -50,25 +41,27 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
     @NonNull
     @Override
     public TextHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch (viewType) {
             case TYPE_TEXT:
-                return new TextHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_country_text, parent, false));
+                return new TextHolder(inflater.inflate(R.layout.countrydialog_item_text, parent, false));
             case TYPE_EMOJI:
-                return new EmojiHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_country_emoji, parent, false));
+                return new EmojiHolder(inflater.inflate(R.layout.countrydialog_item_emoji, parent, false));
             default:
-                return new ImageHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout.recycler_country_image, parent, false));
+                return new ImageHolder(inflater.inflate(R.layout.countrydialog_item_image, parent, false));
         }
     }
 
     @Override
     public void onBindViewHolder(@NonNull final TextHolder holder, int position) {
-        holder.textViewName.setText(showDialCode
+        if (holder instanceof ImageHolder) {
+            ((ImageHolder) holder).flagView.setImageResource(countries.get(position).getFlagDrawableRes(context));
+        } else if (holder instanceof EmojiHolder) {
+            ((EmojiHolder) holder).flagView.setText(countries.get(position).getFlagEmoji());
+        }
+        holder.textView.setText(showDialCode
                 ? String.format("%s (%s)", countries.get(position).getName(context), countries.get(position).getDialCode())
                 : countries.get(position).getName(context));
-        if (holder instanceof ImageHolder)
-            ((ImageHolder) holder).imageViewFlag.setImageResource(countries.get(position).getFlagDrawableRes(context));
-        else if (holder instanceof EmojiHolder)
-            ((EmojiHolder) holder).textViewFlag.setText(countries.get(position).getFlagEmoji());
     }
 
     @Override
@@ -84,31 +77,29 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
     }
 
     protected static final class ImageHolder extends TextHolder {
-        public final ImageView imageViewFlag;
+        public final ImageView flagView;
 
         ImageHolder(View itemView) {
             super(itemView);
-            imageViewFlag = itemView.findViewById(R.id.imageview_country_flag);
+            flagView = itemView.findViewById(android.R.id.icon);
         }
     }
 
     protected static final class EmojiHolder extends TextHolder {
-        public final TextView textViewFlag;
+        public final TextView flagView;
 
         EmojiHolder(View itemView) {
             super(itemView);
-            textViewFlag = itemView.findViewById(R.id.textview_country_flag);
+            flagView = itemView.findViewById(android.R.id.text2);
         }
     }
 
     protected static class TextHolder extends RecyclerView.ViewHolder {
-        public final ViewGroup viewGroup;
-        public final TextView textViewName;
+        public final TextView textView;
 
         TextHolder(View itemView) {
             super(itemView);
-            viewGroup = itemView.findViewById(R.id.viewgroup_country);
-            textViewName = itemView.findViewById(R.id.textview_country_name);
+            textView = itemView.findViewById(android.R.id.text1);
         }
     }
 }

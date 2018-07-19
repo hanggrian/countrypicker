@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.hendraanggrian.countrypickerdialogdemo.com.example.countrypickerdialogdemo.MainActivity">
+    tools:context="com.example.countrydialog.MainActivity">
 
     <Button
-        android:id="@+id/button_simple"
+        android:id="@+id/simpleButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Simple"/>
+        android:text="Simple" />
 
     <Button
-        android:id="@+id/button_noflag"
+        android:id="@+id/noFlagButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Without flags"/>
+        android:text="Without flags" />
 
     <Button
-        android:id="@+id/button_showdialcode"
+        android:id="@+id/dialCodeButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="With Dial Code"/>
-
-    <Button
-        android:id="@+id/button_customizedscroller"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Customized Colors"/>
+        android:text="With Dial Code" />
 </LinearLayout>

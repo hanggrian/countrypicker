@@ -1,7 +1,9 @@
 package com.hendraanggrian.appcompat.countrydialog;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,51 +12,74 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.RecyclerView;
+
+import static android.view.Window.FEATURE_NO_TITLE;
 
 public class CountryDialog extends AppCompatDialog {
 
     private OnSelectedListener listener;
-    private final RecyclerView recyclerView;
+    private final CountryAdapter adapter;
+
+    private Toolbar toolbar;
+    private RecyclerView recyclerView;
 
     public CountryDialog(@NonNull Context context) {
-        this(context, 0);
+        this(context, true, false);
+    }
+
+    public CountryDialog(@NonNull Context context, boolean showFlags, boolean showDialCode) {
+        this(context, Arrays.asList(Country.values()), showFlags, showDialCode);
+    }
+
+    public CountryDialog(@NonNull Context context, @NonNull List<Country> countries, boolean showFlags, boolean showDialCode) {
+        super(context);
+        supportRequestWindowFeature(FEATURE_NO_TITLE);
+        adapter = new CountryAdapter(context, countries, showFlags, showDialCode);
     }
 
     public CountryDialog(@NonNull Context context, @StyleRes int theme) {
-        super(context, theme);
-
-        recyclerView = new RecyclerView(context);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setHasFixedSize(true);
-        /*recyclerView.setAdapter(new CountryAdapter(getContext(), builder.countries, builder.showFlags, builder.showDialCode) {
-            @Override
-            public void onBindViewHolder(@NonNull final TextHolder holder, int position) {
-                super.onBindViewHolder(holder, position);
-                holder.viewGroup.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (listener != null) {
-                            listener.onSelected(countries.get(holder.getAdapterPosition()));
-                        }
-                        dismiss();
-                    }
-                });
-            }
-        });*/
-
-        /*if (TextUtils.isEmpty(title)) {
-            supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        }*/
+        this(context, theme, true, false);
     }
 
+    public CountryDialog(@NonNull Context context, @StyleRes int theme, boolean showFlags, boolean showDialCode) {
+        this(context, theme, Arrays.asList(Country.values()), showFlags, showDialCode);
+    }
+
+    public CountryDialog(@NonNull Context context, @StyleRes int theme, @NonNull List<Country> countries, boolean showFlags, boolean showDialCode) {
+        super(context, theme);
+        supportRequestWindowFeature(FEATURE_NO_TITLE);
+        adapter = new CountryAdapter(context, countries, showFlags, showDialCode);
+    }
+
+    @SuppressLint("RestrictedApi")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(recyclerView);
+        setContentView(R.layout.countrydialog_content);
+
+        toolbar = findViewById(R.id.toolbar);
+
+        recyclerView = findViewById(android.R.id.list);
+        if (recyclerView == null) {
+            throw new IllegalStateException();
+        }
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
+    }
+
+    @NonNull
+    public CountryAdapter getAdapter() {
+        return adapter;
+    }
+
+    @NonNull
+    public Toolbar getToolbar() {
+        return toolbar;
     }
 
     @NonNull
@@ -67,36 +92,35 @@ public class CountryDialog extends AppCompatDialog {
     }
 
     public interface OnSelectedListener {
+
         void onSelected(@NonNull Country country);
     }
 
     public static class Builder {
         @NonNull private final Context context;
-        @NonNull private final List<Country> countries;
+        @NonNull private final List<Country> countries = new ArrayList<>(Arrays.asList(Country.values())); // ensure collection is mutable
         private boolean showFlags = true;
         private boolean showDialCode = false;
+
         @Nullable private String title;
         @Nullable private OnSelectedListener listener;
 
         public Builder(@NonNull Context context) {
-            this(context, Arrays.asList(Country.values()));
-        }
-
-        public Builder(@NonNull Context context, @NonNull Collection<Country> countries) {
             this.context = context;
-            this.countries = new ArrayList<>(countries); // ensure collection is mutable
         }
 
         @NonNull
-        public Builder title(@Nullable String title) {
-            this.title = title;
+        public Builder setItems(@NonNull Collection<Country> countries) {
+            this.countries.clear();
+            this.countries.addAll(countries);
             return this;
         }
 
         @NonNull
-        public Builder exclude(@NonNull String... isoCodes) {
-            for (String isoCode : isoCodes)
-                this.countries.remove(Country.fromIsoCode(isoCode));
+        public Builder exclude(@NonNull Country... countries) {
+            if (countries.length > 0) {
+                this.countries.removeAll(Arrays.asList(countries));
+            }
             return this;
         }
 
@@ -113,14 +137,29 @@ public class CountryDialog extends AppCompatDialog {
         }
 
         @NonNull
-        public Builder onSelected(OnSelectedListener listener) {
+        public Builder setTitle(@Nullable String title) {
+            this.title = title;
+            return this;
+        }
+
+        @NonNull
+        public Builder setTitle(@StringRes int title) {
+            return setTitle(context.getString(title));
+        }
+
+        @NonNull
+        public Builder setOnSelectedListener(@Nullable OnSelectedListener listener) {
             this.listener = listener;
             return this;
         }
 
         @NonNull
         public CountryDialog build() {
-            return new CountryDialog(context);
+            CountryDialog dialog = new CountryDialog(context, countries, showFlags, showDialCode);
+            if (!TextUtils.isEmpty(title)) {
+                // dialog.getToolbar().setTitle(title);
+            }
+            return dialog;
         }
 
         @NonNull

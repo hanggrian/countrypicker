@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <item name="viewgroup_country" type="id"/>
-    <item name="imageview_country_flag" type="id"/>
-    <item name="textview_country_flag" type="id"/>
-    <item name="textview_country_name" type="id"/>
-</resources>

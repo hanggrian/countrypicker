@@ -1,3 +1,3 @@
 include(":$RELEASE_ARTIFACT")
 
-// include(":example")
+include(":example")

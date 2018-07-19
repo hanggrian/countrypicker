@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="contentdesc_country_flag">Country flag</string>
+    <string name="country_flag">Country flag</string>
 </resources>
