@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.Window.FEATURE_NO_TITLE;
 
-public class CountryDialog extends AppCompatDialog {
+public class CountryDialog extends AppCompatDialog implements SearchView.OnQueryTextListener {
 
     private OnSelectedListener listener;
     private final CountryAdapter adapter;
@@ -66,6 +66,7 @@ public class CountryDialog extends AppCompatDialog {
         if (input == null) {
             throw new IllegalStateException();
         }
+        input.setOnQueryTextListener(this);
 
         list = findViewById(android.R.id.list);
         if (list == null) {
@@ -73,6 +74,18 @@ public class CountryDialog extends AppCompatDialog {
         }
         list.setAdapter(adapter);
         list.setHasFixedSize(true);
+    }
+
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        adapter.getFilter().filter(query);
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        adapter.getFilter().filter(newText);
+        return false;
     }
 
     @NonNull
