@@ -20,7 +20,7 @@ import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.SearchView2;
+import androidx.appcompat.widget.SearchBar;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.Window.FEATURE_NO_TITLE;
@@ -31,9 +31,9 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
     private OnSelectedListener listener;
     private final CountryAdapter adapter;
 
-    private SearchView2 input;
-    private ImageButton button;
-    private RecyclerView list;
+    private SearchBar searchBar;
+    private ImageButton locateButton;
+    private RecyclerView recyclerView;
 
     public CountryDialog(@NonNull Context context) {
         this(context, true, false);
@@ -69,19 +69,19 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.countrydialog_content);
 
-        input = findViewById(android.R.id.input);
-        assert input != null;
-        input.getEditText().addTextChangedListener(this);
-        input.setOnQueryTextListener(this);
+        searchBar = findViewById(R.id.searchBar);
+        assert searchBar != null;
+        searchBar.getEditText().addTextChangedListener(this);
+        searchBar.setOnQueryTextListener(this);
 
-        button = findViewById(android.R.id.button1);
-        assert button != null;
-        button.setOnClickListener(this);
+        locateButton = findViewById(android.R.id.button1);
+        assert locateButton != null;
+        locateButton.setOnClickListener(this);
 
-        list = findViewById(android.R.id.list);
-        assert list != null;
-        list.setAdapter(adapter);
-        list.setHasFixedSize(true);
+        recyclerView = findViewById(android.R.id.list);
+        assert recyclerView != null;
+        recyclerView.setAdapter(adapter);
+        recyclerView.setHasFixedSize(true);
     }
 
     @Override
@@ -90,7 +90,7 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
 
     @Override
     public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-        button.setVisibility(TextUtils.isEmpty(charSequence) ? View.VISIBLE : View.GONE);
+        locateButton.setVisibility(TextUtils.isEmpty(charSequence) ? View.VISIBLE : View.GONE);
     }
 
     @Override
@@ -120,8 +120,8 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
     }
 
     @NonNull
-    public RecyclerView getList() {
-        return list;
+    public RecyclerView getRecyclerView() {
+        return recyclerView;
     }
 
     public void setOnSelectedListener(@Nullable OnSelectedListener listener) {

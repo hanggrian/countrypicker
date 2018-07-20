@@ -8,37 +8,41 @@
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginLeft="12dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="12dp"
-        android:layout_marginRight="12dp"
-        android:layout_marginBottom="8dp">
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:padding="0dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
 
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="48dp"
+            android:layout_height="@dimen/countrydialog_searchbar_height"
             android:animateLayoutChanges="true">
 
-            <androidx.appcompat.widget.SearchView2
-                android:id="@android:id/input"
+            <androidx.appcompat.widget.SearchBar
+                android:id="@+id/searchBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical"
+                android:background="?selectableItemBackgroundBorderless"
                 app:defaultQueryHint="Search country"
                 app:iconifiedByDefault="false">
 
                 <requestFocus />
-            </androidx.appcompat.widget.SearchView2>
+            </androidx.appcompat.widget.SearchBar>
 
             <androidx.appcompat.widget.AppCompatImageButton
                 android:id="@android:id/button1"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+                android:layout_width="?actionBarSize"
+                android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|end"
-                android:background="?selectableItemBackground"
+                android:background="?selectableItemBackgroundBorderless"
                 android:src="@drawable/countrydialog_locate"
-                android:tint="?colorAccent" />
+                android:tint="?colorAccent"
+                android:tooltipText="Locate" />
         </FrameLayout>
     </androidx.cardview.widget.CardView>
 
@@ -46,6 +50,8 @@
         android:id="@android:id/list"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </LinearLayout>
