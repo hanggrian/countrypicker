@@ -19,8 +19,9 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatDialog;
-import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SearchBar;
+import androidx.appcompat.widget.SearchView;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.Window.FEATURE_NO_TITLE;
@@ -31,6 +32,7 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
     private OnSelectedListener listener;
     private final CountryAdapter adapter;
 
+    private CardView cardView;
     private SearchBar searchBar;
     private ImageButton locateButton;
     private RecyclerView recyclerView;
@@ -69,17 +71,27 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.countrydialog_content);
 
+        cardView = findViewById(R.id.cardView);
+        assert cardView != null;
         searchBar = findViewById(R.id.searchBar);
         assert searchBar != null;
+        locateButton = findViewById(android.R.id.button1);
+        assert locateButton != null;
+        recyclerView = findViewById(android.R.id.list);
+        assert recyclerView != null;
+
+        cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        });
+
         searchBar.getEditText().addTextChangedListener(this);
         searchBar.setOnQueryTextListener(this);
 
-        locateButton = findViewById(android.R.id.button1);
-        assert locateButton != null;
         locateButton.setOnClickListener(this);
 
-        recyclerView = findViewById(android.R.id.list);
-        assert recyclerView != null;
         recyclerView.setAdapter(adapter);
         recyclerView.setHasFixedSize(true);
     }

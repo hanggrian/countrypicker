@@ -2,6 +2,8 @@ package androidx.appcompat.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.drawable.ColorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
@@ -9,6 +11,7 @@ import android.widget.EditText;
 import com.hendraanggrian.appcompat.countrydialog.R;
 
 import androidx.annotation.NonNull;
+import androidx.core.view.ViewCompat;
 
 import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
 import static android.widget.ImageView.ScaleType.CENTER;
@@ -17,6 +20,10 @@ import static android.widget.ImageView.ScaleType.CENTER;
  * A hacked SearchView that mimics Google's search bar.
  */
 public final class SearchBar extends SearchView {
+
+    private final View mSearchEditFrame;
+    private final View mSearchPlate;
+    private final View mSubmitArea;
 
     public SearchBar(Context context) {
         this(context, null);
@@ -29,11 +36,19 @@ public final class SearchBar extends SearchView {
     @SuppressLint("PrivateResource")
     public SearchBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        // ViewCompat.setBackgroundTintList(mSearchSrcTextView, ColorStateList.valueOf(getResources().getColor(android.R.color.transparent)));
+
+        mSearchEditFrame = findViewById(androidx.appcompat.R.id.search_edit_frame);
+        mSearchPlate = findViewById(androidx.appcompat.R.id.search_plate);
+        mSubmitArea = findViewById(androidx.appcompat.R.id.submit_area);
+
+        // Set up icons and backgrounds.
+        Drawable transparent = new ColorDrawable(getResources().getColor(android.R.color.transparent));
+        ViewCompat.setBackground(mSearchPlate, transparent);
+        ViewCompat.setBackground(mSubmitArea, transparent);
+
         mSearchSrcTextView.setInputType(TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         // First, remove horizontal paddings to get full width.
-        View mSearchEditFrame = findViewById(androidx.appcompat.R.id.search_edit_frame);
         MarginLayoutParams frameLp = (MarginLayoutParams) mSearchEditFrame.getLayoutParams();
         frameLp.leftMargin = 0;
         frameLp.rightMargin = 0;

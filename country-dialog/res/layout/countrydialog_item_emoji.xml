@@ -5,10 +5,10 @@
     android:foreground="?selectableItemBackground"
     android:gravity="center_vertical"
     android:orientation="horizontal"
-    android:paddingStart="?android:listPreferredItemPaddingStart"
-    android:paddingLeft="?android:listPreferredItemPaddingLeft"
-    android:paddingEnd="?android:listPreferredItemPaddingEnd"
-    android:paddingRight="?android:listPreferredItemPaddingRight">
+    android:paddingStart="12dp"
+    android:paddingLeft="12dp"
+    android:paddingEnd="12dp"
+    android:paddingRight="12dp">
 
     <TextView
         android:id="@+id/text2"
