@@ -14,7 +14,7 @@ android {
     defaultConfig {
         minSdkVersion(SDK_MIN)
         targetSdkVersion(SDK_TARGET)
-        applicationId = "com.example.countrydialog"
+        applicationId = "$RELEASE_GROUP.${RELEASE_ARTIFACT.replace("-", "")}.demo"
         versionCode = 1
         versionName = RELEASE_VERSION
     }

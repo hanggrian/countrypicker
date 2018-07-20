@@ -8,6 +8,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.EditText;
 
+import com.hendraanggrian.appcompat.countrydialog.Attrs;
 import com.hendraanggrian.appcompat.countrydialog.R;
 
 import androidx.annotation.NonNull;
@@ -58,7 +59,7 @@ public final class SearchBar extends SearchView {
 
         // Buttons are wider in Google Search app.
         mCloseButton.setScaleType(CENTER);
-        mCloseButton.getLayoutParams().width = getResources().getDimensionPixelSize(R.dimen.countrydialog_searchbar_button_width);
+        mCloseButton.getLayoutParams().width = Attrs.getDimen(context, android.R.attr.actionBarSize);
     }
 
     @NonNull

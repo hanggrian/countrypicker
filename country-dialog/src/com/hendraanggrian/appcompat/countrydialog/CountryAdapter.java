@@ -16,6 +16,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHolder> implements Filterable {
@@ -29,6 +30,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
     private final boolean showFlags;
     private final boolean showDialCode;
 
+    private CountryDialog.OnSelectedListener listener;
     private WeakReference<Filter> filterRef = new WeakReference<>(null);
     private List<Country> filteredCountries;
 
@@ -62,7 +64,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
 
     @Override
     public void onBindViewHolder(@NonNull final TextHolder holder, int position) {
-        Country country = filteredCountries.get(position);
+        final Country country = filteredCountries.get(position);
         if (holder instanceof ImageHolder) {
             ((ImageHolder) holder).flagView.setImageResource(country.getFlagDrawableRes(context));
         } else if (holder instanceof EmojiHolder) {
@@ -71,6 +73,14 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
         holder.textView.setText(showDialCode
                 ? String.format("%s (%s)", country.getName(context), country.getDialCode())
                 : country.getName(context));
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (listener != null) {
+                    listener.onSelected(country);
+                }
+            }
+        });
     }
 
     @Override
@@ -120,6 +130,10 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
             filterRef = new WeakReference<>(filter);
         }
         return filter;
+    }
+
+    public void setOnSelectedListener(@Nullable CountryDialog.OnSelectedListener listener) {
+        this.listener = listener;
     }
 
     protected static final class ImageHolder extends TextHolder {

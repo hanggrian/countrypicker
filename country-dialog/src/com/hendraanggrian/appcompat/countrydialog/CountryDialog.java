@@ -16,12 +16,10 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.StringRes;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.app.AppCompatDialog;
 import androidx.appcompat.widget.SearchBar;
 import androidx.appcompat.widget.SearchView;
-import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.Window.FEATURE_NO_TITLE;
@@ -29,10 +27,8 @@ import static android.view.Window.FEATURE_NO_TITLE;
 public class CountryDialog extends AppCompatDialog implements TextWatcher,
         SearchView.OnQueryTextListener, View.OnClickListener {
 
-    private OnSelectedListener listener;
     private final CountryAdapter adapter;
 
-    private CardView cardView;
     private SearchBar searchBar;
     private ImageButton locateButton;
     private RecyclerView recyclerView;
@@ -71,21 +67,12 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         super.onCreate(savedInstanceState);
         setContentView(R.layout.countrydialog_content);
 
-        cardView = findViewById(R.id.cardView);
-        assert cardView != null;
         searchBar = findViewById(R.id.searchBar);
         assert searchBar != null;
         locateButton = findViewById(android.R.id.button1);
         assert locateButton != null;
         recyclerView = findViewById(android.R.id.list);
         assert recyclerView != null;
-
-        cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-            }
-        });
 
         searchBar.getEditText().addTextChangedListener(this);
         searchBar.setOnQueryTextListener(this);
@@ -136,8 +123,14 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         return recyclerView;
     }
 
-    public void setOnSelectedListener(@Nullable OnSelectedListener listener) {
-        this.listener = listener;
+    public void setOnSelectedListener(@Nullable final OnSelectedListener listener) {
+        adapter.setOnSelectedListener(listener == null ? null : new OnSelectedListener() {
+            @Override
+            public void onSelected(@NonNull Country country) {
+                listener.onSelected(country);
+                dismiss();
+            }
+        });
     }
 
     public interface OnSelectedListener {
@@ -153,8 +146,6 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         private boolean showFlags = true;
         private boolean showDialCode = false;
 
-        @Nullable
-        private String title;
         @Nullable
         private OnSelectedListener listener;
 
@@ -190,17 +181,6 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         }
 
         @NonNull
-        public Builder setTitle(@Nullable String title) {
-            this.title = title;
-            return this;
-        }
-
-        @NonNull
-        public Builder setTitle(@StringRes int title) {
-            return setTitle(context.getString(title));
-        }
-
-        @NonNull
         public Builder setOnSelectedListener(@Nullable OnSelectedListener listener) {
             this.listener = listener;
             return this;
@@ -209,8 +189,8 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         @NonNull
         public CountryDialog build() {
             CountryDialog dialog = new CountryDialog(context, countries, showFlags, showDialCode);
-            if (!TextUtils.isEmpty(title)) {
-                // dialog.getToolbar().setTitle(title);
+            if (listener != null) {
+                dialog.setOnSelectedListener(listener);
             }
             return dialog;
         }

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    tools:context="com.example.countrydialog.MainActivity">
+    tools:context=".MainActivity">
 
     <Button
         android:id="@+id/simpleButton"

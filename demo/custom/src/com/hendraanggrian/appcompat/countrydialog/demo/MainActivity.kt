@@ -1,4 +1,4 @@
-package com.example.countrydialog
+package com.hendraanggrian.appcompat.countrydialog.demo
 
 import android.os.Bundle
 import android.widget.Toast
@@ -20,7 +20,6 @@ class MainActivity : AppCompatActivity() {
 
         noFlagButton.setOnClickListener {
             CountryDialog.Builder(this)
-                .setTitle("No flags")
                 .showFlags(false)
                 .setOnSelectedListener { country -> Toast.makeText(this, country.getName(this), Toast.LENGTH_SHORT).show() }
                 .show()
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
 
         dialCodeButton.setOnClickListener {
             CountryDialog.Builder(this)
-                .setTitle("With dial code")
                 .showDialCode(true)
                 .setOnSelectedListener { country -> Toast.makeText(this, country.getDialCode(), Toast.LENGTH_SHORT).show() }
                 .show()
