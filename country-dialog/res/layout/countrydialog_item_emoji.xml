@@ -11,7 +11,7 @@
     android:paddingRight="?android:listPreferredItemPaddingRight">
 
     <TextView
-        android:id="@+id/text2"
+        android:id="@android:id/text2"
         android:layout_width="@dimen/countrydialog_flag_size"
         android:layout_height="@dimen/countrydialog_flag_size"
         android:layout_marginEnd="?android:listPreferredItemPaddingEnd"

@@ -14,12 +14,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
-public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHolder> implements Filterable {
+class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHolder> implements Filterable {
 
     private final static int TYPE_TEXT = 1;
     private final static int TYPE_IMAGE = 2;
@@ -27,14 +27,14 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
 
     private final Context context;
     private final List<Country> countries;
-    private final boolean showFlags;
-    private final boolean showDialCode;
+    private final boolean isShowFlag;
+    private final boolean isShowDialCode;
 
-    private CountryDialog.OnSelectedListener listener;
+    CountryDialog.OnSelectedListener listener;
     private WeakReference<Filter> filterRef = new WeakReference<>(null);
     private List<Country> filteredCountries;
 
-    public CountryAdapter(@NonNull final Context context, @NonNull List<Country> countries, boolean showFlags, boolean showDialCode) {
+    CountryAdapter(@NonNull final Context context, @NonNull List<Country> countries, boolean isShowFlag, boolean isShowDialCode) {
         Collections.sort(countries, new Comparator<Country>() {
             @Override
             public int compare(Country o1, Country o2) {
@@ -43,8 +43,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
         });
         this.context = context;
         this.countries = countries;
-        this.showFlags = showFlags;
-        this.showDialCode = showDialCode;
+        this.isShowFlag = isShowFlag;
+        this.isShowDialCode = isShowDialCode;
         this.filteredCountries = countries;
     }
 
@@ -70,8 +70,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
         } else if (holder instanceof EmojiHolder) {
             ((EmojiHolder) holder).flagView.setText(country.getFlagEmoji());
         }
-        holder.textView.setText(showDialCode
-                ? String.format("%s (%s)", country.getName(context), country.getDialCode())
+        holder.textView.setText(isShowDialCode
+                ? String.format("%s (%s)", country.getName(context), country.getDial())
                 : country.getName(context));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +85,7 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
 
     @Override
     public int getItemViewType(int position) {
-        return !showFlags ? TYPE_TEXT : filteredCountries.get(position).isFlagDrawableAvailable(context)
+        return !isShowFlag ? TYPE_TEXT : filteredCountries.get(position).isFlagDrawableAvailable(context)
                 ? TYPE_IMAGE
                 : TYPE_EMOJI;
     }
@@ -108,7 +108,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
                     } else {
                         List<Country> filteredList = new ArrayList<>();
                         for (Country country : countries) {
-                            if (country.getName(context).toLowerCase().contains(s.toLowerCase())) {
+                            final Locale locale = country.toLocale(context);
+                            if (country.getName(context).toLowerCase(locale).contains(s.toLowerCase(locale))) {
                                 filteredList.add(country);
                             }
                         }
@@ -132,12 +133,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
         return filter;
     }
 
-    public void setOnSelectedListener(@Nullable CountryDialog.OnSelectedListener listener) {
-        this.listener = listener;
-    }
-
-    protected static final class ImageHolder extends TextHolder {
-        public final ImageView flagView;
+    static final class ImageHolder extends TextHolder {
+        final ImageView flagView;
 
         ImageHolder(View itemView) {
             super(itemView);
@@ -145,8 +142,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
         }
     }
 
-    protected static final class EmojiHolder extends TextHolder {
-        public final TextView flagView;
+    static final class EmojiHolder extends TextHolder {
+        final TextView flagView;
 
         EmojiHolder(View itemView) {
             super(itemView);
@@ -154,8 +151,8 @@ public class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHold
         }
     }
 
-    protected static class TextHolder extends RecyclerView.ViewHolder {
-        public final TextView textView;
+    static class TextHolder extends RecyclerView.ViewHolder {
+        final TextView textView;
 
         TextHolder(View itemView) {
             super(itemView);

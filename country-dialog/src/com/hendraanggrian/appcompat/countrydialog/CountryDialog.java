@@ -3,11 +3,13 @@ package com.hendraanggrian.appcompat.countrydialog;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
+import android.telephony.TelephonyManager;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,28 +39,28 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         this(context, true, false);
     }
 
-    public CountryDialog(@NonNull Context context, boolean showFlags, boolean showDialCode) {
-        this(context, Arrays.asList(Country.values()), showFlags, showDialCode);
+    public CountryDialog(@NonNull Context context, boolean isShowFlag, boolean isShowDialCode) {
+        this(context, Arrays.asList(Country.values()), isShowFlag, isShowDialCode);
     }
 
-    public CountryDialog(@NonNull Context context, @NonNull List<Country> countries, boolean showFlags, boolean showDialCode) {
+    public CountryDialog(@NonNull Context context, @NonNull List<Country> countries, boolean isShowFlag, boolean isShowDialCode) {
         super(context);
         supportRequestWindowFeature(FEATURE_NO_TITLE);
-        adapter = new CountryAdapter(context, countries, showFlags, showDialCode);
+        adapter = new CountryAdapter(context, countries, isShowFlag, isShowDialCode);
     }
 
     public CountryDialog(@NonNull Context context, @StyleRes int theme) {
         this(context, theme, true, false);
     }
 
-    public CountryDialog(@NonNull Context context, @StyleRes int theme, boolean showFlags, boolean showDialCode) {
-        this(context, theme, Arrays.asList(Country.values()), showFlags, showDialCode);
+    public CountryDialog(@NonNull Context context, @StyleRes int theme, boolean isShowFlag, boolean isShowDialCode) {
+        this(context, theme, Arrays.asList(Country.values()), isShowFlag, isShowDialCode);
     }
 
-    public CountryDialog(@NonNull Context context, @StyleRes int theme, @NonNull List<Country> countries, boolean showFlags, boolean showDialCode) {
+    public CountryDialog(@NonNull Context context, @StyleRes int theme, @NonNull List<Country> countries, boolean isShowFlag, boolean isShowDialCode) {
         super(context, theme);
         supportRequestWindowFeature(FEATURE_NO_TITLE);
-        adapter = new CountryAdapter(context, countries, showFlags, showDialCode);
+        adapter = new CountryAdapter(context, countries, isShowFlag, isShowDialCode);
     }
 
     @SuppressLint("RestrictedApi")
@@ -110,7 +112,14 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
 
     @Override
     public void onClick(View view) {
-
+        TelephonyManager tm = (TelephonyManager) getContext().getSystemService(Context.TELEPHONY_SERVICE);
+        String iso2 = tm.getSimCountryIso();
+        final Country country = Country.fromISO2(getContext(), iso2);
+        if (country != null) {
+            adapter.listener.onSelected(country);
+        } else {
+            Toast.makeText(getContext(), "Unable to locate.", Toast.LENGTH_SHORT).show();
+        }
     }
 
     @NonNull
@@ -124,13 +133,13 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
     }
 
     public void setOnSelectedListener(@Nullable final OnSelectedListener listener) {
-        adapter.setOnSelectedListener(listener == null ? null : new OnSelectedListener() {
+        adapter.listener = listener == null ? null : new OnSelectedListener() {
             @Override
             public void onSelected(@NonNull Country country) {
                 listener.onSelected(country);
                 dismiss();
             }
-        });
+        };
     }
 
     public interface OnSelectedListener {
@@ -139,12 +148,10 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
     }
 
     public static class Builder {
-        @NonNull
         private final Context context;
-        @NonNull
         private final List<Country> countries = new ArrayList<>(Arrays.asList(Country.values())); // ensure collection is mutable
-        private boolean showFlags = true;
-        private boolean showDialCode = false;
+        private boolean isShowFlag = true;
+        private boolean isShowDialCode = false;
 
         @Nullable
         private OnSelectedListener listener;
@@ -169,14 +176,14 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         }
 
         @NonNull
-        public Builder showFlags(boolean showFlags) {
-            this.showFlags = showFlags;
+        public Builder setShowFlag(boolean isShowFlag) {
+            this.isShowFlag = isShowFlag;
             return this;
         }
 
         @NonNull
-        public Builder showDialCode(boolean showCallingCode) {
-            this.showDialCode = showCallingCode;
+        public Builder setShowDialCode(boolean isShowDialCode) {
+            this.isShowDialCode = isShowDialCode;
             return this;
         }
 
@@ -188,7 +195,7 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
 
         @NonNull
         public CountryDialog build() {
-            CountryDialog dialog = new CountryDialog(context, countries, showFlags, showDialCode);
+            CountryDialog dialog = new CountryDialog(context, countries, isShowFlag, isShowDialCode);
             if (listener != null) {
                 dialog.setOnSelectedListener(listener);
             }

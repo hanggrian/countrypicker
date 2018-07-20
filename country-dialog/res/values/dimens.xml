@@ -5,5 +5,4 @@
     <dimen name="countrydialog_flag_size">40dp</dimen>
     <dimen name="countrydialog_searchbar_height">48dp</dimen>
     <dimen name="countrydialog_searchbar_search_leftmargin">8dp</dimen>
-    <dimen name="countrydialog_searchbar_search_rightmargin">24dp</dimen>
 </resources>

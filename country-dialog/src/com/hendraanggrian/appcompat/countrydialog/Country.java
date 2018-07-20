@@ -7,6 +7,7 @@ import java.util.Locale;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import static android.os.Build.VERSION_CODES.N;
 
@@ -261,17 +262,17 @@ public enum Country {
     ZM("ZM", "260"),
     ZW("ZW", "263");
 
-    public final String isoCode;
-    public final String dialCode;
+    public final String iso2;
+    public final String dial;
 
-    Country(@NonNull String isoCode, @NonNull String dialCode) {
-        this.isoCode = isoCode;
-        this.dialCode = dialCode;
+    Country(@NonNull String iso2, @NonNull String dial) {
+        this.iso2 = iso2;
+        this.dial = dial;
     }
 
     @NonNull
-    public String getDialCode() {
-        return '+' + dialCode;
+    public String getDial() {
+        return '+' + dial;
     }
 
     public boolean isFlagDrawableAvailable(@NonNull Context context) {
@@ -280,12 +281,12 @@ public enum Country {
 
     @DrawableRes
     public int getFlagDrawableRes(@NonNull Context context) {
-        return context.getResources().getIdentifier(("flag_" + isoCode.toLowerCase(Locale.ENGLISH)).toLowerCase(Locale.ENGLISH), "drawable", context.getPackageName());
+        return context.getResources().getIdentifier(("flag_" + iso2.toLowerCase(Locale.ENGLISH)).toLowerCase(Locale.ENGLISH), "drawable", context.getPackageName());
     }
 
     @NonNull
     public String getFlagEmoji() {
-        return RegionalIndicatorSymbol.valueOf(isoCode.charAt(0)).toString() + RegionalIndicatorSymbol.valueOf(isoCode.charAt(1)).toString();
+        return RegionalIndicatorSymbol.valueOf(iso2.charAt(0)).toString() + RegionalIndicatorSymbol.valueOf(iso2.charAt(1)).toString();
     }
 
     @NonNull
@@ -297,16 +298,17 @@ public enum Country {
     public Locale toLocale(@NonNull Context context) {
         return new Locale(Build.VERSION.SDK_INT < N
                 ? context.getResources().getConfiguration().locale.getLanguage()
-                : context.getResources().getConfiguration().getLocales().get(0).getLanguage(), isoCode);
+                : context.getResources().getConfiguration().getLocales().get(0).getLanguage(), iso2);
     }
 
-    @NonNull
-    public static Country fromIsoCode(@NonNull String isoCode) {
+    @Nullable
+    public static Country fromISO2(@NonNull Context context, @NonNull String iso2) {
         for (Country value : values()) {
-            if (value.isoCode.equals(isoCode)) {
+            final Locale locale = value.toLocale(context);
+            if (value.iso2.toLowerCase(locale).equals(iso2.toLowerCase(locale))) {
                 return value;
             }
         }
-        throw new IllegalArgumentException(isoCode + " is not a valid country iso code!");
+        return null;
     }
 }

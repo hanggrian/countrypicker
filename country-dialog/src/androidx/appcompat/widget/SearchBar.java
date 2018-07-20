@@ -2,15 +2,17 @@ package androidx.appcompat.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hendraanggrian.appcompat.countrydialog.Attrs;
 import com.hendraanggrian.appcompat.countrydialog.R;
 
+import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 
@@ -59,11 +61,21 @@ public final class SearchBar extends SearchView {
 
         // Buttons are wider in Google Search app.
         mCloseButton.setScaleType(CENTER);
-        mCloseButton.getLayoutParams().width = Attrs.getDimen(context, android.R.attr.actionBarSize);
+        mCloseButton.getLayoutParams().width = getDimen(context, android.R.attr.actionBarSize);
     }
 
     @NonNull
     public EditText getEditText() {
         return mSearchSrcTextView;
+    }
+
+    private static int getDimen(@NonNull Context context, @AttrRes int attrId) {
+        final TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(attrId, typedValue, true);
+        final int[] textSizeAttr = new int[]{attrId};
+        TypedArray a = context.obtainStyledAttributes(typedValue.data, textSizeAttr);
+        final int value = a.getDimensionPixelSize(0, 0);
+        a.recycle();
+        return value;
     }
 }

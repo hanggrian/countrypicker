@@ -5,11 +5,23 @@ CountryDialog
 [![build](https://travis-ci.com/hendraanggrian/country-dialog.svg)](https://travis-ci.com/hendraanggrian/country-dialog)
 [![license](https://img.shields.io/badge/license-Apache%20License%202.0-blue.svg?style=flat)](http://www.apache.org/licenses/LICENSE-2.0)
 
+![demo1][demo1]
+![demo2][demo2]
+
 Material design dialog to pick country.
 
-![Simple](/art/screenshot_feature_simple.png)
-![With Country Code](/art/screenshot_feature_showingcountrycode.png)
-![Customized Scroller](/art/screenshot_feature_customizedscroller.png)
+Download
+--------
+```gradle
+repositories {
+    google()
+    jcenter()
+}
+
+dependencies {
+    implementation "com.hendraanggrian.appcompat:country-dialog:$version"
+}
+```
 
 Usage
 -----
@@ -58,21 +70,9 @@ For example if you want to display US flag, the drawable name should be `flag_us
 
 See [Country.java](/countrydialog/src/main/java/com/hendraanggrian/countrydialog/Country.java) for all available country codes.
 
-Download
---------
-```gradle
-repositories {
-    jcenter()
-}
-
-dependencies {
-    compile 'com.hendraanggrian:countrydialog:0.3.4'
-}
-```
-
 License
 -------
-    Copyright 2017 Hendra Anggrian
+    Copyright 2018 Hendra Anggrian
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -85,3 +85,6 @@ License
     WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     See the License for the specific language governing permissions and
     limitations under the License.
+
+[demo1]: /art/demo1.gif
+[demo2]: /art/demo2.gif

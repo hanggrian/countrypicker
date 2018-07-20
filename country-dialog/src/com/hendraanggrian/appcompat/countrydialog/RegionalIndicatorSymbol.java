@@ -44,12 +44,12 @@ enum RegionalIndicatorSymbol {
     }
 
     @NonNull
-    public static RegionalIndicatorSymbol valueOf(char letter) {
+    static RegionalIndicatorSymbol valueOf(char letter) {
         for (RegionalIndicatorSymbol value : values()) {
             if (value.letter == letter) {
                 return value;
             }
         }
-        throw new IllegalArgumentException(letter + " is not a valid Regional indicator symbol!");
+        throw new IllegalArgumentException();
     }
 }

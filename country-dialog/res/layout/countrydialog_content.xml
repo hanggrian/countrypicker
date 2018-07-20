@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/countrydialog_width"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -41,9 +42,10 @@
                 android:layout_height="match_parent"
                 android:layout_gravity="center_vertical|end"
                 android:background="?selectableItemBackgroundBorderless"
-                android:src="@drawable/countrydialog_locate"
+                android:src="@drawable/countrydialog_gps"
                 android:tint="?colorAccent"
-                android:tooltipText="Locate" />
+                android:tooltipText="@string/locate"
+                tools:targetApi="o" />
         </FrameLayout>
     </androidx.cardview.widget.CardView>
 
