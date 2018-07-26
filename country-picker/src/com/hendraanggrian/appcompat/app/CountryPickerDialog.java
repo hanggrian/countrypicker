@@ -1,4 +1,4 @@
-package com.hendraanggrian.appcompat.countrydialog;
+package com.hendraanggrian.appcompat.app;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -10,6 +10,10 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.Toast;
+
+import com.hendraanggrian.appcompat.countrypicker.Country;
+import com.hendraanggrian.appcompat.countrypicker.R;
+import com.hendraanggrian.appcompat.internal.CountryPickerAdapter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -26,41 +30,41 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import static android.view.Window.FEATURE_NO_TITLE;
 
-public class CountryDialog extends AppCompatDialog implements TextWatcher,
+public class CountryPickerDialog extends AppCompatDialog implements TextWatcher,
         SearchView.OnQueryTextListener, View.OnClickListener {
 
-    private final CountryAdapter adapter;
+    private final CountryPickerAdapter adapter;
 
     private SearchBar searchBar;
     private ImageButton locateButton;
     private RecyclerView recyclerView;
 
-    public CountryDialog(@NonNull Context context) {
+    public CountryPickerDialog(@NonNull Context context) {
         this(context, true, false);
     }
 
-    public CountryDialog(@NonNull Context context, boolean isShowFlag, boolean isShowDialCode) {
+    public CountryPickerDialog(@NonNull Context context, boolean isShowFlag, boolean isShowDialCode) {
         this(context, Arrays.asList(Country.values()), isShowFlag, isShowDialCode);
     }
 
-    public CountryDialog(@NonNull Context context, @NonNull List<Country> countries, boolean isShowFlag, boolean isShowDialCode) {
+    public CountryPickerDialog(@NonNull Context context, @NonNull List<Country> countries, boolean isShowFlag, boolean isShowDialCode) {
         super(context);
         supportRequestWindowFeature(FEATURE_NO_TITLE);
-        adapter = new CountryAdapter(context, countries, isShowFlag, isShowDialCode);
+        adapter = new CountryPickerAdapter(context, countries, isShowFlag, isShowDialCode);
     }
 
-    public CountryDialog(@NonNull Context context, @StyleRes int theme) {
+    public CountryPickerDialog(@NonNull Context context, @StyleRes int theme) {
         this(context, theme, true, false);
     }
 
-    public CountryDialog(@NonNull Context context, @StyleRes int theme, boolean isShowFlag, boolean isShowDialCode) {
+    public CountryPickerDialog(@NonNull Context context, @StyleRes int theme, boolean isShowFlag, boolean isShowDialCode) {
         this(context, theme, Arrays.asList(Country.values()), isShowFlag, isShowDialCode);
     }
 
-    public CountryDialog(@NonNull Context context, @StyleRes int theme, @NonNull List<Country> countries, boolean isShowFlag, boolean isShowDialCode) {
+    public CountryPickerDialog(@NonNull Context context, @StyleRes int theme, @NonNull List<Country> countries, boolean isShowFlag, boolean isShowDialCode) {
         super(context, theme);
         supportRequestWindowFeature(FEATURE_NO_TITLE);
-        adapter = new CountryAdapter(context, countries, isShowFlag, isShowDialCode);
+        adapter = new CountryPickerAdapter(context, countries, isShowFlag, isShowDialCode);
     }
 
     @SuppressLint("RestrictedApi")
@@ -123,7 +127,7 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
     }
 
     @NonNull
-    public CountryAdapter getAdapter() {
+    public CountryPickerAdapter getAdapter() {
         return adapter;
     }
 
@@ -194,8 +198,8 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         }
 
         @NonNull
-        public CountryDialog build() {
-            CountryDialog dialog = new CountryDialog(context, countries, isShowFlag, isShowDialCode);
+        public CountryPickerDialog build() {
+            CountryPickerDialog dialog = new CountryPickerDialog(context, countries, isShowFlag, isShowDialCode);
             if (listener != null) {
                 dialog.setOnSelectedListener(listener);
             }
@@ -203,8 +207,8 @@ public class CountryDialog extends AppCompatDialog implements TextWatcher,
         }
 
         @NonNull
-        public CountryDialog show() {
-            CountryDialog dialog = build();
+        public CountryPickerDialog show() {
+            CountryPickerDialog dialog = build();
             dialog.show();
             return dialog;
         }

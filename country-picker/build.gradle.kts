@@ -40,6 +40,7 @@ dependencies {
     implementation(androidx("appcompat"))
     implementation(androidx("cardview"))
     implementation(androidx("recyclerview"))
+    implementation(material())
 
     testImplementation(junit())
     testImplementation(truth())

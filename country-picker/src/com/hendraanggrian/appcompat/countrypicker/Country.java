@@ -1,7 +1,9 @@
-package com.hendraanggrian.appcompat.countrydialog;
+package com.hendraanggrian.appcompat.countrypicker;
 
 import android.content.Context;
 import android.os.Build;
+
+import com.hendraanggrian.appcompat.internal.RegionalIndicatorSymbol;
 
 import java.util.Locale;
 

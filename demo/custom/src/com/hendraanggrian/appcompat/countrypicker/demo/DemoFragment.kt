@@ -1,10 +1,10 @@
-package com.hendraanggrian.appcompat.countrydialog.demo
+package com.hendraanggrian.appcompat.countrypicker.demo
 
 import android.os.Bundle
 import android.widget.Toast.LENGTH_LONG
 import android.widget.Toast.makeText
 import androidx.preference.PreferenceFragmentCompat
-import com.hendraanggrian.appcompat.countrydialog.CountryDialog
+import com.hendraanggrian.appcompat.app.CountryPickerDialog
 
 class DemoFragment : PreferenceFragmentCompat() {
 
@@ -12,7 +12,7 @@ class DemoFragment : PreferenceFragmentCompat() {
         addPreferencesFromResource(R.xml.fragment_demo)
         findPreference("show").setOnPreferenceClickListener {
             val preferences = preferenceScreen.sharedPreferences
-            CountryDialog.Builder(context!!)
+            CountryPickerDialog.Builder(context!!)
                 .setShowFlag(preferences.getBoolean(PREFERENCE_SHOW_FLAG, true))
                 .setShowDialCode(preferences.getBoolean(PREFERENCE_SHOW_DIAL_CODE, false))
                 .setOnSelectedListener {

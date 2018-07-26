@@ -1,4 +1,4 @@
-package com.hendraanggrian.appcompat.countrydialog.demo
+package com.hendraanggrian.appcompat.countrypicker.demo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

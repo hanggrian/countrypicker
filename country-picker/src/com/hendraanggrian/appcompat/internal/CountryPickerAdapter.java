@@ -1,4 +1,4 @@
-package com.hendraanggrian.appcompat.countrydialog;
+package com.hendraanggrian.appcompat.internal;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -9,6 +9,10 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.hendraanggrian.appcompat.app.CountryPickerDialog;
+import com.hendraanggrian.appcompat.countrypicker.Country;
+import com.hendraanggrian.appcompat.countrypicker.R;
+
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,9 +21,13 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 import androidx.recyclerview.widget.RecyclerView;
 
-class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHolder> implements Filterable {
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+
+@RestrictTo(LIBRARY_GROUP)
+public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.TextHolder> implements Filterable {
 
     private final static int TYPE_TEXT = 1;
     private final static int TYPE_IMAGE = 2;
@@ -30,11 +38,11 @@ class CountryAdapter extends RecyclerView.Adapter<CountryAdapter.TextHolder> imp
     private final boolean isShowFlag;
     private final boolean isShowDialCode;
 
-    CountryDialog.OnSelectedListener listener;
+    public CountryPickerDialog.OnSelectedListener listener;
     private WeakReference<Filter> filterRef = new WeakReference<>(null);
     private List<Country> filteredCountries;
 
-    CountryAdapter(@NonNull final Context context, @NonNull List<Country> countries, boolean isShowFlag, boolean isShowDialCode) {
+    public CountryPickerAdapter(@NonNull final Context context, @NonNull List<Country> countries, boolean isShowFlag, boolean isShowDialCode) {
         Collections.sort(countries, new Comparator<Country>() {
             @Override
             public int compare(Country o1, Country o2) {

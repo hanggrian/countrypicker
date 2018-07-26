@@ -1,4 +1,4 @@
-package com.hendraanggrian.appcompat.countrydialog.demo
+package com.hendraanggrian.appcompat.countrypicker.demo
 
 typealias Preferences = android.content.SharedPreferences
 

@@ -10,7 +10,7 @@ import android.util.TypedValue;
 import android.view.View;
 import android.widget.EditText;
 
-import com.hendraanggrian.appcompat.countrydialog.R;
+import com.hendraanggrian.appcompat.countrypicker.R;
 
 import androidx.annotation.AttrRes;
 import androidx.annotation.NonNull;

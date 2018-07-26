@@ -1,8 +1,12 @@
-package com.hendraanggrian.appcompat.countrydialog;
+package com.hendraanggrian.appcompat.internal;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RestrictTo;
 
-enum RegionalIndicatorSymbol {
+import static androidx.annotation.RestrictTo.Scope.LIBRARY_GROUP;
+
+@RestrictTo(LIBRARY_GROUP)
+public enum RegionalIndicatorSymbol {
     A('A', 0x1F1E6),
     B('B', 0x1F1E7),
     C('C', 0x1F1E8),
@@ -44,7 +48,7 @@ enum RegionalIndicatorSymbol {
     }
 
     @NonNull
-    static RegionalIndicatorSymbol valueOf(char letter) {
+    public static RegionalIndicatorSymbol valueOf(char letter) {
         for (RegionalIndicatorSymbol value : values()) {
             if (value.letter == letter) {
                 return value;
