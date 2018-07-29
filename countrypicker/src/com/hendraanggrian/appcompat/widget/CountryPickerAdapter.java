@@ -59,6 +59,12 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         notifyDataSetChanged();
     }
 
+    private void replaceItems(List<Country> countries) {
+        Collections.sort(countries, this);
+        this.countries = countries;
+        this.filteredCountries = countries;
+    }
+
     @NonNull
     @Override
     public CountryPickerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -157,12 +163,6 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
             };
         }
         return filter;
-    }
-
-    private void replaceItems(List<Country> countries) {
-        Collections.sort(countries, this);
-        this.countries = countries;
-        this.filteredCountries = countries;
     }
 
     static final class TextImageHolder extends TextHolder {

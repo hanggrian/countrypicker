@@ -1,6 +1,7 @@
 package com.hendraanggrian.appcompat.countrypicker;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.os.Build;
 
 import java.util.Locale;
@@ -296,9 +297,10 @@ public enum Country {
 
     @NonNull
     public Locale toLocale(@NonNull Context context) {
+        final Configuration config = context.getResources().getConfiguration();
         return new Locale(Build.VERSION.SDK_INT < N
-                ? context.getResources().getConfiguration().locale.getLanguage()
-                : context.getResources().getConfiguration().getLocales().get(0).getLanguage(), iso2);
+                ? config.locale.getLanguage()
+                : config.getLocales().get(0).getLanguage(), iso2);
     }
 
     @Nullable

@@ -1,7 +1,6 @@
 package com.hendraanggrian.appcompat.countrypicker;
 
 import android.content.Context;
-import android.os.Bundle;
 
 import com.hendraanggrian.appcompat.widget.CountryPicker;
 
@@ -15,7 +14,7 @@ import static android.view.Window.FEATURE_NO_TITLE;
 
 public class CountryPickerDialog extends AppCompatDialog {
 
-    private CountryPicker picker;
+    private final CountryPicker picker;
 
     public CountryPickerDialog(@NonNull Context context) {
         this(context, 0);
@@ -23,14 +22,16 @@ public class CountryPickerDialog extends AppCompatDialog {
 
     public CountryPickerDialog(@NonNull Context context, int theme) {
         super(context, theme);
-        supportRequestWindowFeature(FEATURE_NO_TITLE);
-    }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         picker = new CountryPicker(getContext());
         setContentView(picker);
+
+        supportRequestWindowFeature(FEATURE_NO_TITLE);
+
+        /*final WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        getWindow().setAttributes(lp);*/
     }
 
     @NonNull

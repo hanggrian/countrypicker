@@ -64,7 +64,6 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
         searchBar.setOnQueryTextListener(this);
 
         recyclerView.setAdapter(adapter);
-        recyclerView.setHasFixedSize(true);
     }
 
     @Override
