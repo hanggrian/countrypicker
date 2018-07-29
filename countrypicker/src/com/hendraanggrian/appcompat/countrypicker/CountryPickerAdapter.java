@@ -9,7 +9,6 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -20,40 +19,31 @@ import java.util.Locale;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.TextHolder> implements Filterable {
+class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>
+        implements Comparator<Country>, Filterable {
 
-    private final static int TYPE_TEXT = 1;
-    private final static int TYPE_IMAGE = 2;
-    private final static int TYPE_EMOJI = 3;
+    private final static int TYPE_TEXT = 0;
+    private final static int TYPE_TEXT_IMAGE = 1;
+    private final static int TYPE_TEXT_EMOJI = 2;
+    private final static int TYPE_EMPTY = 3;
 
     private final Context context;
-    private List<Country> countries = new ArrayList<>(Arrays.asList(Country.values()));
+    private List<Country> countries;
     private boolean isShowFlag = CountryPickerDialog.DEFAULT_SHOW_FLAG;
     private boolean isShowDial = CountryPickerDialog.DEFAULT_SHOW_DIAL;
 
     CountryPickerDialog.OnSelectedListener listener;
-    private WeakReference<Filter> filterRef = new WeakReference<>(null);
+    private Filter filter;
     private List<Country> filteredCountries;
 
     CountryPickerAdapter(@NonNull final Context context) {
-        Collections.sort(countries, new Comparator<Country>() {
-            @Override
-            public int compare(Country o1, Country o2) {
-                return o1.getName(context).compareTo(o2.getName(context));
-            }
-        });
         this.context = context;
-        this.filteredCountries = countries;
+        replaceItems(new ArrayList<>(Arrays.asList(Country.values())));
     }
 
     void setItems(@NonNull List<Country> countries) {
-        this.countries = countries;
-        Collections.sort(countries, new Comparator<Country>() {
-            @Override
-            public int compare(Country o1, Country o2) {
-                return o1.getName(context).compareTo(o2.getName(context));
-            }
-        });
+        replaceItems(countries);
+        notifyDataSetChanged();
     }
 
     void setShowFlag(boolean isShowFlag) {
@@ -68,27 +58,32 @@ class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.Tex
 
     @NonNull
     @Override
-    public TextHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CountryPickerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch (viewType) {
             case TYPE_TEXT:
                 return new TextHolder(inflater.inflate(R.layout.countrydialog_item_text, parent, false));
-            case TYPE_EMOJI:
-                return new EmojiHolder(inflater.inflate(R.layout.countrydialog_item_emoji, parent, false));
+            case TYPE_TEXT_IMAGE:
+                return new TextImageHolder(inflater.inflate(R.layout.countrydialog_item_image, parent, false));
+            case TYPE_TEXT_EMOJI:
+                return new TextEmojiHolder(inflater.inflate(R.layout.countrydialog_item_emoji, parent, false));
             default:
-                return new ImageHolder(inflater.inflate(R.layout.countrydialog_item_image, parent, false));
+                return new ViewHolder(inflater.inflate(R.layout.countrydialog_item_empty, parent, false));
         }
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final TextHolder holder, int position) {
-        final Country country = filteredCountries.get(position);
-        if (holder instanceof ImageHolder) {
-            ((ImageHolder) holder).flagView.setImageResource(country.getFlagDrawableRes(context));
-        } else if (holder instanceof EmojiHolder) {
-            ((EmojiHolder) holder).flagView.setText(country.getFlagEmoji());
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+        if (!(holder instanceof TextHolder)) {
+            return;
         }
-        holder.textView.setText(isShowDial
+        final Country country = filteredCountries.get(position);
+        if (holder instanceof TextImageHolder) {
+            ((TextImageHolder) holder).imageView.setImageResource(country.getFlagDrawableRes(context));
+        } else if (holder instanceof TextEmojiHolder) {
+            ((TextEmojiHolder) holder).emojiView.setText(country.getFlagEmoji());
+        }
+        ((TextHolder) holder).textView.setText(isShowDial
                 ? String.format("%s (%s)", country.getName(context), country.getDial())
                 : country.getName(context));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -103,26 +98,37 @@ class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.Tex
 
     @Override
     public int getItemViewType(int position) {
+        if (filteredCountries.isEmpty()) {
+            return TYPE_EMPTY;
+        }
         return !isShowFlag ? TYPE_TEXT : filteredCountries.get(position).isFlagDrawableAvailable(context)
-                ? TYPE_IMAGE
-                : TYPE_EMOJI;
+                ? TYPE_TEXT_IMAGE
+                : TYPE_TEXT_EMOJI;
     }
 
     @Override
     public int getItemCount() {
+        if (filteredCountries.isEmpty()) {
+            return 1;
+        }
         return filteredCountries.size();
     }
 
     @Override
+    public int compare(Country country, Country other) {
+        return country.getName(context).compareTo(other.getName(context));
+    }
+
+    @Override
     public Filter getFilter() {
-        Filter filter = filterRef.get();
         if (filter == null) {
             filter = new Filter() {
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
+                    final List<Country> values;
                     String s = charSequence.toString();
                     if (s.isEmpty()) {
-                        filteredCountries = countries;
+                        values = countries;
                     } else {
                         List<Country> filteredList = new ArrayList<>();
                         for (Country country : countries) {
@@ -131,50 +137,62 @@ class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.Tex
                                 filteredList.add(country);
                             }
                         }
-                        filteredCountries = filteredList;
+                        values = filteredList;
                     }
 
                     FilterResults filterResults = new FilterResults();
-                    filterResults.values = filteredCountries;
+                    filterResults.values = values;
                     return filterResults;
                 }
 
                 @Override
                 @SuppressWarnings("unchecked")
-                protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
-                    filteredCountries = (ArrayList<Country>) filterResults.values;
+                protected void publishResults(CharSequence charSequence, FilterResults results) {
+                    filteredCountries = (List<Country>) results.values;
                     notifyDataSetChanged();
                 }
             };
-            filterRef = new WeakReference<>(filter);
         }
         return filter;
     }
 
-    static final class ImageHolder extends TextHolder {
-        final ImageView flagView;
+    private void replaceItems(List<Country> countries) {
+        Collections.sort(countries, this);
+        this.countries = countries;
+        this.filteredCountries = countries;
+    }
 
-        ImageHolder(View itemView) {
+    static final class TextImageHolder extends TextHolder {
+        final ImageView imageView;
+
+        TextImageHolder(View itemView) {
             super(itemView);
-            flagView = itemView.findViewById(android.R.id.icon);
+            imageView = itemView.findViewById(android.R.id.icon);
         }
     }
 
-    static final class EmojiHolder extends TextHolder {
-        final TextView flagView;
+    static final class TextEmojiHolder extends TextHolder {
+        final TextView emojiView;
 
-        EmojiHolder(View itemView) {
+        TextEmojiHolder(View itemView) {
             super(itemView);
-            flagView = itemView.findViewById(android.R.id.text2);
+            emojiView = itemView.findViewById(android.R.id.text2);
         }
     }
 
-    static class TextHolder extends RecyclerView.ViewHolder {
+    static class TextHolder extends ViewHolder {
         final TextView textView;
 
         TextHolder(View itemView) {
             super(itemView);
             textView = itemView.findViewById(android.R.id.text1);
+        }
+    }
+
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        ViewHolder(View itemView) {
+            super(itemView);
         }
     }
 }

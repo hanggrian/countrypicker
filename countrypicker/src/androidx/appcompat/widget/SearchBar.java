@@ -2,31 +2,32 @@ package androidx.appcompat.widget;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.ImageView;
 
 import com.hendraanggrian.appcompat.countrypicker.R;
 
-import androidx.annotation.AttrRes;
-import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
+import androidx.core.widget.ImageViewCompat;
 
 import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
 import static android.widget.ImageView.ScaleType.CENTER;
 
 /**
- * A hacked SearchView that mimics Google's search bar.
+ * A hacked {@link SearchView} that mimics search bar in Android Settings app API 28.
  */
 public final class SearchBar extends SearchView {
 
     private final View mSearchEditFrame;
     private final View mSearchPlate;
     private final View mSubmitArea;
+    private final ImageView mCollapsedIcon;
 
     public SearchBar(Context context) {
         this(context, null);
@@ -43,6 +44,7 @@ public final class SearchBar extends SearchView {
         mSearchEditFrame = findViewById(androidx.appcompat.R.id.search_edit_frame);
         mSearchPlate = findViewById(androidx.appcompat.R.id.search_plate);
         mSubmitArea = findViewById(androidx.appcompat.R.id.submit_area);
+        mCollapsedIcon = findViewById(androidx.appcompat.R.id.search_mag_icon);
 
         // Set up icons and backgrounds.
         Drawable transparent = new ColorDrawable(getResources().getColor(android.R.color.transparent));
@@ -61,15 +63,24 @@ public final class SearchBar extends SearchView {
 
         // Buttons are wider in Google Search app.
         mCloseButton.setScaleType(CENTER);
-        mCloseButton.getLayoutParams().width = getDimen(context, android.R.attr.actionBarSize);
+        mCloseButton.getLayoutParams().width = getDimenAttr(context, android.R.attr.actionBarSize);
+
+        final ColorStateList colorAccent = ColorStateList.valueOf(getColorAttr(getContext(), R.attr.colorAccent));
+        mSearchSrcTextView.setTextColor(colorAccent);
+        ImageViewCompat.setImageTintList(mGoButton, colorAccent);
+        ImageViewCompat.setImageTintList(mSearchButton, colorAccent);
+        ImageViewCompat.setImageTintList(mCloseButton, colorAccent);
+        ImageViewCompat.setImageTintList(mVoiceButton, colorAccent);
+        ImageViewCompat.setImageTintList(mCollapsedIcon, colorAccent);
     }
 
-    @NonNull
-    public EditText getEditText() {
-        return mSearchSrcTextView;
+    private static int getColorAttr(Context context, int attrId) {
+        final TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(attrId, typedValue, true);
+        return typedValue.data;
     }
 
-    private static int getDimen(@NonNull Context context, @AttrRes int attrId) {
+    private static int getDimenAttr(Context context, int attrId) {
         final TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(attrId, typedValue, true);
         final int[] textSizeAttr = new int[]{attrId};

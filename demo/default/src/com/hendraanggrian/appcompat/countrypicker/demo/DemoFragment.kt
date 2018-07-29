@@ -14,7 +14,6 @@ class DemoFragment : PreferenceFragmentCompat() {
             val preferences = preferenceScreen.sharedPreferences
             CountryPickerDialog.Builder(context!!)
                 .setShowFlag(preferences.getBoolean(PREFERENCE_SHOW_FLAG, true))
-                .setShowDial(preferences.getBoolean(PREFERENCE_SHOW_DIAL, false))
                 .setOnSelectedListener {
                     makeText(context, it.getName(context!!), LENGTH_LONG).show()
                 }
