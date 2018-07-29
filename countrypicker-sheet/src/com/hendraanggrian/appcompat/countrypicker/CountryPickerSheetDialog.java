@@ -7,6 +7,8 @@ import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hendraanggrian.appcompat.widget.CountryPicker;
 
+import java.util.List;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -41,6 +43,14 @@ public class CountryPickerSheetDialog extends BottomSheetDialog {
             throw new IllegalStateException("Dialog must be inflated first.");
         }
         return picker;
+    }
+
+    public void setItems(@NonNull List<Country> countries) {
+        picker.setItems(countries);
+    }
+
+    public void setShowFlag(boolean shown) {
+        picker.setShowFlag(shown);
     }
 
     public void setOnSelectedListener(@Nullable final CountryPicker.OnSelectedListener listener) {

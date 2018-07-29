@@ -37,6 +37,14 @@ public class CountryPickerDialog extends AppCompatDialog {
         return picker;
     }
 
+    public void setItems(@NonNull List<Country> countries) {
+        picker.setItems(countries);
+    }
+
+    public void setShowFlag(boolean shown) {
+        picker.setShowFlag(shown);
+    }
+
     public void setOnSelectedListener(@Nullable final CountryPicker.OnSelectedListener listener) {
         picker.getAdapter().setListener(listener == null ? null : new CountryPicker.OnSelectedListener() {
             @Override
@@ -79,10 +87,10 @@ public class CountryPickerDialog extends AppCompatDialog {
         public CountryPickerDialog build() {
             CountryPickerDialog dialog = new CountryPickerDialog(context);
             if (countries != null) {
-                dialog.picker.setItems(countries);
+                dialog.setItems(countries);
             }
             if (isShowFlag != CountryPicker.DEFAULT_SHOW_FLAG) {
-                dialog.picker.setShowFlag(isShowFlag);
+                dialog.setShowFlag(isShowFlag);
             }
             if (listener != null) {
                 dialog.setOnSelectedListener(listener);

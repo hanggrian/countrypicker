@@ -111,9 +111,9 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
         adapter.setItems(countries);
     }
 
-    public void setShowFlag(boolean isShowFlag) {
+    public void setShowFlag(boolean shown) {
         recyclerView.getRecycledViewPool().clear();
-        adapter.setShowFlag(isShowFlag);
+        adapter.setShowFlag(shown);
     }
 
     private static int getColorAttr(Context context, int attrId) {

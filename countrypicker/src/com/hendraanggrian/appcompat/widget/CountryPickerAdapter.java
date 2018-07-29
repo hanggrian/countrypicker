@@ -50,13 +50,13 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         notifyDataSetChanged();
     }
 
-    void setShowFlag(boolean isShowFlag) {
-        this.isShowFlag = isShowFlag;
+    void setShowFlag(boolean shown) {
+        this.isShowFlag = shown;
         notifyDataSetChanged();
     }
 
-    void setShowDial(boolean isShowDial) {
-        this.isShowDial = isShowDial;
+    void setShowDial(boolean shown) {
+        this.isShowDial = shown;
         notifyDataSetChanged();
     }
 
