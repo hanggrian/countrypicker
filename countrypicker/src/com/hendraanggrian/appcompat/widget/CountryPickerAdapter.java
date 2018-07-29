@@ -1,4 +1,4 @@
-package com.hendraanggrian.appcompat.countrypicker;
+package com.hendraanggrian.appcompat.widget;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.Filter;
 import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.hendraanggrian.appcompat.countrypicker.Country;
+import com.hendraanggrian.appcompat.countrypicker.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -19,7 +22,7 @@ import java.util.Locale;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>
+public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>
         implements Comparator<Country>, Filterable {
 
     private final static int TYPE_TEXT = 0;
@@ -29,10 +32,10 @@ class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.Vie
 
     private final Context context;
     private List<Country> countries;
-    private boolean isShowFlag = CountryPickerDialog.DEFAULT_SHOW_FLAG;
-    private boolean isShowDial = CountryPickerDialog.DEFAULT_SHOW_DIAL;
+    private boolean isShowFlag = CountryPicker.DEFAULT_SHOW_FLAG;
+    private boolean isShowDial = CountryPicker.DEFAULT_SHOW_DIAL;
 
-    CountryPickerDialog.OnSelectedListener listener;
+    public CountryPicker.OnSelectedListener listener;
     private Filter filter;
     private List<Country> filteredCountries;
 
@@ -41,17 +44,17 @@ class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.Vie
         replaceItems(new ArrayList<>(Arrays.asList(Country.values())));
     }
 
-    void setItems(@NonNull List<Country> countries) {
+    public void setItems(@NonNull List<Country> countries) {
         replaceItems(countries);
         notifyDataSetChanged();
     }
 
-    void setShowFlag(boolean isShowFlag) {
+    public void setShowFlag(boolean isShowFlag) {
         this.isShowFlag = isShowFlag;
         notifyDataSetChanged();
     }
 
-    void setShowDial(boolean isShowDial) {
+    public void setShowDial(boolean isShowDial) {
         this.isShowDial = isShowDial;
         notifyDataSetChanged();
     }
@@ -62,13 +65,13 @@ class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.Vie
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch (viewType) {
             case TYPE_TEXT:
-                return new TextHolder(inflater.inflate(R.layout.countrydialog_item_text, parent, false));
+                return new TextHolder(inflater.inflate(R.layout.countrypicker_item_text, parent, false));
             case TYPE_TEXT_IMAGE:
-                return new TextImageHolder(inflater.inflate(R.layout.countrydialog_item_image, parent, false));
+                return new TextImageHolder(inflater.inflate(R.layout.countrypicker_item_image, parent, false));
             case TYPE_TEXT_EMOJI:
-                return new TextEmojiHolder(inflater.inflate(R.layout.countrydialog_item_emoji, parent, false));
+                return new TextEmojiHolder(inflater.inflate(R.layout.countrypicker_item_emoji, parent, false));
             default:
-                return new ViewHolder(inflater.inflate(R.layout.countrydialog_item_empty, parent, false));
+                return new ViewHolder(inflater.inflate(R.layout.countrypicker_item_empty, parent, false));
         }
     }
 

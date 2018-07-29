@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- dimensions are according to: https://material.google.com/components/dialogs.html -->
-    <dimen name="countrydialog_width">320dp</dimen>
     <dimen name="countrydialog_flag_size">40dp</dimen>
     <dimen name="countrydialog_searchbar_height">48dp</dimen>
     <dimen name="countrydialog_searchbar_search_leftmargin">8dp</dimen>
