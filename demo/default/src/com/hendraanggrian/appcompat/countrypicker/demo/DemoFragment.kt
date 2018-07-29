@@ -5,14 +5,14 @@ import android.widget.Toast.LENGTH_LONG
 import android.widget.Toast.makeText
 import androidx.preference.PreferenceFragmentCompat
 import com.hendraanggrian.appcompat.countrypicker.CountryPickerDialog
-import com.hendraanggrian.appcompat.countrypicker.CountryPickerSheetDialogFragment
+import com.hendraanggrian.appcompat.countrypicker.CountryPickerSheetDialog
 
 class DemoFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         addPreferencesFromResource(R.xml.fragment_demo)
+        val preferences = preferenceScreen.sharedPreferences
         findPreference("show_dialog").setOnPreferenceClickListener {
-            val preferences = preferenceScreen.sharedPreferences
             CountryPickerDialog.Builder(context!!)
                 .setShowFlag(preferences.getBoolean(PREFERENCE_IS_SHOW_FLAG, true))
                 .setOnSelectedListener {
@@ -22,10 +22,15 @@ class DemoFragment : PreferenceFragmentCompat() {
             false
         }
         findPreference("show_sheet").setOnPreferenceClickListener {
-            SheetFragment().show(childFragmentManager, null)
+            CountryPickerSheetDialog(context!!)
+                .apply {
+                    picker.setShowFlag(preferences.getBoolean(PREFERENCE_IS_SHOW_FLAG, true))
+                    setOnSelectedListener {
+                        makeText(context, it.getName(context!!), LENGTH_LONG).show()
+                    }
+                }
+                .show()
             false
         }
     }
-
-    class SheetFragment : CountryPickerSheetDialogFragment()
 }

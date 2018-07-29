@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.Locale;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>
@@ -32,31 +33,35 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
 
     private final Context context;
     private List<Country> countries;
+    private List<Country> filteredCountries;
+    private Filter filter;
+
     private boolean isShowFlag = CountryPicker.DEFAULT_SHOW_FLAG;
     private boolean isShowDial = CountryPicker.DEFAULT_SHOW_DIAL;
-
-    public CountryPicker.OnSelectedListener listener;
-    private Filter filter;
-    private List<Country> filteredCountries;
+    CountryPicker.OnSelectedListener listener;
 
     CountryPickerAdapter(@NonNull final Context context) {
         this.context = context;
         replaceItems(new ArrayList<>(Arrays.asList(Country.values())));
     }
 
-    public void setItems(@NonNull List<Country> countries) {
+    void setItems(@NonNull List<Country> countries) {
         replaceItems(countries);
         notifyDataSetChanged();
     }
 
-    public void setShowFlag(boolean isShowFlag) {
+    void setShowFlag(boolean isShowFlag) {
         this.isShowFlag = isShowFlag;
         notifyDataSetChanged();
     }
 
-    public void setShowDial(boolean isShowDial) {
+    void setShowDial(boolean isShowDial) {
         this.isShowDial = isShowDial;
         notifyDataSetChanged();
+    }
+
+    public void setListener(@Nullable CountryPicker.OnSelectedListener listener) {
+        this.listener = listener;
     }
 
     private void replaceItems(List<Country> countries) {

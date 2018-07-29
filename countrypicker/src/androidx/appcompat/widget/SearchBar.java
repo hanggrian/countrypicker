@@ -9,10 +9,12 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 import com.hendraanggrian.appcompat.countrypicker.R;
 
+import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.ImageViewCompat;
 
@@ -72,6 +74,11 @@ public final class SearchBar extends SearchView {
         ImageViewCompat.setImageTintList(mCloseButton, colorAccent);
         ImageViewCompat.setImageTintList(mVoiceButton, colorAccent);
         ImageViewCompat.setImageTintList(mCollapsedIcon, colorAccent);
+    }
+
+    @NonNull
+    public EditText getEditText() {
+        return mSearchSrcTextView;
     }
 
     private static int getColorAttr(Context context, int attrId) {

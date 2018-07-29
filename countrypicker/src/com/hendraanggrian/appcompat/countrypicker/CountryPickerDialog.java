@@ -22,16 +22,11 @@ public class CountryPickerDialog extends AppCompatDialog {
 
     public CountryPickerDialog(@NonNull Context context, int theme) {
         super(context, theme);
-        picker = new CountryPicker(getContext());
-        setContentView(picker);
 
         supportRequestWindowFeature(FEATURE_NO_TITLE);
 
-        /*final WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-        lp.copyFrom(getWindow().getAttributes());
-        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
-        getWindow().setAttributes(lp);*/
+        picker = new CountryPicker(getContext());
+        setContentView(picker);
     }
 
     @NonNull
@@ -42,15 +37,15 @@ public class CountryPickerDialog extends AppCompatDialog {
         return picker;
     }
 
-    /*public void setOnSelectedListener(@Nullable final CountryPicker.OnSelectedListener listener) {
-        picker.getAdapter().listener = listener == null ? null : new CountryPicker.OnSelectedListener() {
+    public void setOnSelectedListener(@Nullable final CountryPicker.OnSelectedListener listener) {
+        picker.getAdapter().setListener(listener == null ? null : new CountryPicker.OnSelectedListener() {
             @Override
             public void onSelected(@NonNull Country country) {
                 listener.onSelected(country);
                 dismiss();
             }
-        };
-    }*/
+        });
+    }
 
     public static class Builder {
         private final Context context;
@@ -90,7 +85,7 @@ public class CountryPickerDialog extends AppCompatDialog {
                 dialog.picker.setShowFlag(isShowFlag);
             }
             if (listener != null) {
-//                dialog.setOnSelectedListener(listener);
+                dialog.setOnSelectedListener(listener);
             }
             return dialog;
         }

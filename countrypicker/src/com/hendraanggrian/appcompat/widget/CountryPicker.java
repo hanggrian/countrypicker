@@ -97,7 +97,7 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
     }
 
     @NonNull
-    public SearchView getSearchView() {
+    public SearchBar getSearchView() {
         return searchBar;
     }
 
