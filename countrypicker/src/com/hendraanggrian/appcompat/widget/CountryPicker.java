@@ -23,8 +23,8 @@ import androidx.recyclerview.widget.RecyclerView;
 public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenuItemClickListener,
         SearchView.OnQueryTextListener {
 
-    public static final boolean DEFAULT_SHOW_FLAG = true;
-    public static final boolean DEFAULT_SHOW_DIAL = false;
+    public static final boolean DEFAULT_FLAG_SHOWN = true;
+    public static final boolean DEFAULT_DIAL_SHOWN = false;
 
     private final CountryPickerAdapter adapter;
 
@@ -70,7 +70,7 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
     public boolean onMenuItemClick(MenuItem item) {
         dialItem.setChecked(!dialItem.isChecked());
         recyclerView.getRecycledViewPool().clear();
-        adapter.setShowDial(dialItem.isChecked());
+        adapter.setDialShown(dialItem.isChecked());
         return false;
     }
 
@@ -113,7 +113,7 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
 
     public void setShowFlag(boolean shown) {
         recyclerView.getRecycledViewPool().clear();
-        adapter.setShowFlag(shown);
+        adapter.setFlagShown(shown);
     }
 
     private static int getColorAttr(Context context, int attrId) {

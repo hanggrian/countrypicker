@@ -12,9 +12,10 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class CountryPickerSheetDialog extends BottomSheetDialog {
+public class CountryPickerSheetDialog extends BottomSheetDialog implements CountryPickerComponent {
 
     private final CountryPicker picker;
+    private final CountryPickerComponentImpl impl;
 
     public CountryPickerSheetDialog(@NonNull Context context) {
         this(context, 0);
@@ -24,6 +25,12 @@ public class CountryPickerSheetDialog extends BottomSheetDialog {
         super(context, theme);
 
         picker = new CountryPicker(getContext());
+        impl = new CountryPickerComponentImpl(picker) {
+            @Override
+            void onDismiss() {
+                dismiss();
+            }
+        };
         setContentView(picker);
 
         final BottomSheetBehavior behavior = BottomSheetBehavior.from((View) picker.getParent());
@@ -39,27 +46,21 @@ public class CountryPickerSheetDialog extends BottomSheetDialog {
 
     @NonNull
     public CountryPicker getPicker() {
-        if (picker == null) {
-            throw new IllegalStateException("Dialog must be inflated first.");
-        }
-        return picker;
+        return impl.getPicker();
     }
 
+    @Override
     public void setItems(@NonNull List<Country> countries) {
-        picker.setItems(countries);
+        impl.setItems(countries);
     }
 
-    public void setShowFlag(boolean shown) {
-        picker.setShowFlag(shown);
+    @Override
+    public void setFlagShown(boolean shown) {
+        impl.setFlagShown(shown);
     }
 
-    public void setOnSelectedListener(@Nullable final CountryPicker.OnSelectedListener listener) {
-        picker.getAdapter().setListener(listener == null ? null : new CountryPicker.OnSelectedListener() {
-            @Override
-            public void onSelected(@NonNull Country country) {
-                listener.onSelected(country);
-                dismiss();
-            }
-        });
+    @Override
+    public void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener) {
+        impl.setOnSelectedListener(listener);
     }
 }

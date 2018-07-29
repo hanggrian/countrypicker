@@ -36,8 +36,8 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
     private List<Country> filteredCountries;
     private Filter filter;
 
-    private boolean isShowFlag = CountryPicker.DEFAULT_SHOW_FLAG;
-    private boolean isShowDial = CountryPicker.DEFAULT_SHOW_DIAL;
+    private boolean isFlagShown = CountryPicker.DEFAULT_FLAG_SHOWN;
+    private boolean isDialShown = CountryPicker.DEFAULT_DIAL_SHOWN;
     CountryPicker.OnSelectedListener listener;
 
     CountryPickerAdapter(@NonNull final Context context) {
@@ -45,18 +45,18 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         replaceItems(new ArrayList<>(Arrays.asList(Country.values())));
     }
 
-    void setItems(@NonNull List<Country> countries) {
+    public void setItems(@NonNull List<Country> countries) {
         replaceItems(countries);
         notifyDataSetChanged();
     }
 
-    void setShowFlag(boolean shown) {
-        this.isShowFlag = shown;
+    public void setFlagShown(boolean shown) {
+        this.isFlagShown = shown;
         notifyDataSetChanged();
     }
 
-    void setShowDial(boolean shown) {
-        this.isShowDial = shown;
+    void setDialShown(boolean shown) {
+        this.isDialShown = shown;
         notifyDataSetChanged();
     }
 
@@ -97,7 +97,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         } else if (holder instanceof TextEmojiHolder) {
             ((TextEmojiHolder) holder).emojiView.setText(country.getFlagEmoji());
         }
-        ((TextHolder) holder).textView.setText(isShowDial
+        ((TextHolder) holder).textView.setText(isDialShown
                 ? String.format("%s (%s)", country.getName(context), country.getDial())
                 : country.getName(context));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -115,7 +115,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         if (filteredCountries.isEmpty()) {
             return TYPE_EMPTY;
         }
-        return !isShowFlag ? TYPE_TEXT : filteredCountries.get(position).isFlagDrawableAvailable(context)
+        return !isFlagShown ? TYPE_TEXT : filteredCountries.get(position).isFlagDrawableAvailable(context)
                 ? TYPE_TEXT_IMAGE
                 : TYPE_TEXT_EMOJI;
     }

@@ -21,8 +21,8 @@
             app:expandedSubtitleTextAppearance="@style/TextAppearance.Design.SubtitleCollapsingToolbar.ExpandedSubtitle.Inverse"
             app:expandedTitleTextAppearance="@style/TextAppearance.Design.SubtitleCollapsingToolbar.ExpandedTitle.Inverse"
             app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:subtitle="Custom flags and dial code"
-            app:title="Custom">
+            app:subtitle="Emoji flags"
+            app:title="Default">
 
             <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolbar"

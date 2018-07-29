@@ -61,7 +61,7 @@ public final class SearchBar extends SearchView {
         frameLp.rightMargin = 0;
 
         MarginLayoutParams textLp = (MarginLayoutParams) mSearchSrcTextView.getLayoutParams();
-        textLp.leftMargin = getResources().getDimensionPixelSize(R.dimen.countrydialog_searchbar_search_leftmargin);
+        textLp.leftMargin = getResources().getDimensionPixelSize(R.dimen.countrydialog_searchbar_gap);
 
         // Buttons are wider in Google Search app.
         mCloseButton.setScaleType(CENTER);

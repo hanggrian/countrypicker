@@ -12,9 +12,10 @@ import androidx.appcompat.app.AppCompatDialog;
 
 import static android.view.Window.FEATURE_NO_TITLE;
 
-public class CountryPickerDialog extends AppCompatDialog {
+public class CountryPickerDialog extends AppCompatDialog implements CountryPickerComponent {
 
     private final CountryPicker picker;
+    private final CountryPickerComponentImpl impl;
 
     public CountryPickerDialog(@NonNull Context context) {
         this(context, 0);
@@ -26,39 +27,39 @@ public class CountryPickerDialog extends AppCompatDialog {
         supportRequestWindowFeature(FEATURE_NO_TITLE);
 
         picker = new CountryPicker(getContext());
+        impl = new CountryPickerComponentImpl(picker) {
+            @Override
+            void onDismiss() {
+                dismiss();
+            }
+        };
         setContentView(picker);
     }
 
     @NonNull
     public CountryPicker getPicker() {
-        if (picker == null) {
-            throw new IllegalStateException("Dialog must be inflated first.");
-        }
-        return picker;
+        return impl.getPicker();
     }
 
+    @Override
     public void setItems(@NonNull List<Country> countries) {
-        picker.setItems(countries);
+        impl.setItems(countries);
     }
 
-    public void setShowFlag(boolean shown) {
-        picker.setShowFlag(shown);
+    @Override
+    public void setFlagShown(boolean shown) {
+        impl.setFlagShown(shown);
     }
 
-    public void setOnSelectedListener(@Nullable final CountryPicker.OnSelectedListener listener) {
-        picker.getAdapter().setListener(listener == null ? null : new CountryPicker.OnSelectedListener() {
-            @Override
-            public void onSelected(@NonNull Country country) {
-                listener.onSelected(country);
-                dismiss();
-            }
-        });
+    @Override
+    public void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener) {
+        impl.setOnSelectedListener(listener);
     }
 
     public static class Builder {
         private final Context context;
         @Nullable private List<Country> countries;
-        private boolean isShowFlag = CountryPicker.DEFAULT_SHOW_FLAG;
+        private boolean isShowFlag = CountryPicker.DEFAULT_FLAG_SHOWN;
         @Nullable private CountryPicker.OnSelectedListener listener;
 
         public Builder(@NonNull Context context) {
@@ -89,8 +90,8 @@ public class CountryPickerDialog extends AppCompatDialog {
             if (countries != null) {
                 dialog.setItems(countries);
             }
-            if (isShowFlag != CountryPicker.DEFAULT_SHOW_FLAG) {
-                dialog.setShowFlag(isShowFlag);
+            if (isShowFlag != CountryPicker.DEFAULT_FLAG_SHOWN) {
+                dialog.setFlagShown(isShowFlag);
             }
             if (listener != null) {
                 dialog.setOnSelectedListener(listener);

@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="@dimen/countrydialog_searchbar_height"
+        android:layout_height="48dp"
         android:layout_marginStart="?android:listPreferredItemPaddingStart"
         android:layout_marginLeft="?android:listPreferredItemPaddingLeft"
         android:layout_marginTop="?android:listPreferredItemPaddingLeft"
@@ -21,8 +21,8 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:contentInsetLeft="0dp"
-            app:contentInsetStart="0dp">
+            app:contentInsetLeft="-8dp"
+            app:contentInsetStart="-8dp">
 
             <androidx.appcompat.widget.SearchBar
                 android:id="@+id/searchBar"
@@ -40,6 +40,7 @@
         android:layout_height="match_parent"
         android:clipToPadding="false"
         android:paddingTop="?android:listPreferredItemPaddingLeft"
+        android:paddingBottom="?android:listPreferredItemPaddingLeft"
         android:scrollbars="vertical"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 </LinearLayout>

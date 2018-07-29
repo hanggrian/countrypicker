@@ -5,22 +5,20 @@
         <androidx.preference.CheckBoxPreference
             android:defaultValue="true"
             android:icon="@drawable/ic_show_flag"
-            android:key="show_flag"
-            android:summary="@string/enable_to_show_flags"
-            android:title="@string/flag" />
-
-        <androidx.preference.CheckBoxPreference
-            android:defaultValue="false"
-            android:icon="@drawable/ic_show_dial_code"
-            android:key="show_dial_code"
-            android:summary="@string/enable_to_show_dial_codes"
-            android:title="@string/dial_code" />
+            android:key="is_show_flag"
+            android:summary="Enable to show flags"
+            android:title="Flag" />
     </androidx.preference.PreferenceCategory>
 
-    <androidx.preference.PreferenceCategory>
+    <androidx.preference.PreferenceCategory android:title="Show">
         <androidx.preference.Preference
-            android:key="show"
-            android:summary="@string/click_to_show_country_dialog"
-            android:title="@string/show" />
+            android:key="show_dialog"
+            android:summary="Click to show dialog picker"
+            android:title="Dialog" />
+
+        <androidx.preference.Preference
+            android:key="show_sheet"
+            android:summary="Click to show bottom sheet picker"
+            android:title="Bottom sheet" />
     </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>
