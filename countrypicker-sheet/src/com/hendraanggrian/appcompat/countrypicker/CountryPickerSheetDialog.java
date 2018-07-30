@@ -1,7 +1,9 @@
 package com.hendraanggrian.appcompat.countrypicker;
 
 import android.content.Context;
+import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.Window;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -14,34 +16,29 @@ import androidx.annotation.Nullable;
 
 public class CountryPickerSheetDialog extends BottomSheetDialog implements CountryPickerComponent {
 
-    private final CountryPicker picker;
     private final CountryPickerComponentImpl impl;
 
     public CountryPickerSheetDialog(@NonNull Context context) {
         this(context, 0);
     }
 
-    public CountryPickerSheetDialog(@NonNull Context context, int theme) {
+    public CountryPickerSheetDialog(@NonNull final Context context, int theme) {
         super(context, theme);
+        impl = new CountryPickerComponentImpl(this, context);
+        setContentView(impl.getPicker());
 
-        picker = new CountryPicker(getContext());
-        impl = new CountryPickerComponentImpl(picker) {
-            @Override
-            void onDismiss() {
-                dismiss();
-            }
-        };
-        setContentView(picker);
-
-        final BottomSheetBehavior behavior = BottomSheetBehavior.from((View) picker.getParent());
-        picker.getSearchView().getEditText().setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean b) {
-                if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                    behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                }
-            }
-        });
+        final BottomSheetBehavior behavior = BottomSheetBehavior.from((View) getPicker().getParent());
+        behavior.setPeekHeight(getDisplayMetrics().heightPixels * 2 / 3);
+        getPicker().getSearchBar()
+                .getInput()
+                .setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean hasFocus) {
+                        if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                        }
+                    }
+                });
     }
 
     @NonNull
@@ -62,5 +59,15 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
     @Override
     public void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener) {
         impl.setOnSelectedListener(listener);
+    }
+
+    private DisplayMetrics getDisplayMetrics() {
+        final DisplayMetrics dm = new DisplayMetrics();
+        Window window = getWindow();
+        if (window == null) {
+            throw new IllegalStateException();
+        }
+        window.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        return dm;
     }
 }

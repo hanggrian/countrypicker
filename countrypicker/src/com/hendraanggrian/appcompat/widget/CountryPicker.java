@@ -20,6 +20,9 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+/**
+ * Root layout of country selection view.
+ */
 public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenuItemClickListener,
         SearchView.OnQueryTextListener {
 
@@ -97,7 +100,7 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
     }
 
     @NonNull
-    public SearchBar getSearchView() {
+    public SearchBar getSearchBar() {
         return searchBar;
     }
 

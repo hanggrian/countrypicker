@@ -14,7 +14,6 @@ import static android.view.Window.FEATURE_NO_TITLE;
 
 public class CountryPickerDialog extends AppCompatDialog implements CountryPickerComponent {
 
-    private final CountryPicker picker;
     private final CountryPickerComponentImpl impl;
 
     public CountryPickerDialog(@NonNull Context context) {
@@ -23,17 +22,9 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicke
 
     public CountryPickerDialog(@NonNull Context context, int theme) {
         super(context, theme);
-
         supportRequestWindowFeature(FEATURE_NO_TITLE);
-
-        picker = new CountryPicker(getContext());
-        impl = new CountryPickerComponentImpl(picker) {
-            @Override
-            void onDismiss() {
-                dismiss();
-            }
-        };
-        setContentView(picker);
+        impl = new CountryPickerComponentImpl(this, context);
+        setContentView(impl.getPicker());
     }
 
     @NonNull
@@ -58,9 +49,9 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicke
 
     public static class Builder {
         private final Context context;
-        @Nullable private List<Country> countries;
-        private boolean isShowFlag = CountryPicker.DEFAULT_FLAG_SHOWN;
-        @Nullable private CountryPicker.OnSelectedListener listener;
+        private List<Country> countries;
+        private boolean isFlagShown = CountryPicker.DEFAULT_FLAG_SHOWN;
+        private CountryPicker.OnSelectedListener listener;
 
         public Builder(@NonNull Context context) {
             this.context = context;
@@ -73,8 +64,8 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicke
         }
 
         @NonNull
-        public Builder setShowFlag(boolean isShowFlag) {
-            this.isShowFlag = isShowFlag;
+        public Builder setFlagShown(boolean shown) {
+            this.isFlagShown = shown;
             return this;
         }
 
@@ -90,8 +81,8 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicke
             if (countries != null) {
                 dialog.setItems(countries);
             }
-            if (isShowFlag != CountryPicker.DEFAULT_FLAG_SHOWN) {
-                dialog.setFlagShown(isShowFlag);
+            if (isFlagShown != CountryPicker.DEFAULT_FLAG_SHOWN) {
+                dialog.setFlagShown(isFlagShown);
             }
             if (listener != null) {
                 dialog.setOnSelectedListener(listener);

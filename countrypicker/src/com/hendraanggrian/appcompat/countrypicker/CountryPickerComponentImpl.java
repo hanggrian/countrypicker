@@ -1,5 +1,8 @@
 package com.hendraanggrian.appcompat.countrypicker;
 
+import android.app.Dialog;
+import android.content.Context;
+
 import com.hendraanggrian.appcompat.widget.CountryPicker;
 
 import java.util.List;
@@ -7,22 +10,19 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-abstract class CountryPickerComponentImpl implements CountryPickerComponent {
+class CountryPickerComponentImpl implements CountryPickerComponent {
 
-    abstract void onDismiss();
-
+    private final Dialog dialog;
     private final CountryPicker picker;
 
-    CountryPickerComponentImpl(CountryPicker picker) {
-        this.picker = picker;
+    CountryPickerComponentImpl(Dialog dialog, Context context) {
+        this.dialog = dialog;
+        this.picker = new CountryPicker(context);
     }
 
     @NonNull
     @Override
     public CountryPicker getPicker() {
-        if (picker == null) {
-            throw new IllegalStateException("Dialog must be inflated first.");
-        }
         return picker;
     }
 
@@ -44,7 +44,7 @@ abstract class CountryPickerComponentImpl implements CountryPickerComponent {
             @Override
             public void onSelected(@NonNull Country country) {
                 listener.onSelected(country);
-                onDismiss();
+                dialog.dismiss();
             }
         });
     }

@@ -1,4 +1,4 @@
-CountryDialog
+CountryPicker
 =============
 [![bintray](https://img.shields.io/badge/bintray-appcompat-brightgreen.svg)](https://bintray.com/hendraanggrian/appcompat)
 [![download](https://api.bintray.com/packages/hendraanggrian/appcompat/countrypicker/images/download.svg)](https://bintray.com/hendraanggrian/appcompat/countrypicker/_latestVersion)
@@ -8,7 +8,7 @@ CountryDialog
 ![demo1][demo1]
 ![demo2][demo2]
 
-Material design dialog to pick country.
+Material design components to pick country.
 
 Download
 --------
@@ -19,17 +19,18 @@ repositories {
 }
 
 dependencies {
-    implementation "com.hendraanggrian.appcompat:country-dialog:$version"
+    implementation "com.hendraanggrian.appcompat:countrypicker:$version"
+    implementation "com.hendraanggrian.appcompat:countrypicker-sheet:$version"
 }
 ```
 
-Usage
------
-Use 'CountryDialog.Builder' to build or show 'CountryDialog'.
+Using dialog
+------------
+Use 'CountryPickerDialog.Builder' to build or show 'CountryPickerDialog'.
+
 ```java
-new CountryDialog.Builder(context)
-    .title("Pick country")
-    .onSelected(new CountryDialog.OnSelectedListener() {
+new CountryPickerDialog.Builder(context)
+    .setOnSelectedListener(new CountryPicker.OnSelectedListener() {
         @Override
         public void onSelected(@NonNull Country country) {
             // do something
@@ -38,23 +39,19 @@ new CountryDialog.Builder(context)
     .show();
 ```
 
-All customization properties that can be applied:
+Using bottom sheet
+------------------
+No builder here, create traditionally.
+
 ```java
-new CountryDialog.Builder(context)
-    .title(title)                           // when not set or empty, title bar is hidden
-    .showFlags(false)                       // show flag images, default is true
-    .showDialCode(true)                     // shows country name with dial code, default is false
-    .exclude(Country.ID, Country.US)        // exclude some countries on the list
-    .cancellable(true)                      // default is false
-    .scrollerThumbColor(color)              // default is colorAccent of your theme
-    .scrollerTrackColor(color)              // default is transparent
-    .scrollerPopupBackgroundColor(color)    // default is colorAccent of your theme
-    .scrollerPopupTextColor(color)          // default is colorControlNormal of your theme
-    .scrollerPopupTextSize(14, true)        // use false to use 14px or true to use 14dp
-    .scrollerPopupTextTypeface(typeface)
-    .scrollerAutoHide(false, 0)             // default is true with 1500ms delay
-    .onPicked(listener)
-    .show();
+BottomSheetDialog dialog = new CountryPickerSheetDialog(context);
+dialog.setOnSelectedListener(new CountryPicker.OnSelectedListener() {
+    @Override
+    public void onSelected(@NonNull Country country) {
+        // do something
+    }
+});
+dialog.show()
 ```
 
 Country flags
@@ -68,7 +65,7 @@ By default, country flags are represented in emoji to achieve lowest library siz
 To use custom flag images, have a drawable with name format `flag_{2-digit iso code}` in your project.
 For example if you want to display US flag, the drawable name should be `flag_us`.
 
-See [Country.java](/countrydialog/src/main/java/com/hendraanggrian/countrydialog/Country.java) for all available country codes.
+See [Country.java](/countrypicker/src/com/hendraanggrian/appcompat/countrypicker/Country.java) for all available country codes.
 
 License
 -------

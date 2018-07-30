@@ -1,4 +1,4 @@
-package com.hendraanggrian.appcompat.countrypicker.demo
+package com.hendraanggrian.appcompat.countrypicker.demo2
 
 import android.os.Bundle
 import android.widget.Toast.LENGTH_LONG
@@ -14,7 +14,7 @@ class DemoFragment : PreferenceFragmentCompat() {
         val preferences = preferenceScreen.sharedPreferences
         findPreference("show_dialog").setOnPreferenceClickListener {
             CountryPickerDialog.Builder(context!!)
-                .setShowFlag(preferences.getBoolean(PREFERENCE_IS_SHOW_FLAG, true))
+                .setFlagShown(preferences.getBoolean(PREFERENCE_IS_SHOW_FLAG, true))
                 .setOnSelectedListener {
                     makeText(context, it.getName(context!!), LENGTH_LONG).show()
                 }

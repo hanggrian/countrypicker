@@ -15,7 +15,7 @@ android {
     defaultConfig {
         minSdkVersion(SDK_MIN)
         targetSdkVersion(SDK_TARGET)
-        applicationId = "$RELEASE_GROUP.${RELEASE_ARTIFACT.replace("-", "")}.demo"
+        applicationId = "$RELEASE_GROUP.$RELEASE_ARTIFACT.demo2"
         versionCode = 1
         versionName = RELEASE_VERSION
     }
