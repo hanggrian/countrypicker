@@ -1,6 +1,7 @@
 package com.hendraanggrian.appcompat.countrypicker;
 
 import android.content.Context;
+import android.view.Window;
 
 import com.hendraanggrian.appcompat.widget.CountryPicker;
 
@@ -10,11 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialog;
 
-import static android.view.Window.FEATURE_NO_TITLE;
+public class CountryPickerDialog extends AppCompatDialog implements CountryPickerBase {
 
-public class CountryPickerDialog extends AppCompatDialog implements CountryPickerComponent {
-
-    private final CountryPickerComponentImpl impl;
+    private final CountryPickerImpl impl;
 
     public CountryPickerDialog(@NonNull Context context) {
         this(context, 0);
@@ -22,26 +21,38 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicke
 
     public CountryPickerDialog(@NonNull Context context, int theme) {
         super(context, theme);
-        supportRequestWindowFeature(FEATURE_NO_TITLE);
-        impl = new CountryPickerComponentImpl(this, context);
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        impl = new CountryPickerImpl(this, context);
         setContentView(impl.getPicker());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @NonNull
     public CountryPicker getPicker() {
         return impl.getPicker();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setItems(@NonNull List<Country> countries) {
         impl.setItems(countries);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFlagShown(boolean shown) {
         impl.setFlagShown(shown);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener) {
         impl.setOnSelectedListener(listener);

@@ -2,6 +2,9 @@ package com.hendraanggrian.appcompat.countrypicker;
 
 import androidx.annotation.NonNull;
 
+/**
+ * Represents A to Z that will be combined into flag emojis.
+ */
 enum RegionalIndicatorSymbol {
     A('A', 0x1F1E6),
     B('B', 0x1F1E7),

@@ -10,12 +10,12 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-class CountryPickerComponentImpl implements CountryPickerComponent {
+class CountryPickerImpl implements CountryPickerBase {
 
     private final Dialog dialog;
     private final CountryPicker picker;
 
-    CountryPickerComponentImpl(Dialog dialog, Context context) {
+    CountryPickerImpl(Dialog dialog, Context context) {
         this.dialog = dialog;
         this.picker = new CountryPicker(context);
     }

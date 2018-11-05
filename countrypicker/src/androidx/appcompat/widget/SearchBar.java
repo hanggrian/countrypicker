@@ -6,6 +6,7 @@ import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
@@ -18,11 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
 import androidx.core.widget.ImageViewCompat;
 
-import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
-import static android.widget.ImageView.ScaleType.CENTER;
-
 /**
  * A hacked {@link SearchView} that mimics search bar in Android Settings app API 28.
+ * This class needs to be in this particular package since it's accessing internal components.
  */
 public final class SearchBar extends SearchView {
 
@@ -49,11 +48,12 @@ public final class SearchBar extends SearchView {
         mCollapsedIcon = findViewById(androidx.appcompat.R.id.search_mag_icon);
 
         // Set up icons and backgrounds.
-        Drawable transparent = new ColorDrawable(getResources().getColor(android.R.color.transparent));
+        Drawable transparent =
+            new ColorDrawable(getResources().getColor(android.R.color.transparent));
         ViewCompat.setBackground(mSearchPlate, transparent);
         ViewCompat.setBackground(mSubmitArea, transparent);
 
-        mSearchSrcTextView.setInputType(TYPE_TEXT_FLAG_NO_SUGGESTIONS);
+        mSearchSrcTextView.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         // First, remove horizontal paddings to get full width.
         MarginLayoutParams frameLp = (MarginLayoutParams) mSearchEditFrame.getLayoutParams();
@@ -61,13 +61,15 @@ public final class SearchBar extends SearchView {
         frameLp.rightMargin = 0;
 
         MarginLayoutParams textLp = (MarginLayoutParams) mSearchSrcTextView.getLayoutParams();
-        textLp.leftMargin = getResources().getDimensionPixelSize(R.dimen.countrypicker_searchbarGap);
+        textLp.leftMargin =
+            getResources().getDimensionPixelSize(R.dimen.countrypicker_searchbarGap);
 
         // Buttons are wider in Google Search app.
-        mCloseButton.setScaleType(CENTER);
+        mCloseButton.setScaleType(ImageView.ScaleType.CENTER);
         mCloseButton.getLayoutParams().width = getDimenAttr(context, android.R.attr.actionBarSize);
 
-        final ColorStateList colorAccent = ColorStateList.valueOf(getColorAttr(getContext(), R.attr.colorAccent));
+        final ColorStateList colorAccent =
+            ColorStateList.valueOf(getColorAttr(getContext(), R.attr.colorAccent));
         mSearchSrcTextView.setTextColor(colorAccent);
         ImageViewCompat.setImageTintList(mGoButton, colorAccent);
         ImageViewCompat.setImageTintList(mSearchButton, colorAccent);

@@ -12,6 +12,9 @@ import androidx.annotation.Nullable;
 
 import static android.os.Build.VERSION_CODES.N;
 
+/**
+ * Represents countries around the world according to registered ISO 2 codes.
+ */
 public enum Country {
     AD("AD", "376"),
     AE("AE", "971"),
@@ -282,12 +285,17 @@ public enum Country {
 
     @DrawableRes
     public int getFlagDrawableRes(@NonNull Context context) {
-        return context.getResources().getIdentifier(("flag_" + iso2.toLowerCase(Locale.ENGLISH)).toLowerCase(Locale.ENGLISH), "drawable", context.getPackageName());
+        return context.getResources().getIdentifier(
+            ("flag_" + iso2.toLowerCase(Locale.ENGLISH)).toLowerCase(Locale.ENGLISH),
+            "drawable",
+            context.getPackageName()
+        );
     }
 
     @NonNull
     public String getFlagEmoji() {
-        return RegionalIndicatorSymbol.valueOf(iso2.charAt(0)).toString() + RegionalIndicatorSymbol.valueOf(iso2.charAt(1)).toString();
+        return RegionalIndicatorSymbol.valueOf(iso2.charAt(0)).toString()
+            + RegionalIndicatorSymbol.valueOf(iso2.charAt(1)).toString();
     }
 
     @NonNull
@@ -299,8 +307,8 @@ public enum Country {
     public Locale toLocale(@NonNull Context context) {
         final Configuration config = context.getResources().getConfiguration();
         return new Locale(Build.VERSION.SDK_INT < N
-                ? config.locale.getLanguage()
-                : config.getLocales().get(0).getLanguage(), iso2);
+            ? config.locale.getLanguage()
+            : config.getLocales().get(0).getLanguage(), iso2);
     }
 
     @Nullable

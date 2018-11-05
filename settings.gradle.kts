@@ -1,5 +1,5 @@
-include(":$RELEASE_ARTIFACT")
-include(":$RELEASE_ARTIFACT-sheet")
+include(RELEASE_ARTIFACT)
+include("$RELEASE_ARTIFACT-sheet")
 
-include(":demo:default")
-include(":demo:custom-flags")
+include("demo:default")
+include("demo:custom-flags")

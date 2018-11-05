@@ -14,9 +14,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class CountryPickerSheetDialog extends BottomSheetDialog implements CountryPickerComponent {
+public class CountryPickerSheetDialog extends BottomSheetDialog implements CountryPickerBase {
 
-    private final CountryPickerComponentImpl impl;
+    private final CountryPickerImpl impl;
 
     public CountryPickerSheetDialog(@NonNull Context context) {
         this(context, 0);
@@ -24,38 +24,52 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
 
     public CountryPickerSheetDialog(@NonNull final Context context, int theme) {
         super(context, theme);
-        impl = new CountryPickerComponentImpl(this, context);
+        impl = new CountryPickerImpl(this, context);
         setContentView(impl.getPicker());
 
-        final BottomSheetBehavior behavior = BottomSheetBehavior.from((View) getPicker().getParent());
+        final BottomSheetBehavior behavior =
+            BottomSheetBehavior.from((View) getPicker().getParent());
         behavior.setPeekHeight(getDisplayMetrics().heightPixels * 2 / 3);
-        getPicker().getSearchBar()
-                .getInput()
-                .setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                    @Override
-                    public void onFocusChange(View view, boolean hasFocus) {
-                        if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-                        }
+        getPicker()
+            .getSearchBar()
+            .getInput()
+            .setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean hasFocus) {
+                    if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
                     }
-                });
+                }
+            });
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @NonNull
     public CountryPicker getPicker() {
         return impl.getPicker();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setItems(@NonNull List<Country> countries) {
         impl.setItems(countries);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setFlagShown(boolean shown) {
         impl.setFlagShown(shown);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener) {
         impl.setOnSelectedListener(listener);
