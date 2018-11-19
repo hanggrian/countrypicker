@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.Context;
 
 import com.hendraanggrian.appcompat.widget.CountryPicker;
-import com.hendraanggrian.appcompat.widget.CountryPickerAdapter;
 
 import java.util.List;
 
@@ -30,27 +29,23 @@ class CountryPickerContainerImpl implements CountryPickerContainer {
     @Override
     public void setItems(@NonNull List<Country> countries) {
         picker.getRecyclerView().getRecycledViewPool().clear();
-        getAdapter().setItems(countries);
+        picker.getAdapter().setItems(countries);
     }
 
     @Override
     public void setFlagShown(boolean shown) {
         picker.getRecyclerView().getRecycledViewPool().clear();
-        getAdapter().setFlagShown(shown);
+        picker.getAdapter().setFlagShown(shown);
     }
 
     @Override
     public void setOnSelectedListener(@Nullable final CountryPicker.OnSelectedListener listener) {
-        getAdapter().setListener(listener == null ? null : new CountryPicker.OnSelectedListener() {
+        picker.getAdapter().setListener(listener == null ? null : new CountryPicker.OnSelectedListener() {
             @Override
             public void onSelected(@NonNull Country country) {
                 listener.onSelected(country);
                 dialog.dismiss();
             }
         });
-    }
-
-    private CountryPickerAdapter getAdapter() {
-        return (CountryPickerAdapter) picker.getRecyclerView().getAdapter();
     }
 }

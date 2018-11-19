@@ -1,6 +1,8 @@
 package com.hendraanggrian.appcompat.countrypicker;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.telephony.TelephonyManager;
 import android.view.Window;
 
 import com.hendraanggrian.appcompat.widget.CountryPicker;
@@ -9,9 +11,9 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatDialog;
+import androidx.appcompat.app.AlertDialog;
 
-public class CountryPickerDialog extends AppCompatDialog implements CountryPickerContainer {
+public class CountryPickerDialog extends AlertDialog implements CountryPickerContainer {
 
     private final CountryPickerContainer container;
 
@@ -19,12 +21,30 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicke
         this(context, 0);
     }
 
-    public CountryPickerDialog(@NonNull Context context, int theme) {
+    public CountryPickerDialog(@NonNull final Context context, int theme) {
         super(context, theme);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
         container = new CountryPickerContainerImpl(this, context);
-        setContentView(container.getPicker());
+        setView(container.getPicker());
+
+        final Country country = Country.fromIso(context,
+                ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE))
+                        .getNetworkCountryIso());
+        if (country != null) {
+            setButton(DialogInterface.BUTTON_POSITIVE,
+                    getContext().getString(R.string.use_default, country.getName(context)),
+                    new OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            final CountryPicker.OnSelectedListener listener = container
+                                    .getPicker().getAdapter().getListener();
+                            if (listener != null) {
+                                listener.onSelected(country);
+                            }
+                        }
+                    });
+        }
     }
 
     /**

@@ -269,7 +269,6 @@ public enum Country {
 
     public final String iso2;
     public final String dial;
-    private Locale locale; // locale representation of country
 
     Country(@NonNull String iso2, @NonNull String dial) {
         this.iso2 = iso2;
@@ -313,7 +312,7 @@ public enum Country {
     }
 
     @Nullable
-    public static Country fromISO2(@NonNull Context context, @NonNull String iso2) {
+    public static Country fromIso(@NonNull Context context, @NonNull String iso2) {
         for (Country value : values()) {
             final Locale locale = value.toLocale(context);
             if (value.iso2.toLowerCase(locale).equals(iso2.toLowerCase(locale))) {

@@ -17,6 +17,8 @@ android {
         getByName("main") {
             manifest.srcFile("AndroidManifest.xml")
             java.srcDirs("src")
+            res.srcDir("res")
+            resources.srcDir("src")
         }
         getByName("androidTest") {
             setRoot("tests")
@@ -36,6 +38,7 @@ android {
 
 dependencies {
     api(project(":$RELEASE_ARTIFACT"))
+    implementation(androidx("coordinatorlayout"))
     implementation(material())
 
     testImplementation(junit())
