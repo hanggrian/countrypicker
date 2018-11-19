@@ -3,6 +3,7 @@ package com.hendraanggrian.appcompat.countrypicker;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
+import android.util.SparseIntArray;
 
 import java.util.Locale;
 
@@ -293,9 +294,8 @@ public enum Country {
     }
 
     @NonNull
-    public String getFlagEmoji() {
-        return RegionalIndicatorSymbol.valueOf(iso2.charAt(0)).toString()
-            + RegionalIndicatorSymbol.valueOf(iso2.charAt(1)).toString();
+    public String getFlagSymbols() {
+        return getSymbol(iso2.charAt(0)) + getSymbol(iso2.charAt(1));
     }
 
     @NonNull
@@ -320,5 +320,43 @@ public enum Country {
             }
         }
         return null;
+    }
+
+    /**
+     * https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
+     */
+    private static SparseIntArray symbols = new SparseIntArray();
+
+    static {
+        symbols.put('A', 0x1F1E6);
+        symbols.put('B', 0x1F1E7);
+        symbols.put('C', 0x1F1E8);
+        symbols.put('D', 0x1F1E9);
+        symbols.put('E', 0x1F1EA);
+        symbols.put('F', 0x1F1EB);
+        symbols.put('G', 0x1F1EC);
+        symbols.put('H', 0x1F1ED);
+        symbols.put('I', 0x1F1EE);
+        symbols.put('J', 0x1F1EF);
+        symbols.put('K', 0x1F1F0);
+        symbols.put('L', 0x1F1F1);
+        symbols.put('M', 0x1F1F2);
+        symbols.put('N', 0x1F1F3);
+        symbols.put('O', 0x1F1F4);
+        symbols.put('P', 0x1F1F5);
+        symbols.put('Q', 0x1F1F6);
+        symbols.put('R', 0x1F1F7);
+        symbols.put('S', 0x1F1F8);
+        symbols.put('T', 0x1F1F9);
+        symbols.put('U', 0x1F1FA);
+        symbols.put('V', 0x1F1FB);
+        symbols.put('W', 0x1F1FC);
+        symbols.put('X', 0x1F1FD);
+        symbols.put('Y', 0x1F1FE);
+        symbols.put('Z', 0x1F1FF);
+    }
+
+    private static String getSymbol(char c) {
+        return String.valueOf(Character.toChars(symbols.get(c)));
     }
 }

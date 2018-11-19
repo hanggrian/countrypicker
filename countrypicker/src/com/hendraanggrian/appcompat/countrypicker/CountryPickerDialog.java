@@ -11,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialog;
 
-public class CountryPickerDialog extends AppCompatDialog implements CountryPickerBase {
+public class CountryPickerDialog extends AppCompatDialog implements CountryPickableView {
 
-    private final CountryPickerImpl impl;
+    private final CountryPickableViewImpl impl;
 
     public CountryPickerDialog(@NonNull Context context) {
         this(context, 0);
@@ -22,7 +22,7 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicke
     public CountryPickerDialog(@NonNull Context context, int theme) {
         super(context, theme);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        impl = new CountryPickerImpl(this, context);
+        impl = new CountryPickableViewImpl(this, context);
         setContentView(impl.getPicker());
     }
 

@@ -1,6 +1,5 @@
 package androidx.appcompat.widget;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
@@ -22,7 +21,10 @@ import androidx.core.widget.ImageViewCompat;
 /**
  * A hacked {@link SearchView} that mimics search bar in Android Settings app API 28.
  * This class needs to be in this particular package since it's accessing internal components.
+ *
+ * <p> Note: {@link android.widget.SearchView} is not hackable since it uses internal R class.</p>
  */
+@SuppressWarnings("FieldCanBeLocal")
 public final class SearchBar extends SearchView {
 
     private final View mSearchEditFrame;
@@ -38,7 +40,6 @@ public final class SearchBar extends SearchView {
         this(context, attrs, R.attr.searchViewStyle);
     }
 
-    @SuppressLint("PrivateResource")
     public SearchBar(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
@@ -62,7 +63,7 @@ public final class SearchBar extends SearchView {
 
         final MarginLayoutParams textLp = (MarginLayoutParams) mSearchSrcTextView.getLayoutParams();
         textLp.leftMargin = getResources()
-            .getDimensionPixelSize(R.dimen.countrypicker_searchbarGap);
+            .getDimensionPixelSize(R.dimen.countrypicker_searchbar_gap);
 
         // Buttons are wider in Google Search app.
         mCloseButton.setScaleType(ImageView.ScaleType.CENTER);
@@ -89,6 +90,7 @@ public final class SearchBar extends SearchView {
         return typedValue.data;
     }
 
+    @SuppressWarnings("SameParameterValue")
     private static int getDimenAttr(Context context, int attrId) {
         final TypedValue typedValue = new TypedValue();
         context.getTheme().resolveAttribute(attrId, typedValue, true);

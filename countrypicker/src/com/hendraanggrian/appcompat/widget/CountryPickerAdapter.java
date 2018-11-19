@@ -103,7 +103,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
             ((TextImageHolder) holder).imageView
                 .setImageResource(country.getFlagDrawableRes(context));
         } else if (holder instanceof TextEmojiHolder) {
-            ((TextEmojiHolder) holder).emojiView.setText(country.getFlagEmoji());
+            ((TextEmojiHolder) holder).emojiView.setText(country.getFlagSymbols());
         }
         ((TextHolder) holder).textView.setText(isDialShown
             ? String.format("%s (%s)", country.getName(context), country.getDial())

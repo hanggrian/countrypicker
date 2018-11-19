@@ -14,9 +14,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class CountryPickerSheetDialog extends BottomSheetDialog implements CountryPickerBase {
+public class CountryPickerSheetDialog extends BottomSheetDialog implements CountryPickableView {
 
-    private final CountryPickerImpl impl;
+    private final CountryPickableViewImpl impl;
 
     public CountryPickerSheetDialog(@NonNull Context context) {
         this(context, 0);
@@ -24,7 +24,7 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
 
     public CountryPickerSheetDialog(@NonNull final Context context, int theme) {
         super(context, theme);
-        impl = new CountryPickerImpl(this, context);
+        impl = new CountryPickableViewImpl(this, context);
         setContentView(impl.getPicker());
 
         final BottomSheetBehavior behavior =
