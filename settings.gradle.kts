@@ -1,5 +1,8 @@
 include(RELEASE_ARTIFACT)
 include("$RELEASE_ARTIFACT-sheet")
+includeDir("demo")
 
-include("demo:default")
-include("demo:custom-flags")
+fun includeDir(dir: String) = File(dir)
+    .walk()
+    .filter { it.isDirectory }
+    .forEach { include("$dir:${it.name}") }

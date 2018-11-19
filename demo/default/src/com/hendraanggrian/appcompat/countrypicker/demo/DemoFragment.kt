@@ -26,7 +26,7 @@ class DemoFragment : PreferenceFragmentCompat() {
                 .apply {
                     picker.setShowFlag(preferences.getBoolean(PREFERENCE_IS_SHOW_FLAG, true))
                     setOnSelectedListener {
-                        makeText(context, it.getName(context!!), LENGTH_LONG).show()
+                        makeText(context, it.getName(context), LENGTH_LONG).show()
                     }
                 }
                 .show()

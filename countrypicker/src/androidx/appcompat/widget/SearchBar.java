@@ -48,7 +48,7 @@ public final class SearchBar extends SearchView {
         mCollapsedIcon = findViewById(androidx.appcompat.R.id.search_mag_icon);
 
         // Set up icons and backgrounds.
-        Drawable transparent =
+        final Drawable transparent =
             new ColorDrawable(getResources().getColor(android.R.color.transparent));
         ViewCompat.setBackground(mSearchPlate, transparent);
         ViewCompat.setBackground(mSubmitArea, transparent);
@@ -56,13 +56,13 @@ public final class SearchBar extends SearchView {
         mSearchSrcTextView.setInputType(InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
 
         // First, remove horizontal paddings to get full width.
-        MarginLayoutParams frameLp = (MarginLayoutParams) mSearchEditFrame.getLayoutParams();
+        final MarginLayoutParams frameLp = (MarginLayoutParams) mSearchEditFrame.getLayoutParams();
         frameLp.leftMargin = 0;
         frameLp.rightMargin = 0;
 
-        MarginLayoutParams textLp = (MarginLayoutParams) mSearchSrcTextView.getLayoutParams();
-        textLp.leftMargin =
-            getResources().getDimensionPixelSize(R.dimen.countrypicker_searchbarGap);
+        final MarginLayoutParams textLp = (MarginLayoutParams) mSearchSrcTextView.getLayoutParams();
+        textLp.leftMargin = getResources()
+            .getDimensionPixelSize(R.dimen.countrypicker_searchbarGap);
 
         // Buttons are wider in Google Search app.
         mCloseButton.setScaleType(ImageView.ScaleType.CENTER);
