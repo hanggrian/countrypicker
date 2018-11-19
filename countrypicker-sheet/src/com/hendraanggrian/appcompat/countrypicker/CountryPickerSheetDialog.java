@@ -3,7 +3,9 @@ package com.hendraanggrian.appcompat.countrypicker;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.FrameLayout;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -14,9 +16,9 @@ import java.util.List;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-public class CountryPickerSheetDialog extends BottomSheetDialog implements CountryPickableView {
+public class CountryPickerSheetDialog extends BottomSheetDialog implements CountryPickerContainer {
 
-    private final CountryPickableViewImpl impl;
+    private final CountryPickerContainer container;
 
     public CountryPickerSheetDialog(@NonNull Context context) {
         this(context, 0);
@@ -24,23 +26,28 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
 
     public CountryPickerSheetDialog(@NonNull final Context context, int theme) {
         super(context, theme);
-        impl = new CountryPickableViewImpl(this, context);
-        setContentView(impl.getPicker());
 
-        final BottomSheetBehavior behavior =
-            BottomSheetBehavior.from((View) getPicker().getParent());
+        // root layout to avoid picker content being pushed because height is too small
+        final FrameLayout root = new FrameLayout(context);
+        root.setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.MATCH_PARENT));
+        container = new CountryPickerContainerImpl(this, context);
+        root.addView(container.getPicker());
+        setContentView(root);
+
+        final BottomSheetBehavior behavior = BottomSheetBehavior.from((View) root.getParent());
         behavior.setPeekHeight(getDisplayMetrics().heightPixels * 2 / 3);
         getPicker()
-            .getSearchBar()
-            .getInput()
-            .setOnFocusChangeListener(new View.OnFocusChangeListener() {
-                @Override
-                public void onFocusChange(View view, boolean hasFocus) {
-                    if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                        behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                .getSearchBar()
+                .getInput()
+                .setOnFocusChangeListener(new View.OnFocusChangeListener() {
+                    @Override
+                    public void onFocusChange(View view, boolean hasFocus) {
+                        if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                            behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                        }
                     }
-                }
-            });
+                });
     }
 
     /**
@@ -48,7 +55,7 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
      */
     @NonNull
     public CountryPicker getPicker() {
-        return impl.getPicker();
+        return container.getPicker();
     }
 
     /**
@@ -56,7 +63,7 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
      */
     @Override
     public void setItems(@NonNull List<Country> countries) {
-        impl.setItems(countries);
+        container.setItems(countries);
     }
 
     /**
@@ -64,7 +71,7 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
      */
     @Override
     public void setFlagShown(boolean shown) {
-        impl.setFlagShown(shown);
+        container.setFlagShown(shown);
     }
 
     /**
@@ -72,7 +79,7 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
      */
     @Override
     public void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener) {
-        impl.setOnSelectedListener(listener);
+        container.setOnSelectedListener(listener);
     }
 
     private DisplayMetrics getDisplayMetrics() {

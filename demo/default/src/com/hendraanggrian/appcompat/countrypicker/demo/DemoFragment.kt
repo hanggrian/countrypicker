@@ -1,9 +1,8 @@
 package com.hendraanggrian.appcompat.countrypicker.demo
 
 import android.os.Bundle
-import android.widget.Toast.LENGTH_LONG
-import android.widget.Toast.makeText
 import androidx.preference.PreferenceFragmentCompat
+import com.google.android.material.snackbar.Snackbar
 import com.hendraanggrian.appcompat.countrypicker.CountryPickerDialog
 import com.hendraanggrian.appcompat.countrypicker.CountryPickerSheetDialog
 
@@ -16,7 +15,7 @@ class DemoFragment : PreferenceFragmentCompat() {
             CountryPickerDialog.Builder(context!!)
                 .setFlagShown(preferences.getBoolean(PREFERENCE_IS_SHOW_FLAG, true))
                 .setOnSelectedListener {
-                    makeText(context, it.getName(context!!), LENGTH_LONG).show()
+                    Snackbar.make(view!!, it.getName(context!!), Snackbar.LENGTH_SHORT).show()
                 }
                 .show()
             false
@@ -26,7 +25,7 @@ class DemoFragment : PreferenceFragmentCompat() {
                 .apply {
                     picker.setShowFlag(preferences.getBoolean(PREFERENCE_IS_SHOW_FLAG, true))
                     setOnSelectedListener {
-                        makeText(context, it.getName(context), LENGTH_LONG).show()
+                        Snackbar.make(view!!, it.getName(context), Snackbar.LENGTH_SHORT).show()
                     }
                 }
                 .show()

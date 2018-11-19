@@ -4,18 +4,19 @@ import android.app.Dialog;
 import android.content.Context;
 
 import com.hendraanggrian.appcompat.widget.CountryPicker;
+import com.hendraanggrian.appcompat.widget.CountryPickerAdapter;
 
 import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-class CountryPickableViewImpl implements CountryPickableView {
+class CountryPickerContainerImpl implements CountryPickerContainer {
 
     private final Dialog dialog;
     private final CountryPicker picker;
 
-    CountryPickableViewImpl(Dialog dialog, Context context) {
+    CountryPickerContainerImpl(Dialog dialog, Context context) {
         this.dialog = dialog;
         this.picker = new CountryPicker(context);
     }
@@ -29,23 +30,27 @@ class CountryPickableViewImpl implements CountryPickableView {
     @Override
     public void setItems(@NonNull List<Country> countries) {
         picker.getRecyclerView().getRecycledViewPool().clear();
-        picker.getAdapter().setItems(countries);
+        getAdapter().setItems(countries);
     }
 
     @Override
     public void setFlagShown(boolean shown) {
         picker.getRecyclerView().getRecycledViewPool().clear();
-        picker.getAdapter().setFlagShown(shown);
+        getAdapter().setFlagShown(shown);
     }
 
     @Override
     public void setOnSelectedListener(@Nullable final CountryPicker.OnSelectedListener listener) {
-        picker.getAdapter().setListener(listener == null ? null : new CountryPicker.OnSelectedListener() {
+        getAdapter().setListener(listener == null ? null : new CountryPicker.OnSelectedListener() {
             @Override
             public void onSelected(@NonNull Country country) {
                 listener.onSelected(country);
                 dialog.dismiss();
             }
         });
+    }
+
+    private CountryPickerAdapter getAdapter() {
+        return (CountryPickerAdapter) picker.getRecyclerView().getAdapter();
     }
 }

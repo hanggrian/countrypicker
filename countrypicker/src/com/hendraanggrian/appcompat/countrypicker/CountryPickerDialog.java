@@ -11,9 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialog;
 
-public class CountryPickerDialog extends AppCompatDialog implements CountryPickableView {
+public class CountryPickerDialog extends AppCompatDialog implements CountryPickerContainer {
 
-    private final CountryPickableViewImpl impl;
+    private final CountryPickerContainer container;
 
     public CountryPickerDialog(@NonNull Context context) {
         this(context, 0);
@@ -22,8 +22,9 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicka
     public CountryPickerDialog(@NonNull Context context, int theme) {
         super(context, theme);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        impl = new CountryPickableViewImpl(this, context);
-        setContentView(impl.getPicker());
+
+        container = new CountryPickerContainerImpl(this, context);
+        setContentView(container.getPicker());
     }
 
     /**
@@ -31,7 +32,7 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicka
      */
     @NonNull
     public CountryPicker getPicker() {
-        return impl.getPicker();
+        return container.getPicker();
     }
 
     /**
@@ -39,7 +40,7 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicka
      */
     @Override
     public void setItems(@NonNull List<Country> countries) {
-        impl.setItems(countries);
+        container.setItems(countries);
     }
 
     /**
@@ -47,7 +48,7 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicka
      */
     @Override
     public void setFlagShown(boolean shown) {
-        impl.setFlagShown(shown);
+        container.setFlagShown(shown);
     }
 
     /**
@@ -55,7 +56,7 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicka
      */
     @Override
     public void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener) {
-        impl.setOnSelectedListener(listener);
+        container.setOnSelectedListener(listener);
     }
 
     public static class Builder {

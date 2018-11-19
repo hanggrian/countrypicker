@@ -91,11 +91,6 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
     }
 
     @NonNull
-    public CountryPickerAdapter getAdapter() {
-        return adapter;
-    }
-
-    @NonNull
     public Toolbar getToolbar() {
         return toolbar;
     }

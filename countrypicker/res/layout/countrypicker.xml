@@ -46,7 +46,9 @@
         android:paddingTop="?android:listPreferredItemPaddingLeft"
         android:paddingBottom="?android:listPreferredItemPaddingLeft"
         app:bubbleColor="?colorAccent"
+        app:bubbleTextColor="?android:windowBackground"
         app:handleColor="?colorAccent"
         app:hideScrollbar="false"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:trackColor="@android:color/transparent" />
 </RelativeLayout>

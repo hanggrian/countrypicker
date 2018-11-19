@@ -10,7 +10,7 @@ import androidx.annotation.Nullable;
 /**
  * Base interface for country picker popups.
  */
-public interface CountryPickableView {
+public interface CountryPickerContainer {
 
     /**
      * @return picker view.
