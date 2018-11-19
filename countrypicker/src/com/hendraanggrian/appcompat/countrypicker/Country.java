@@ -269,6 +269,7 @@ public enum Country {
 
     public final String iso2;
     public final String dial;
+    private Locale locale; // locale representation of country
 
     Country(@NonNull String iso2, @NonNull String dial) {
         this.iso2 = iso2;

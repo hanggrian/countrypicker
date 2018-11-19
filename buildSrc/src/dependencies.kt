@@ -16,6 +16,8 @@ fun DependencyHandler.hendraanggrian(
     version: String
 ): String = "com.hendraanggrian.$repository:$module:$version"
 
+fun DependencyHandler.fastScroll() = "com.l4digital.fastscroll:fastscroll:$VERSION_FASTSCROLL"
+
 fun DependencyHandler.material() = "com.google.android.material:material:$VERSION_ANDROIDX"
 
 fun DependencyHandler.truth() = "com.google.truth:truth:$VERSION_TRUTH"

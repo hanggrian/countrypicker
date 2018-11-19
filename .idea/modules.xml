@@ -54,6 +54,7 @@
       <module fileurl="file://$PROJECT_DIR$/demo/debugAndroidTest/debugAndroidTest.iml" filepath="$PROJECT_DIR$/demo/debugAndroidTest/debugAndroidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/debugUnitTest/debugUnitTest.iml" filepath="$PROJECT_DIR$/demo/debugUnitTest/debugUnitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/default/default.iml" filepath="$PROJECT_DIR$/demo/default/default.iml" />
+      <module fileurl="file://$PROJECT_DIR$/demo/demo.iml" filepath="$PROJECT_DIR$/demo/demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/countrypicker/demo-countrypicker.iml" filepath="$PROJECT_DIR$/demo/countrypicker/demo-countrypicker.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo/demo-demo.iml" filepath="$PROJECT_DIR$/demo/demo/demo-demo.iml" />
       <module fileurl="file://$PROJECT_DIR$/demo/demo2/demo2.iml" filepath="$PROJECT_DIR$/demo/demo2/demo2.iml" />

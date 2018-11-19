@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.hendraanggrian.appcompat.countrypicker.Country;
 import com.hendraanggrian.appcompat.countrypicker.R;
+import com.l4digital.fastscroll.FastScroller;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,7 +25,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>
-    implements Comparator<Country>, Filterable {
+    implements FastScroller.SectionIndexer, Comparator<Country>, Filterable {
 
     private final static int TYPE_TEXT = 0;
     private final static int TYPE_TEXT_IMAGE = 1;
@@ -98,7 +99,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         if (!(holder instanceof TextHolder)) {
             return;
         }
-        final Country country = filteredCountries.get(position);
+        final Country country = getItem(position);
         if (holder instanceof TextImageHolder) {
             ((TextImageHolder) holder).imageView
                 .setImageResource(country.getFlagDrawableRes(context));
@@ -135,6 +136,11 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
             return 1;
         }
         return filteredCountries.size();
+    }
+
+    @Override
+    public CharSequence getSectionText(int position) {
+        return String.valueOf(getItem(position).getName(context).charAt(0));
     }
 
     @Override
@@ -178,6 +184,10 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
             };
         }
         return filter;
+    }
+
+    private Country getItem(int index) {
+        return filteredCountries.get(index);
     }
 
     static final class TextImageHolder extends TextHolder {

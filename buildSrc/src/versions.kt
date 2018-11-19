@@ -13,6 +13,7 @@ const val VERSION_RULES = "1.1.0"
 
 const val VERSION_PIKASSO = "0.2"
 
+internal const val VERSION_FASTSCROLL = "2.0.0"
 internal const val VERSION_TRUTH = "0.42"
 internal const val VERSION_JUNIT = "4.12"
 internal const val VERSION_DOKKA = "0.9.17"

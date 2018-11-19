@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
         android:layout_width="match_parent"
         android:layout_height="@dimen/countrypicker_searchbar_height"
+        android:layout_alignParentTop="true"
         android:layout_marginStart="?android:listPreferredItemPaddingStart"
         android:layout_marginLeft="?android:listPreferredItemPaddingLeft"
         android:layout_marginTop="?android:listPreferredItemPaddingLeft"
@@ -34,13 +36,17 @@
         </androidx.appcompat.widget.Toolbar>
     </androidx.cardview.widget.CardView>
 
-    <androidx.recyclerview.widget.RecyclerView
+    <com.l4digital.fastscroll.FastScrollRecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/cardView"
+        android:layout_alignParentBottom="true"
         android:clipToPadding="false"
         android:paddingTop="?android:listPreferredItemPaddingLeft"
         android:paddingBottom="?android:listPreferredItemPaddingLeft"
-        android:scrollbars="vertical"
+        app:bubbleColor="?colorAccent"
+        app:handleColor="?colorAccent"
+        app:hideScrollbar="false"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
-</LinearLayout>
+</RelativeLayout>
