@@ -17,6 +17,7 @@ import androidx.appcompat.widget.LinearLayoutCompat;
 import androidx.appcompat.widget.SearchBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,7 +25,7 @@ import androidx.recyclerview.widget.RecyclerView;
  * Root layout of country selection view, may be used independently.
  */
 public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenuItemClickListener,
-        SearchView.OnQueryTextListener {
+    SearchView.OnQueryTextListener {
 
     public static final boolean DEFAULT_FLAG_SHOWN = true;
     public static final boolean DEFAULT_DIAL_SHOWN = false;
@@ -33,6 +34,7 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
 
     private final Toolbar toolbar;
     private final SearchBar searchBar;
+    private final CoordinatorLayout coordinatorLayout;
     private final RecyclerView recyclerView;
 
     private final MenuItem dialItem;
@@ -54,12 +56,13 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
 
         toolbar = findViewById(R.id.toolbar);
         searchBar = findViewById(R.id.searchBar);
+        coordinatorLayout = findViewById(R.id.coordinatorLayout);
         recyclerView = findViewById(R.id.recyclerView);
 
         toolbar.inflateMenu(R.menu.countrydialog_menu);
         final Drawable tintedOverflow = DrawableCompat.wrap(toolbar.getOverflowIcon());
         DrawableCompat
-                .setTint(tintedOverflow.mutate(), getColorAttr(getContext(), R.attr.colorAccent));
+            .setTint(tintedOverflow.mutate(), getColorAttr(getContext(), R.attr.colorAccent));
         toolbar.setOverflowIcon(tintedOverflow);
 
         dialItem = toolbar.getMenu().getItem(0);
@@ -104,6 +107,11 @@ public class CountryPicker extends LinearLayoutCompat implements MenuItem.OnMenu
     @NonNull
     public SearchBar getSearchBar() {
         return searchBar;
+    }
+
+    @NonNull
+    public CoordinatorLayout getCoordinatorLayout() {
+        return coordinatorLayout;
     }
 
     @NonNull

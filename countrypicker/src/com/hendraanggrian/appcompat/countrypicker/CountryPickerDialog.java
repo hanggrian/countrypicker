@@ -2,7 +2,6 @@ package com.hendraanggrian.appcompat.countrypicker;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.telephony.TelephonyManager;
 import android.view.Window;
 
 import com.hendraanggrian.appcompat.widget.CountryPicker;
@@ -28,22 +27,18 @@ public class CountryPickerDialog extends AlertDialog implements CountryPickerCon
         container = new CountryPickerContainerImpl(this, context);
         setView(container.getPicker());
 
-        final Country country = Country.fromIso(context,
-                ((TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE))
-                        .getNetworkCountryIso());
-        if (country != null) {
-            setButton(DialogInterface.BUTTON_POSITIVE,
-                    getContext().getString(R.string.use_default, country.getName(context)),
-                    new OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            final CountryPicker.OnSelectedListener listener = container
-                                    .getPicker().getAdapter().getListener();
-                            if (listener != null) {
-                                listener.onSelected(country);
-                            }
-                        }
-                    });
+        final Runnable runnable = defaultRunnable();
+        if (runnable != null) {
+            setButton(
+                DialogInterface.BUTTON_POSITIVE,
+                getContext().getString(R.string.use_default),
+                new OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        runnable.run();
+                    }
+                }
+            );
         }
     }
 
@@ -77,6 +72,15 @@ public class CountryPickerDialog extends AlertDialog implements CountryPickerCon
     @Override
     public void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener) {
         container.setOnSelectedListener(listener);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Nullable
+    @Override
+    public Runnable defaultRunnable() {
+        return container.defaultRunnable();
     }
 
     public static class Builder {
