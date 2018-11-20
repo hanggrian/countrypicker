@@ -1,7 +1,6 @@
 package com.hendraanggrian.appcompat.countrypicker;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.view.Window;
 
 import com.hendraanggrian.appcompat.widget.CountryPicker;
@@ -10,9 +9,9 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDialog;
 
-public class CountryPickerDialog extends AlertDialog implements CountryPickerContainer {
+public class CountryPickerDialog extends AppCompatDialog implements CountryPickerContainer {
 
     private final CountryPickerContainer container;
 
@@ -25,21 +24,7 @@ public class CountryPickerDialog extends AlertDialog implements CountryPickerCon
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
 
         container = new CountryPickerContainerImpl(this, context);
-        setView(container.getPicker());
-
-        final Runnable runnable = defaultRunnable();
-        if (runnable != null) {
-            setButton(
-                DialogInterface.BUTTON_POSITIVE,
-                getContext().getString(R.string.use_default),
-                new OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        runnable.run();
-                    }
-                }
-            );
-        }
+        setContentView(container.getPicker());
     }
 
     /**
@@ -72,15 +57,6 @@ public class CountryPickerDialog extends AlertDialog implements CountryPickerCon
     @Override
     public void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener) {
         container.setOnSelectedListener(listener);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Nullable
-    @Override
-    public Runnable defaultRunnable() {
-        return container.defaultRunnable();
     }
 
     public static class Builder {

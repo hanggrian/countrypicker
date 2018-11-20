@@ -38,7 +38,4 @@ public interface CountryPickerContainer {
      * @param listener to invoke, may be null.
      */
     void setOnSelectedListener(@Nullable CountryPicker.OnSelectedListener listener);
-
-    @Nullable
-    Runnable defaultRunnable();
 }

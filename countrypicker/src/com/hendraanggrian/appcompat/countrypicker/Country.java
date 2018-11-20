@@ -3,6 +3,7 @@ package com.hendraanggrian.appcompat.countrypicker;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Build;
+import android.telephony.TelephonyManager;
 import android.util.SparseIntArray;
 
 import java.util.Locale;
@@ -312,12 +313,22 @@ public enum Country {
     }
 
     @Nullable
-    public static Country fromIso(@NonNull Context context, @NonNull String iso2) {
+    public static Country valueOf(@NonNull Context context, @NonNull String iso) {
         for (Country value : values()) {
             final Locale locale = value.toLocale(context);
-            if (value.iso2.toLowerCase(locale).equals(iso2.toLowerCase(locale))) {
+            if (value.iso2.toLowerCase(locale).equals(iso.toLowerCase(locale))) {
                 return value;
             }
+        }
+        return null;
+    }
+
+    @Nullable
+    public static Country getDefault(@NonNull Context context) {
+        final TelephonyManager tm = (TelephonyManager)
+            context.getSystemService(Context.TELEPHONY_SERVICE);
+        if (tm != null) {
+            return Country.valueOf(context, tm.getNetworkCountryIso());
         }
         return null;
     }

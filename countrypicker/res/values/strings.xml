@@ -3,5 +3,5 @@
     <string name="country_flag">Country flag</string>
     <string name="show_dial_code">Show dial code</string>
     <string name="no_results">No results</string>
-    <string name="use_default">Use default</string>
+    <string name="locate">Locate</string>
 </resources>

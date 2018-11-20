@@ -1,7 +1,6 @@
 package androidx.appcompat.widget;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
 import android.content.res.TypedArray;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
@@ -16,7 +15,6 @@ import com.hendraanggrian.appcompat.countrypicker.R;
 
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
-import androidx.core.widget.ImageViewCompat;
 
 /**
  * A hacked {@link SearchView} that mimics search bar in Android Settings app API 28.
@@ -30,7 +28,6 @@ public final class SearchBar extends SearchView {
     private final View mSearchEditFrame;
     private final View mSearchPlate;
     private final View mSubmitArea;
-    private final ImageView mCollapsedIcon;
 
     public SearchBar(Context context) {
         this(context, null);
@@ -46,7 +43,6 @@ public final class SearchBar extends SearchView {
         mSearchEditFrame = findViewById(androidx.appcompat.R.id.search_edit_frame);
         mSearchPlate = findViewById(androidx.appcompat.R.id.search_plate);
         mSubmitArea = findViewById(androidx.appcompat.R.id.submit_area);
-        mCollapsedIcon = findViewById(androidx.appcompat.R.id.search_mag_icon);
 
         // Set up icons and backgrounds.
         final Drawable transparent =
@@ -68,15 +64,6 @@ public final class SearchBar extends SearchView {
         // Buttons are wider in Google Search app.
         mCloseButton.setScaleType(ImageView.ScaleType.CENTER);
         mCloseButton.getLayoutParams().width = getDimenAttr(context, android.R.attr.actionBarSize);
-
-        final ColorStateList colorAccent =
-            ColorStateList.valueOf(getColorAttr(getContext(), R.attr.colorAccent));
-        mSearchSrcTextView.setTextColor(colorAccent);
-        ImageViewCompat.setImageTintList(mGoButton, colorAccent);
-        ImageViewCompat.setImageTintList(mSearchButton, colorAccent);
-        ImageViewCompat.setImageTintList(mCloseButton, colorAccent);
-        ImageViewCompat.setImageTintList(mVoiceButton, colorAccent);
-        ImageViewCompat.setImageTintList(mCollapsedIcon, colorAccent);
     }
 
     @NonNull

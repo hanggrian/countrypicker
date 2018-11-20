@@ -1,6 +1,7 @@
 package com.hendraanggrian.appcompat.widget;
 
 import android.content.Context;
+import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,7 +26,7 @@ import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
 
 public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>
-        implements FastScroller.SectionIndexer, Comparator<Country>, Filterable {
+    implements FastScroller.SectionIndexer, Comparator<Country>, Filterable {
 
     private final static int TYPE_TEXT = 0;
     private final static int TYPE_TEXT_IMAGE = 1;
@@ -87,23 +88,23 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
     @NonNull
     @Override
     public CountryPickerAdapter.ViewHolder onCreateViewHolder(
-            @NonNull ViewGroup parent,
-            int viewType
+        @NonNull ViewGroup parent,
+        int viewType
     ) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch (viewType) {
             case TYPE_TEXT:
-                return new TextHolder(inflater
-                        .inflate(R.layout.countrypicker_item_text, parent, false));
+                return new TextHolder(inflater.inflate(R.layout.countrypicker_item_text,
+                    parent, false));
             case TYPE_TEXT_IMAGE:
-                return new TextImageHolder(inflater
-                        .inflate(R.layout.countrypicker_item_image, parent, false));
+                return new TextImageHolder(inflater.inflate(R.layout.countrypicker_item_image,
+                    parent, false));
             case TYPE_TEXT_EMOJI:
-                return new TextEmojiHolder(inflater
-                        .inflate(R.layout.countrypicker_item_emoji, parent, false));
+                return new TextEmojiHolder(inflater.inflate(R.layout.countrypicker_item_emoji,
+                    parent, false));
             default:
-                return new ViewHolder(inflater
-                        .inflate(R.layout.countrypicker_item_empty, parent, false));
+                return new ViewHolder(inflater.inflate(R.layout.countrypicker_item_empty,
+                    parent, false));
         }
     }
 
@@ -115,13 +116,13 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         final Country country = getItem(position);
         if (holder instanceof TextImageHolder) {
             ((TextImageHolder) holder).imageView
-                    .setImageResource(country.getFlagDrawableRes(context));
+                .setImageResource(country.getFlagDrawableRes(context));
         } else if (holder instanceof TextEmojiHolder) {
             ((TextEmojiHolder) holder).emojiView.setText(country.getFlagSymbols());
         }
         ((TextHolder) holder).textView.setText(isDialShown
-                ? String.format("%s (%s)", country.getName(context), country.getDial())
-                : country.getName(context));
+            ? String.format("%s (%s)", country.getName(context), country.getDial())
+            : country.getName(context));
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -137,10 +138,13 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         if (filteredCountries.isEmpty()) {
             return TYPE_EMPTY;
         }
-        return !isFlagShown ? TYPE_TEXT : filteredCountries.get(position)
-                .isFlagDrawableAvailable(context)
-                ? TYPE_TEXT_IMAGE
-                : TYPE_TEXT_EMOJI;
+        if (!isFlagShown || Build.VERSION.SDK_INT < 21) {
+            return TYPE_TEXT;
+        }
+        return filteredCountries.get(position)
+            .isFlagDrawableAvailable(context)
+            ? TYPE_TEXT_IMAGE
+            : TYPE_TEXT_EMOJI;
     }
 
     @Override
@@ -176,7 +180,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
                         for (Country country : countries) {
                             final Locale locale = country.toLocale(context);
                             if (country.getName(context).toLowerCase(locale)
-                                    .contains(s.toLowerCase(locale))) {
+                                .contains(s.toLowerCase(locale))) {
                                 filteredList.add(country);
                             }
                         }

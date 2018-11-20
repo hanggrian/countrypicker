@@ -56,11 +56,11 @@ dialog.show()
 
 Country flags
 -------------
-![Emoji flags](/art/screenshot_type_emoji.png)
+![Emoji flags](/art/demo1.gif)
 
 By default, country flags are represented in emoji to achieve lowest library size.
 
-![Image flags](/art/screenshot_type_image.png)
+![Image flags](/art/demo2.gif)
 
 To use custom flag images, have a drawable with name format `flag_{2-digit iso code}` in your project.
 For example if you want to display US flag, the drawable name should be `flag_us`.

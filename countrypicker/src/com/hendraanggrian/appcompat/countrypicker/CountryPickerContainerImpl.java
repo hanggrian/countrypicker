@@ -2,7 +2,6 @@ package com.hendraanggrian.appcompat.countrypicker;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.telephony.TelephonyManager;
 
 import com.hendraanggrian.appcompat.widget.CountryPicker;
 
@@ -49,28 +48,5 @@ class CountryPickerContainerImpl implements CountryPickerContainer {
                     dialog.dismiss();
                 }
             });
-    }
-
-    @Nullable
-    @Override
-    public Runnable defaultRunnable() {
-        final TelephonyManager tm = (TelephonyManager)
-            picker.getContext().getSystemService(Context.TELEPHONY_SERVICE);
-        if (tm == null) {
-            return null;
-        }
-        final Country country = Country.fromIso(picker.getContext(), tm.getNetworkCountryIso());
-        if (country == null) {
-            return null;
-        }
-        return new Runnable() {
-            @Override
-            public void run() {
-                final CountryPicker.OnSelectedListener listener = picker.getAdapter().getListener();
-                if (listener != null) {
-                    listener.onSelected(country);
-                }
-            }
-        };
     }
 }
