@@ -4,6 +4,6 @@
         <ignore path="AndroidManifest.xml" />
     </issue>
     <issue id="PrivateResource">
-        <ignore path="src/androidx/appcompat/widget/SearchBar.java"/>
+        <ignore path="src/androidx/appcompat/widget/CountrySearchView.java" />
     </issue>
 </lint>

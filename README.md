@@ -24,8 +24,11 @@ dependencies {
 }
 ```
 
-Using dialog
-------------
+Usage
+-----
+
+#### Dialog
+
 Use 'CountryPickerDialog.Builder' to build or show 'CountryPickerDialog'.
 
 ```java
@@ -39,8 +42,8 @@ new CountryPickerDialog.Builder(context)
     .show();
 ```
 
-Using bottom sheet
-------------------
+#### Bottom sheet
+
 No builder here, create traditionally.
 
 ```java
@@ -53,6 +56,10 @@ dialog.setOnSelectedListener(new CountryPicker.OnSelectedListener() {
 });
 dialog.show()
 ```
+
+#### Inflate manually
+
+`CountryPicker` itself is a `LinearLayout` that may be used independently with XML or programatically.
 
 Country flags
 -------------

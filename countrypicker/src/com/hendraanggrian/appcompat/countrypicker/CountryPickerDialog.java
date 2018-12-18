@@ -3,13 +3,13 @@ package com.hendraanggrian.appcompat.countrypicker;
 import android.content.Context;
 import android.view.Window;
 
-import com.hendraanggrian.appcompat.widget.CountryPicker;
-
-import java.util.List;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialog;
+
+import com.hendraanggrian.appcompat.widget.CountryPicker;
+
+import java.util.List;
 
 public class CountryPickerDialog extends AppCompatDialog implements CountryPickerContainer {
 
@@ -89,7 +89,7 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicke
 
         @NonNull
         public CountryPickerDialog build() {
-            CountryPickerDialog dialog = new CountryPickerDialog(context);
+            final CountryPickerDialog dialog = new CountryPickerDialog(context);
             if (countries != null) {
                 dialog.setItems(countries);
             }
@@ -104,7 +104,7 @@ public class CountryPickerDialog extends AppCompatDialog implements CountryPicke
 
         @NonNull
         public CountryPickerDialog show() {
-            CountryPickerDialog dialog = build();
+            final CountryPickerDialog dialog = build();
             dialog.show();
             return dialog;
         }

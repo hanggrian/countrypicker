@@ -23,7 +23,7 @@
             app:contentInsetLeft="-8dp"
             app:contentInsetStart="-8dp">
 
-            <androidx.appcompat.widget.SearchBar
+            <androidx.appcompat.widget.CountrySearchView
                 android:id="@+id/searchBar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

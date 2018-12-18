@@ -11,10 +11,10 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 
-import com.hendraanggrian.appcompat.countrypicker.R;
-
 import androidx.annotation.NonNull;
 import androidx.core.view.ViewCompat;
+
+import com.hendraanggrian.appcompat.countrypicker.R;
 
 /**
  * A hacked {@link SearchView} that mimics search bar in Android Settings app API 28.
@@ -23,21 +23,21 @@ import androidx.core.view.ViewCompat;
  * <p> Note: {@link android.widget.SearchView} is not hackable since it uses internal R class.</p>
  */
 @SuppressWarnings("FieldCanBeLocal")
-public final class SearchBar extends SearchView {
+public final class CountrySearchView extends SearchView {
 
     private final View mSearchEditFrame;
     private final View mSearchPlate;
     private final View mSubmitArea;
 
-    public SearchBar(Context context) {
+    public CountrySearchView(Context context) {
         this(context, null);
     }
 
-    public SearchBar(Context context, AttributeSet attrs) {
+    public CountrySearchView(Context context, AttributeSet attrs) {
         this(context, attrs, R.attr.searchViewStyle);
     }
 
-    public SearchBar(Context context, AttributeSet attrs, int defStyleAttr) {
+    public CountrySearchView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
 
         mSearchEditFrame = findViewById(androidx.appcompat.R.id.search_edit_frame);

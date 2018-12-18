@@ -38,16 +38,13 @@ android {
 
 dependencies {
     api(project(":$RELEASE_ARTIFACT"))
-    implementation(androidx("coordinatorlayout"))
     implementation(material())
 
     testImplementation(junit())
     testImplementation(truth())
     androidTestImplementation(truth())
     androidTestImplementation(kotlin("stdlib", VERSION_KOTLIN))
-    androidTestImplementation(hendraanggrian("material", "errorbar-ktx", VERSION_ANDROIDX))
-    androidTestImplementation(androidx("appcompat"))
-    androidTestImplementation(androidx("coordinatorlayout"))
+    androidTestImplementation(hendraanggrian("material", "errorbar-ktx", "1.0.0"))
     androidTestImplementation(androidx("test.espresso", "espresso-core", VERSION_ESPRESSO))
     androidTestImplementation(androidx("test", "runner", VERSION_RUNNER))
     androidTestImplementation(androidx("test", "rules", VERSION_RULES))

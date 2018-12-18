@@ -6,11 +6,11 @@ import android.os.Build;
 import android.telephony.TelephonyManager;
 import android.util.SparseIntArray;
 
-import java.util.Locale;
-
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import java.util.Locale;
 
 import static android.os.Build.VERSION_CODES.N;
 
@@ -314,7 +314,7 @@ public enum Country {
 
     @Nullable
     public static Country valueOf(@NonNull Context context, @NonNull String iso) {
-        for (Country value : values()) {
+        for (final Country value : values()) {
             final Locale locale = value.toLocale(context);
             if (value.iso2.toLowerCase(locale).equals(iso.toLowerCase(locale))) {
                 return value;
@@ -334,9 +334,9 @@ public enum Country {
     }
 
     /**
-     * https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
+     * See <a href="https://en.wikipedia.org/wiki/Regional_Indicator_Symbol">https://en.wikipedia.org/wiki/Regional_Indicator_Symbol</a>
      */
-    private static SparseIntArray symbols = new SparseIntArray();
+    private static final SparseIntArray symbols = new SparseIntArray(26);
 
     static {
         symbols.put('A', 0x1F1E6);

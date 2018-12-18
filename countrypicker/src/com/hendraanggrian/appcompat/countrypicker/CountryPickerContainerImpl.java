@@ -3,12 +3,12 @@ package com.hendraanggrian.appcompat.countrypicker;
 import android.app.Dialog;
 import android.content.Context;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import com.hendraanggrian.appcompat.widget.CountryPicker;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 class CountryPickerContainerImpl implements CountryPickerContainer {
 
@@ -40,13 +40,14 @@ class CountryPickerContainerImpl implements CountryPickerContainer {
 
     @Override
     public void setOnSelectedListener(@Nullable final CountryPicker.OnSelectedListener listener) {
-        picker.getAdapter()
-            .setListener(listener == null ? null : new CountryPicker.OnSelectedListener() {
-                @Override
-                public void onSelected(@NonNull Country country) {
-                    listener.onSelected(country);
-                    dialog.dismiss();
-                }
-            });
+        picker.getAdapter().setListener(listener == null
+            ? null
+            : new CountryPicker.OnSelectedListener() {
+            @Override
+            public void onSelected(@NonNull Country country) {
+                listener.onSelected(country);
+                dialog.dismiss();
+            }
+        });
     }
 }

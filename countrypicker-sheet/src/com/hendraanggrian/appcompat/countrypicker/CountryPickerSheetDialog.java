@@ -3,17 +3,17 @@ package com.hendraanggrian.appcompat.countrypicker;
 import android.content.Context;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.Window;
 import android.widget.FrameLayout;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Preconditions;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hendraanggrian.appcompat.widget.CountryPicker;
 
 import java.util.List;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 
@@ -25,7 +25,7 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
         this(context, 0);
     }
 
-    public CountryPickerSheetDialog(@NonNull final Context context, int theme) {
+    public CountryPickerSheetDialog(@NonNull Context context, int theme) {
         super(context, theme);
 
         // root layout to avoid picker content being pushed because height is too small
@@ -84,11 +84,10 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
 
     private DisplayMetrics getDisplayMetrics() {
         final DisplayMetrics dm = new DisplayMetrics();
-        Window window = getWindow();
-        if (window == null) {
-            throw new IllegalStateException();
-        }
-        window.getWindowManager().getDefaultDisplay().getMetrics(dm);
+        Preconditions.checkNotNull(getWindow())
+            .getWindowManager()
+            .getDefaultDisplay()
+            .getMetrics(dm);
         return dm;
     }
 }

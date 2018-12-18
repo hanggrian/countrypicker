@@ -11,23 +11,24 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.hendraanggrian.appcompat.countrypicker.Country;
-import com.hendraanggrian.appcompat.countrypicker.R;
-
-import java.util.List;
-
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.CountrySearchView;
 import androidx.appcompat.widget.LinearLayoutCompat;
-import androidx.appcompat.widget.SearchBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.hendraanggrian.appcompat.countrypicker.Country;
+import com.hendraanggrian.appcompat.countrypicker.R;
+
+import java.util.List;
+
 /**
  * Root layout of country selection view, may be used independently.
  */
+@SuppressWarnings("FieldCanBeLocal")
 public class CountryPicker extends LinearLayoutCompat {
 
     public static final boolean DEFAULT_FLAG_SHOWN = true;
@@ -37,7 +38,7 @@ public class CountryPicker extends LinearLayoutCompat {
 
     private final CardView cardView;
     private final Toolbar toolbar;
-    private final SearchBar searchBar;
+    private final CountrySearchView searchView;
     private final RecyclerView recyclerView;
 
     private final MenuItem locateItem;
@@ -91,7 +92,7 @@ public class CountryPicker extends LinearLayoutCompat {
 
         cardView = findViewById(R.id.cardView);
         toolbar = findViewById(R.id.toolbar);
-        searchBar = findViewById(R.id.searchBar);
+        searchView = findViewById(R.id.searchBar);
         recyclerView = findViewById(R.id.recyclerView);
 
         if (Build.VERSION.SDK_INT >= 21) {
@@ -129,8 +130,8 @@ public class CountryPicker extends LinearLayoutCompat {
         DrawableCompat.setTint(tintedIcon.mutate(), getColorAttr(getContext(), R.attr.colorAccent));
         locateItem.setIcon(tintedIcon);
 
-        searchBar.getInput().addTextChangedListener(textWatcher);
-        searchBar.setOnQueryTextListener(queryListener);
+        searchView.getInput().addTextChangedListener(textWatcher);
+        searchView.setOnQueryTextListener(queryListener);
 
         recyclerView.setAdapter(adapter);
     }
@@ -147,8 +148,8 @@ public class CountryPicker extends LinearLayoutCompat {
     }
 
     @NonNull
-    public SearchBar getSearchBar() {
-        return searchBar;
+    public CountrySearchView getSearchBar() {
+        return searchView;
     }
 
     @NonNull

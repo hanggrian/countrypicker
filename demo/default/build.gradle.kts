@@ -49,11 +49,11 @@ dependencies {
     implementation(project(":$RELEASE_ARTIFACT-sheet"))
 
     implementation(material())
-    implementation(androidx("core", "core-ktx"))
+    implementation(androidx("core", "core-ktx", "1.0.0"))
     implementation(androidx("appcompat"))
     implementation(androidx("coordinatorlayout"))
     implementation(androidx("preference"))
 
-    implementation(hendraanggrian("material", "collapsingtoolbarlayout-subtitle", VERSION_ANDROIDX))
-    implementation(hendraanggrian("material", "errorbar-ktx", VERSION_ANDROIDX))
+    implementation(hendraanggrian("material", "collapsingtoolbarlayout-subtitle", "1.0.0"))
+    implementation(hendraanggrian("material", "errorbar-ktx", "1.0.0"))
 }

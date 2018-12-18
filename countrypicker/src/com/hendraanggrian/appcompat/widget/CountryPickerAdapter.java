@@ -10,6 +10,10 @@ import android.widget.Filterable;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.hendraanggrian.appcompat.countrypicker.Country;
 import com.hendraanggrian.appcompat.countrypicker.R;
 import com.l4digital.fastscroll.FastScroller;
@@ -20,10 +24,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Locale;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.recyclerview.widget.RecyclerView;
 
 public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>
     implements FastScroller.SectionIndexer, Comparator<Country>, Filterable {
@@ -42,7 +42,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
     private boolean isDialShown = CountryPicker.DEFAULT_DIAL_SHOWN;
     private CountryPicker.OnSelectedListener listener;
 
-    CountryPickerAdapter(@NonNull final Context context) {
+    CountryPickerAdapter(@NonNull Context context) {
         this.context = context;
         replaceItems(new ArrayList<>(Arrays.asList(Country.values())));
     }
@@ -91,7 +91,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         @NonNull ViewGroup parent,
         int viewType
     ) {
-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+        final LayoutInflater inflater = LayoutInflater.from(parent.getContext());
         switch (viewType) {
             case TYPE_TEXT:
                 return new TextHolder(inflater.inflate(R.layout.countrypicker_item_text,
@@ -109,7 +109,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
     }
 
     @Override
-    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         if (!(holder instanceof TextHolder)) {
             return;
         }
@@ -141,8 +141,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         if (!isFlagShown || Build.VERSION.SDK_INT < 21) {
             return TYPE_TEXT;
         }
-        return filteredCountries.get(position)
-            .isFlagDrawableAvailable(context)
+        return filteredCountries.get(position).isFlagDrawableAvailable(context)
             ? TYPE_TEXT_IMAGE
             : TYPE_TEXT_EMOJI;
     }
@@ -172,12 +171,12 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
                 @Override
                 protected FilterResults performFiltering(CharSequence charSequence) {
                     final List<Country> values;
-                    String s = charSequence.toString();
+                    final String s = charSequence.toString();
                     if (s.isEmpty()) {
                         values = countries;
                     } else {
-                        List<Country> filteredList = new ArrayList<>();
-                        for (Country country : countries) {
+                        final List<Country> filteredList = new ArrayList<>();
+                        for (final Country country : countries) {
                             final Locale locale = country.toLocale(context);
                             if (country.getName(context).toLowerCase(locale)
                                 .contains(s.toLowerCase(locale))) {
@@ -187,7 +186,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
                         values = filteredList;
                     }
 
-                    FilterResults filterResults = new FilterResults();
+                    final FilterResults filterResults = new FilterResults();
                     filterResults.values = values;
                     return filterResults;
                 }
@@ -207,7 +206,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         return filteredCountries.get(index);
     }
 
-    static final class TextImageHolder extends TextHolder {
+    static class TextImageHolder extends TextHolder {
         final ImageView imageView;
 
         TextImageHolder(View itemView) {
@@ -216,7 +215,7 @@ public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdap
         }
     }
 
-    static final class TextEmojiHolder extends TextHolder {
+    static class TextEmojiHolder extends TextHolder {
         final TextView emojiView;
 
         TextEmojiHolder(View itemView) {
