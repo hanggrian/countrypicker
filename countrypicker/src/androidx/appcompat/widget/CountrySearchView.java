@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
 
 import com.hendraanggrian.appcompat.countrypicker.R;
@@ -46,7 +47,7 @@ public final class CountrySearchView extends SearchView {
 
         // Set up icons and backgrounds.
         final Drawable transparent =
-            new ColorDrawable(getResources().getColor(android.R.color.transparent));
+            new ColorDrawable(ContextCompat.getColor(context, android.R.color.transparent));
         ViewCompat.setBackground(mSearchPlate, transparent);
         ViewCompat.setBackground(mSubmitArea, transparent);
 
