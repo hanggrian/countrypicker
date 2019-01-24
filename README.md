@@ -1,10 +1,10 @@
-CountryPicker
-=============
 [![bintray](https://img.shields.io/badge/bintray-appcompat-brightgreen.svg)](https://bintray.com/hendraanggrian/appcompat)
 [![download](https://api.bintray.com/packages/hendraanggrian/appcompat/countrypicker/images/download.svg)](https://bintray.com/hendraanggrian/appcompat/countrypicker/_latestVersion)
 [![build](https://travis-ci.com/hendraanggrian/countrypicker.svg)](https://travis-ci.com/hendraanggrian/countrypicker)
 [![license](https://img.shields.io/badge/license-Apache--2.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
 
+CountryPicker
+=============
 ![demo1][demo1]
 ![demo2][demo2]
 
