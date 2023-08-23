@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools">
+
+  <item
+    android:id="@+id/countrypicker_locate"
+    android:icon="@drawable/outline_gps_fixed_24"
+    android:title="@string/locate"
+    app:showAsAction="always"
+    tools:ignore="AlwaysShowAction"/>
+</menu>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@android:id/text1"
+  android:layout_width="match_parent"
+  android:layout_height="?listPreferredItemHeight"
+  android:foreground="?selectableItemBackground"
+  android:paddingStart="?listPreferredItemPaddingStart"
+  android:paddingLeft="?listPreferredItemPaddingLeft"
+  android:paddingEnd="?listPreferredItemPaddingEnd"
+  android:paddingRight="?listPreferredItemPaddingRight"
+  android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+  android:gravity="center_vertical"
+  tools:ignore="UnusedAttribute"/>

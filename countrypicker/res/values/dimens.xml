@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <dimen name="countrypicker_searchbar_gap">16dp</dimen>
-
-    <!-- androidx.R.dimen.abc_search_view_preferred_height -->
-    <dimen name="countrypicker_searchbar_height">48dp</dimen>
-</resources>

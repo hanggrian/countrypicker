@@ -1,77 +1,68 @@
-[![download](https://api.bintray.com/packages/hendraanggrian/appcompat/countrypicker/images/download.svg)](https://bintray.com/hendraanggrian/appcompat/countrypicker/_latestVersion)
-[![build](https://travis-ci.com/hendraanggrian/countrypicker.svg)](https://travis-ci.com/hendraanggrian/countrypicker)
-[![license](https://img.shields.io/github/license/hendraanggrian/countrypicker)](http://www.apache.org/licenses/LICENSE-2.0)
+[![Travis CI](https://img.shields.io/travis/com/hendraanggrian/material/countrypicker)](https://travis-ci.com/github/hendraanggrian/countrypicker/)
+[![Codecov](https://img.shields.io/codecov/c/github/hendraanggrian/countrypicker)](https://codecov.io/gh/hendraanggrian/countrypicker/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.hendraanggrian.material/countrypicker)](https://repo1.maven.org/maven2/com/hendraanggrian/material/countrypicker/)
+[![Nexus Snapshot](https://img.shields.io/nexus/s/com.hendraanggrian.material/countrypicker?server=https%3A%2F%2Fs01.oss.sonatype.org)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/hendraanggrian/material/countrypicker/)
+[![Android SDK](https://img.shields.io/badge/sdk-16%2B-informational)](https://developer.android.com/studio/releases/platforms/#4.1)
 
-CountryPicker
-=============
-![demo1][demo1]
-![demo2][demo2]
+# CountryPicker
+
+![Dialog preview.](https://github.com/hendraanggrian/countrypicker/raw/assets/preview_dialog.png)
+![Bottom sheet dialog.](https://github.com/hendraanggrian/countrypicker/raw/assets/preview_sheet.png)
 
 Material design components to pick country.
 
-Download
---------
+- Emoji country flags to achieve lowest library size, with options to customize.
+- Search box, locate button, and fast scroller.
+
+## Download
+
 ```gradle
 repositories {
     google()
-    jcenter()
+    mavenCentral()
 }
-
 dependencies {
-    implementation "com.hendraanggrian.appcompat:countrypicker:$version"
-    implementation "com.hendraanggrian.appcompat:countrypicker-sheet:$version"
+    implementation "com.hendraanggrian.material:countrypicker:$version"
 }
 ```
 
-Usage
------
+## Usage
 
-#### Dialog
+### Dialog
 
-Use 'CountryPickerDialog.Builder' to build or show 'CountryPickerDialog'.
+Use `CountryPickerDialog.Builder` to build or show `CountryPickerDialog`.
 
 ```java
 new CountryPickerDialog.Builder(context)
-    .setOnSelectedListener(new CountryPicker.OnSelectedListener() {
-        @Override
-        public void onSelected(@NonNull Country country) {
-            // do something
-        }
-    })
-    .show();
+  .setOnSelectedListener(new CountryPicker.OnSelectedListener() {
+    @Override
+    public void onSelected(@NonNull Country country) {
+      // do something
+    }
+  })
+  .show();
 ```
 
-#### Bottom sheet
+### Bottom Sheet
 
 No builder here, create traditionally.
 
 ```java
 BottomSheetDialog dialog = new CountryPickerSheetDialog(context);
 dialog.setOnSelectedListener(new CountryPicker.OnSelectedListener() {
-    @Override
-    public void onSelected(@NonNull Country country) {
-        // do something
-    }
+  @Override
+  public void onSelected(@NonNull Country country) {
+    // do something
+  }
 });
 dialog.show()
 ```
 
-#### Inflate manually
+## Custom Flags
 
-`CountryPicker` itself is a `LinearLayout` that may be used independently with XML or programatically.
+To use custom flag images, have a drawable with name format
+`flag_{2-digit iso code}` in your project. For example if you want to display US
+flag, the drawable name should be `flag_us`.
 
-Country flags
--------------
-![Emoji flags](/art/demo1.gif)
-
-By default, country flags are represented in emoji to achieve lowest library size.
-
-![Image flags](/art/demo2.gif)
-
-To use custom flag images, have a drawable with name format `flag_{2-digit iso code}` in your project.
-For example if you want to display US flag, the drawable name should be `flag_us`.
-
-See [Country.java](/countrypicker/src/com/hendraanggrian/appcompat/countrypicker/Country.java) for all available country codes.
-
-[demo1]: /art/demo1.gif
-[demo2]: /art/demo2.gif
+See [Country.java](/countrypicker/src/com/hendraanggrian/appcompat/countrypicker/Country.java)
+for all available country codes.

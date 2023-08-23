@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string-array name="flag_entries">
+    <item>Default</item>
+    <item>Custom</item>
+    <item>None</item>
+  </string-array>
+
+  <string-array name="name_entries">
+    <item>Default</item>
+    <item>Dial Code</item>
+    <item>Iso Code</item>
+  </string-array>
+
+  <string-array name="all_values">
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+  </string-array>
+</resources>

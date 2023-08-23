@@ -1,8 +1,14 @@
-include(RELEASE_ARTIFACT)
-include("$RELEASE_ARTIFACT-sheet")
-includeDir("demo")
+pluginManagement.repositories {
+    gradlePluginPortal()
+    mavenCentral()
+    google()
+}
+dependencyResolutionManagement.repositories {
+    mavenCentral()
+    google()
+}
 
-fun includeDir(dir: String) = file(dir)
-    .listFiles()
-    .filter { it.isDirectory }
-    .forEach { include("$dir:${it.name}") }
+rootProject.name = "countrypicker"
+
+include("countrypicker")
+include("sample")

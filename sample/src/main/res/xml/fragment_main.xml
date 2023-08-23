@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<androidx.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+  <androidx.preference.PreferenceCategory>
+    <androidx.preference.ListPreference
+      android:dialogTitle="Flag Display Behavior"
+      android:entries="@array/flag_entries"
+      android:entryValues="@array/all_values"
+      android:icon="@drawable/baseline_flag_24"
+      android:key="flag_display"
+      android:title="Flag Display"/>
+
+    <androidx.preference.ListPreference
+      android:dialogTitle="Name Display Behavior"
+      android:entries="@array/name_entries"
+      android:entryValues="@array/all_values"
+      android:icon="@drawable/baseline_dialpad_24"
+      android:key="name_display"
+      android:title="Name Display"/>
+  </androidx.preference.PreferenceCategory>
+
+  <androidx.preference.PreferenceCategory android:title="Show">
+    <androidx.preference.Preference
+      android:key="show_dialog"
+      android:summary="Click to show dialog picker"
+      android:title="Dialog"/>
+
+    <androidx.preference.Preference
+      android:key="show_sheet"
+      android:summary="Click to show bottom sheet picker"
+      android:title="Bottom sheet"/>
+  </androidx.preference.PreferenceCategory>
+</androidx.preference.PreferenceScreen>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="?listPreferredItemHeight"
+  android:foreground="?selectableItemBackground"
+  android:paddingStart="?listPreferredItemPaddingStart"
+  android:paddingLeft="?listPreferredItemPaddingLeft"
+  android:paddingEnd="?listPreferredItemPaddingEnd"
+  android:paddingRight="?listPreferredItemPaddingRight"
+  tools:ignore="UnusedAttribute">
+
+  <ImageView
+    android:id="@android:id/icon"
+    android:layout_width="40dp"
+    android:layout_height="40dp"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true"
+    android:contentDescription="@string/country_flag"
+    android:scaleType="centerInside"
+    android:scrollbars="none"/>
+
+  <TextView
+    android:id="@android:id/text1"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentLeft="true"
+    android:layout_centerVertical="true"
+    android:layout_marginStart="64dp"
+    android:layout_marginLeft="64dp"
+    android:layout_marginEnd="?listPreferredItemPaddingEnd"
+    android:layout_marginRight="?listPreferredItemPaddingRight"
+    android:textAppearance="@style/TextAppearance.AppCompat.Body2"/>
+</RelativeLayout>
