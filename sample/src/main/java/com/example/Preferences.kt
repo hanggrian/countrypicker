@@ -1,4 +1,4 @@
-package com.example.countrypicker
+package com.example
 
 const val PREFERENCE_FLAG_DISPLAY = "flag_display"
 const val PREFERENCE_NAME_DISPLAY = "name_display"

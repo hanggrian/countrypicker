@@ -1,4 +1,4 @@
-package com.example.countrypicker
+package com.example
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

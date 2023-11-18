@@ -1,4 +1,4 @@
-package com.example.countrypicker
+package com.example
 
 import android.content.SharedPreferences
 import android.os.Bundle

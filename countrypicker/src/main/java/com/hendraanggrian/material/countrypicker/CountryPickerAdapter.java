@@ -23,10 +23,10 @@ import java.util.Locale;
 public class CountryPickerAdapter extends RecyclerView.Adapter<CountryPickerAdapter.ViewHolder>
     implements FastScroller.SectionIndexer, Comparator<Country>, Filterable {
 
-  private final static int TYPE_TEXT = 0;
-  private final static int TYPE_TEXT_IMAGE = 1;
-  private final static int TYPE_TEXT_EMOJI = 2;
-  private final static int TYPE_EMPTY = 3;
+  private static final int TYPE_TEXT = 0;
+  private static final int TYPE_TEXT_IMAGE = 1;
+  private static final int TYPE_TEXT_EMOJI = 2;
+  private static final int TYPE_EMPTY = 3;
 
   private final Context context;
   private List<Country> filteredCountries;
