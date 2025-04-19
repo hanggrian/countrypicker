@@ -1,15 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools">
+
   <application
     android:name="androidx.multidex.MultiDexApplication"
     android:allowBackup="true"
-    android:label="CountryPicker Sample"
     android:supportsRtl="true"
-    android:theme="@style/Theme.MaterialComponents.DayNight.NoActionBar">
+    android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar"
+    android:title="CountryPicker Sample"
+    tools:ignore="MissingApplicationIcon">
     <activity
-      android:name="com.example.countrypicker.MainActivity"
-      android:windowSoftInputMode="adjustResize"
-      android:exported="true">
+      android:name=".MainActivity"
+      android:exported="true"
+      android:windowSoftInputMode="adjustResize">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>

@@ -1,13 +1,12 @@
-[![Travis CI](https://img.shields.io/travis/com/hendraanggrian/material/countrypicker)](https://travis-ci.com/github/hendraanggrian/countrypicker/)
-[![Codecov](https://img.shields.io/codecov/c/github/hendraanggrian/countrypicker)](https://codecov.io/gh/hendraanggrian/countrypicker/)
-[![Maven Central](https://img.shields.io/maven-central/v/com.hendraanggrian.material/countrypicker)](https://repo1.maven.org/maven2/com/hendraanggrian/material/countrypicker/)
-[![Nexus Snapshot](https://img.shields.io/nexus/s/com.hendraanggrian.material/countrypicker?server=https%3A%2F%2Fs01.oss.sonatype.org)](https://s01.oss.sonatype.org/content/repositories/snapshots/com/hendraanggrian/material/countrypicker/)
-[![Android SDK](https://img.shields.io/badge/sdk-16%2B-informational)](https://developer.android.com/studio/releases/platforms/#4.1)
+[![CircleCI](https://img.shields.io/circleci/build/gh/hanggrian/countrypicker)](https://app.circleci.com/pipelines/github/hanggrian/countrypicker/)
+[![Codecov](https://img.shields.io/codecov/c/gh/hanggrian/countrypicker)](https://app.codecov.io/gh/hanggrian/countrypicker/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.hanggrian/countrypicker)](https://central.sonatype.com/artifact/com.hanggrian/countrypicker/)
+[![Android SDK](https://img.shields.io/badge/android-21%2B-34a853)](https://developer.android.com/tools/releases/platforms/#5.0)
 
 # CountryPicker
 
-![Dialog preview.](https://github.com/hendraanggrian/countrypicker/raw/assets/preview_dialog.png)
-![Bottom sheet dialog.](https://github.com/hendraanggrian/countrypicker/raw/assets/preview_sheet.png)
+![](https://github.com/hendraanggrian/countrypicker/raw/assets/preview_dialog.gif "Dialog preview")
+![](https://github.com/hendraanggrian/countrypicker/raw/assets/preview_bottomsheet.gif "Bottom sheet dialog")
 
 Material design components to pick country.
 
@@ -22,7 +21,7 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    implementation "com.hendraanggrian.material:countrypicker:$version"
+    implementation "com.hendraanggrian:countrypicker:$version"
 }
 ```
 

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<lint>
+  <issue id="UnusedResources">
+    <ignore path="src/main/res/drawable-hdpi/*.png"/>
+    <ignore path="src/main/res/drawable-mdpi/*.png"/>
+    <ignore path="src/main/res/drawable-xhdpi/*.png"/>
+    <ignore path="src/main/res/drawable-xxhdpi/*.png"/>
+    <ignore path="src/main/res/drawable-xxxhdpi/*.png"/>
+  </issue>
+  <issue id="IconDensities">
+    <ignore path="src/main/res/drawable-hdpi"/>
+  </issue>
+  <issue id="IconDuplicates">
+    <ignore path="src/main/res/drawable-hdpi/*.png"/>
+    <ignore path="src/main/res/drawable-mdpi/*.png"/>
+    <ignore path="src/main/res/drawable-xhdpi/*.png"/>
+    <ignore path="src/main/res/drawable-xxhdpi/*.png"/>
+    <ignore path="src/main/res/drawable-xxxhdpi/*.png"/>
+  </issue>
+</lint>

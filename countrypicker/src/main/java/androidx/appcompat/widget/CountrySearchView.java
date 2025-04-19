@@ -13,7 +13,7 @@ import android.widget.ImageView;
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.core.view.ViewCompat;
-import com.hendraanggrian.material.countrypicker.R;
+import com.hanggrian.countrypicker.R;
 
 /**
  * A "hacked" {@link SearchView} that mimics search bar in Android Settings app API 28. This class
@@ -55,8 +55,8 @@ public final class CountrySearchView extends SearchView {
     frameLp.rightMargin = 0;
 
     final MarginLayoutParams textLp = (MarginLayoutParams) mSearchSrcTextView.getLayoutParams();
-    textLp.leftMargin = getResources()
-      .getDimensionPixelSize(R.dimen.countrypicker_searchbar_gap);
+    textLp.leftMargin =
+        getResources().getDimensionPixelSize(R.dimen.countrypicker_searchbar_gap);
 
     // Buttons are wider in Google Search app.
     mCloseButton.setScaleType(ImageView.ScaleType.CENTER);

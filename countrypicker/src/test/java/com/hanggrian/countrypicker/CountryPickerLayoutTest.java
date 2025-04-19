@@ -1,22 +1,18 @@
-package com.hendraanggrian.material.countrypicker;
+package com.hanggrian.countrypicker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
-import android.os.Build;
-import android.widget.LinearLayout;
 import androidx.appcompat.app.AppCompatActivity;
-import com.hendraanggrian.material.countrypicker.test.R;
+import com.hanggrian.countrypicker.test.R;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.annotation.internal.DoNotInstrument;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = Build.VERSION_CODES.LOLLIPOP)
 @DoNotInstrument
 public class CountryPickerLayoutTest {
   private AppCompatActivity activity;

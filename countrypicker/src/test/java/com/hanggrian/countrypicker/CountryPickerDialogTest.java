@@ -1,20 +1,17 @@
-package com.hendraanggrian.material.countrypicker;
+package com.hanggrian.countrypicker;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-
-import android.os.Build;
 import androidx.appcompat.app.AppCompatActivity;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.robolectric.Robolectric;
 import org.robolectric.RobolectricTestRunner;
-import org.robolectric.annotation.Config;
 import org.robolectric.annotation.internal.DoNotInstrument;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = Build.VERSION_CODES.LOLLIPOP)
 @DoNotInstrument
 public class CountryPickerDialogTest {
   private AppCompatActivity activity;
@@ -34,25 +31,28 @@ public class CountryPickerDialogTest {
 
   @Test
   public void setItems() {
-    CountryPicker picker = new CountryPickerDialog.Builder(activity)
-        .setItems(Country.US)
-        .build();
+    CountryPicker picker =
+        new CountryPickerDialog.Builder(activity)
+            .setItems(Country.US)
+            .build();
     assertEquals(Country.US, picker.getItems().get(0));
   }
 
   @Test
   public void setFlagDisplay() {
-    CountryPicker picker = new CountryPickerDialog.Builder(activity)
-        .setFlagDisplay(FlagDisplay.CUSTOM)
-        .build();
+    CountryPicker picker =
+        new CountryPickerDialog.Builder(activity)
+            .setFlagDisplay(FlagDisplay.CUSTOM)
+            .build();
     assertEquals(FlagDisplay.CUSTOM, picker.getFlagDisplay());
   }
 
   @Test
   public void setNameDisplay() {
-    CountryPicker picker = new CountryPickerDialog.Builder(activity)
-        .setNameDisplay(NameDisplay.ISO_CODE)
-        .build();
+    CountryPicker picker =
+        new CountryPickerDialog.Builder(activity)
+            .setNameDisplay(NameDisplay.ISO_CODE)
+            .build();
     assertEquals(NameDisplay.ISO_CODE, picker.getNameDisplay());
   }
 }

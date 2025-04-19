@@ -1,9 +1,9 @@
-package com.hendraanggrian.material.countrypicker;
+package com.hanggrian.countrypicker;
 
 import android.os.Bundle;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import com.hendraanggrian.material.countrypicker.test.R;
+import com.hanggrian.countrypicker.test.R;
 
 public class TestActivity extends AppCompatActivity {
   @Override

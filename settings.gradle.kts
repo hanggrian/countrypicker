@@ -10,6 +10,6 @@ dependencyResolutionManagement.repositories {
 
 rootProject.name = "countrypicker"
 
-include("countrypicker")
+include("countrypicker", "countrypicker-bottomsheet")
 include("sample")
 include("website")

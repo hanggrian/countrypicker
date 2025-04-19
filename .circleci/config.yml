@@ -1,0 +1,24 @@
+version: 2.1
+
+orbs:
+  codecov: codecov/codecov@3
+
+executors:
+  linux:
+    docker:
+      - image: cimg/android:2025.04
+
+jobs:
+  upload-coverage:
+    executor: linux
+    steps:
+      - checkout
+      - run: ./gradlew check
+      - run: ./gradlew checkstyleAndroid
+      - run: ./gradlew jacocoAndroid
+      - codecov/upload
+
+workflows:
+  build:
+    jobs:
+      - upload-coverage

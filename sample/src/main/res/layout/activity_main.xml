@@ -4,11 +4,12 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context="com.example.countrypicker.MainActivity">
+  tools:context=".MainActivity">
 
   <com.google.android.material.appbar.AppBarLayout
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:fitsSystemWindows="true">
 
     <com.google.android.material.appbar.CollapsingToolbarLayout
       android:layout_width="match_parent"
@@ -16,7 +17,7 @@
       android:background="?colorPrimaryDark"
       app:contentScrim="?colorPrimary"
       app:layout_scrollFlags="scroll|exitUntilCollapsed"
-      app:title="Default Emoji Flags">
+      app:title="CountryPicker Sample">
 
       <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
