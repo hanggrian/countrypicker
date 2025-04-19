@@ -15,20 +15,22 @@ import static org.junit.Assert.assertFalse;
 @RunWith(RobolectricTestRunner.class)
 @DoNotInstrument
 public class CountryPickerLayoutTest {
-  private AppCompatActivity activity;
-  private CountryPickerLayout layout;
+    private AppCompatActivity activity;
+    private CountryPickerLayout layout;
 
-  @Before
-  public void setup() {
-    activity = Robolectric.buildActivity(TestActivity.class).setup().get();
-    layout = (CountryPickerLayout) activity.getLayoutInflater()
-        .inflate(R.layout.activity_test, null);
-  }
+    @Before
+    public void setup() {
+        activity = Robolectric.buildActivity(TestActivity.class).setup().get();
+        layout =
+            (CountryPickerLayout) activity
+                .getLayoutInflater()
+                .inflate(R.layout.activity_test, null);
+    }
 
-  @Test
-  public void defaultProperties() {
-    assertFalse(layout.getAdapter().countries.isEmpty());
-    assertEquals(FlagDisplay.DEFAULT, layout.getAdapter().flagDisplay);
-    assertEquals(NameDisplay.DEFAULT, layout.getAdapter().nameDisplay);
-  }
+    @Test
+    public void defaultProperties() {
+        assertFalse(layout.getAdapter().getCountries().isEmpty());
+        assertEquals(FlagDisplay.DEFAULT, layout.getAdapter().getFlagDisplay());
+        assertEquals(NameDisplay.DEFAULT, layout.getAdapter().getNameDisplay());
+    }
 }

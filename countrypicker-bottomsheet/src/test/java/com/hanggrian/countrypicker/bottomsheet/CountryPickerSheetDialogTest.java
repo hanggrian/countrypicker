@@ -1,6 +1,11 @@
-package com.hanggrian.countrypicker;
+package com.hanggrian.countrypicker.bottomsheet;
 
 import androidx.appcompat.app.AppCompatActivity;
+import com.hanggrian.countrypicker.Country;
+import com.hanggrian.countrypicker.CountryPicker;
+import com.hanggrian.countrypicker.FlagDisplay;
+import com.hanggrian.countrypicker.NameDisplay;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,7 +18,7 @@ import static org.junit.Assert.assertFalse;
 
 @RunWith(RobolectricTestRunner.class)
 @DoNotInstrument
-public class CountryPickerDialogTest {
+public class CountryPickerSheetDialogTest {
     private AppCompatActivity activity;
 
     @Before
@@ -23,16 +28,16 @@ public class CountryPickerDialogTest {
 
     @Test
     public void defaultProperties() {
-        CountryPicker picker = new CountryPickerDialog.Builder(activity).build();
+        CountryPicker picker = new CountryPickerSheetDialog.Builder(activity).build();
         assertFalse(picker.getItems().isEmpty());
-        assertEquals(FlagDisplay.DEFAULT, picker.getFlagDisplay());
-        assertEquals(NameDisplay.DEFAULT, picker.getNameDisplay());
+        Assert.assertEquals(FlagDisplay.DEFAULT, picker.getFlagDisplay());
+        Assert.assertEquals(NameDisplay.DEFAULT, picker.getNameDisplay());
     }
 
     @Test
     public void setItems() {
         CountryPicker picker =
-            new CountryPickerDialog.Builder(activity)
+            new CountryPickerSheetDialog.Builder(activity)
                 .setItems(Country.US)
                 .build();
         assertEquals(Country.US, picker.getItems().get(0));
@@ -41,7 +46,7 @@ public class CountryPickerDialogTest {
     @Test
     public void setFlagDisplay() {
         CountryPicker picker =
-            new CountryPickerDialog.Builder(activity)
+            new CountryPickerSheetDialog.Builder(activity)
                 .setFlagDisplay(FlagDisplay.CUSTOM)
                 .build();
         assertEquals(FlagDisplay.CUSTOM, picker.getFlagDisplay());
@@ -50,7 +55,7 @@ public class CountryPickerDialogTest {
     @Test
     public void setNameDisplay() {
         CountryPicker picker =
-            new CountryPickerDialog.Builder(activity)
+            new CountryPickerSheetDialog.Builder(activity)
                 .setNameDisplay(NameDisplay.ISO_CODE)
                 .build();
         assertEquals(NameDisplay.ISO_CODE, picker.getNameDisplay());

@@ -1,13 +1,20 @@
-package com.hanggrian.countrypicker;
+package com.hanggrian.countrypicker.bottomsheet;
 
 import android.content.Context;
 import android.util.DisplayMetrics;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.hanggrian.countrypicker.Country;
+import com.hanggrian.countrypicker.CountryPicker;
+import com.hanggrian.countrypicker.CountryPickerLayout;
+import com.hanggrian.countrypicker.FlagDisplay;
+import com.hanggrian.countrypicker.NameDisplay;
+import com.hanggrian.countrypicker.internal.CountryPickerImpl;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
@@ -24,9 +31,16 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
     public CountryPickerSheetDialog(@NonNull Context context, int theme) {
         super(context, theme);
 
-        // root layout to avoid picker content being pushed because height is too small
         picker = new CountryPickerImpl(this, context);
+        picker.getLayout().getToolbar().setBackgroundColor(
+            getColorAttr(context, com.google.android.material.R.attr.colorSurfaceVariant)
+        );
+
+        // root layout to avoid picker content being pushed because height is too small
         final FrameLayout root = new FrameLayout(context);
+        root.setBackgroundColor(
+            getColorAttr(context, com.google.android.material.R.attr.colorSurface)
+        );
         root.setLayoutParams(new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
         root.addView(picker.getLayout());
         setContentView(root);
@@ -123,6 +137,12 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
             .getDefaultDisplay()
             .getMetrics(dm);
         return dm;
+    }
+
+    private static int getColorAttr(Context context, int attrId) {
+        final TypedValue typedValue = new TypedValue();
+        context.getTheme().resolveAttribute(attrId, typedValue, true);
+        return typedValue.data;
     }
 
     public static class Builder {

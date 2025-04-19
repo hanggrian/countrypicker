@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat
             .getInsetsController(window, window.decorView)
             .isAppearanceLightStatusBars =
-            resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK !=
+            resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK ==
             Configuration.UI_MODE_NIGHT_YES
     }
 }

@@ -21,12 +21,12 @@
   <androidx.preference.PreferenceCategory android:title="Show">
     <androidx.preference.Preference
       android:key="show_dialog"
-      android:summary="Click to show dialog picker"
+      android:summary="A pop-up that maximizes compatibility"
       android:title="Dialog"/>
 
     <androidx.preference.Preference
       android:key="show_sheet"
-      android:summary="Click to show bottom sheet picker"
+      android:summary="A draggable bottom sheet with Material components"
       android:title="Bottom sheet"/>
   </androidx.preference.PreferenceCategory>
 </androidx.preference.PreferenceScreen>

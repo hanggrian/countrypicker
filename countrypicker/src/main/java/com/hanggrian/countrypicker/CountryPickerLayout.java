@@ -19,9 +19,7 @@ import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.recyclerview.widget.RecyclerView;
 import java.util.Objects;
 
-/**
- * Root layout of country selection view, may be used independently.
- */
+/** Root layout of country selection view, may be used independently. */
 public class CountryPickerLayout extends LinearLayoutCompat {
     private final CountryPickerAdapter adapter;
 
@@ -94,14 +92,15 @@ public class CountryPickerLayout extends LinearLayoutCompat {
             });
         // must set background after menu inflation
         toolbar.setBackgroundColor(
-            getColorAttr(context, com.google.android.material.R.attr.colorSurfaceVariant));
+            getColorAttr(context, androidx.appcompat.R.attr.colorControlHighlight)
+        );
 
         Drawable tintedIcon = locateItem.getIcon();
         if (tintedIcon != null) {
             DrawableCompat.wrap(tintedIcon);
             DrawableCompat.setTint(
                 tintedIcon.mutate(),
-                getColorAttr(getContext(), com.google.android.material.R.attr.colorPrimary)
+                getColorAttr(getContext(), androidx.appcompat.R.attr.colorPrimary)
             );
             locateItem.setIcon(tintedIcon);
         }

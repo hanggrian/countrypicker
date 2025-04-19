@@ -1,4 +1,4 @@
-package com.hanggrian.countrypicker;
+package com.hanggrian.countrypicker.bottomsheet;
 
 import android.app.Dialog;
 import android.os.Bundle;

@@ -34,9 +34,9 @@ public class CountryPickerAdapter
     private List<Country> filteredCountries;
     private Filter filter;
 
-    List<Country> countries;
-    FlagDisplay flagDisplay = FlagDisplay.DEFAULT;
-    NameDisplay nameDisplay = NameDisplay.DEFAULT;
+    private List<Country> countries;
+    private FlagDisplay flagDisplay = FlagDisplay.DEFAULT;
+    private NameDisplay nameDisplay = NameDisplay.DEFAULT;
     CountryPickerLayout.OnSelectedListener selectedListener;
 
     CountryPickerAdapter(@NonNull Context context) {
@@ -44,9 +44,14 @@ public class CountryPickerAdapter
         replaceItems(new ArrayList<>(Arrays.asList(Country.values())));
     }
 
-    public void setItems(@NonNull List<Country> countries) {
+    public void setCountries(@NonNull List<Country> countries) {
         replaceItems(countries);
         notifyDataSetChanged();
+    }
+
+    @NonNull
+    public List<Country> getCountries() {
+        return countries;
     }
 
     public void setFlagDisplay(@NonNull FlagDisplay display) {
@@ -54,9 +59,19 @@ public class CountryPickerAdapter
         notifyDataSetChanged();
     }
 
+    @NonNull
+    public FlagDisplay getFlagDisplay() {
+        return flagDisplay;
+    }
+
     public void setNameDisplay(@NonNull NameDisplay display) {
         nameDisplay = display;
         notifyDataSetChanged();
+    }
+
+    @NonNull
+    public NameDisplay getNameDisplay() {
+        return nameDisplay;
     }
 
     public void setListener(@Nullable CountryPickerLayout.OnSelectedListener listener) {
@@ -65,7 +80,7 @@ public class CountryPickerAdapter
 
     private void replaceItems(List<Country> countries) {
         Collections.sort(countries, this);
-        this.countries = countries;
+        this.countries = Collections.unmodifiableList(countries);
         this.filteredCountries = countries;
     }
 

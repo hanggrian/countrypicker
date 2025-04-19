@@ -1,6 +1,6 @@
 [![CircleCI](https://img.shields.io/circleci/build/gh/hanggrian/countrypicker)](https://app.circleci.com/pipelines/github/hanggrian/countrypicker/)
 [![Codecov](https://img.shields.io/codecov/c/gh/hanggrian/countrypicker)](https://app.codecov.io/gh/hanggrian/countrypicker/)
-[![Maven Central](https://img.shields.io/maven-central/v/com.hanggrian/countrypicker)](https://central.sonatype.com/artifact/com.hanggrian/countrypicker/)
+[![Maven Central](https://img.shields.io/maven-central/v/com.hanggrian.countrypicker/countrypicker)](https://central.sonatype.com/artifact/com.hanggrian.countrypicker/countrypicker/)
 [![Android SDK](https://img.shields.io/badge/android-21%2B-34a853)](https://developer.android.com/tools/releases/platforms/#5.0)
 
 # CountryPicker
@@ -17,29 +17,30 @@ Material design components to pick country.
 
 ```gradle
 repositories {
-    google()
     mavenCentral()
+    google()
 }
 dependencies {
-    implementation "com.hendraanggrian:countrypicker:$version"
+    // base dialogs
+    implementation "com.hanggrian.countrypicker:countrypicker:$version"
+
+    // material bottom sheets
+    implementation "com.hanggrian.countrypicker:countrypicker-bottomsheet:$version"
 }
 ```
 
 ## Usage
 
-### Dialog
-
 Use `CountryPickerDialog.Builder` to build or show `CountryPickerDialog`.
 
 ```java
 new CountryPickerDialog.Builder(context)
-  .setOnSelectedListener(new CountryPicker.OnSelectedListener() {
-    @Override
-    public void onSelected(@NonNull Country country) {
-      // do something
-    }
-  })
-  .show();
+    .setOnSelectedListener(new CountryPicker.OnSelectedListener() {
+        @Override
+        public void onSelected(@NonNull Country country) {
+            // do something
+        }
+    }).show();
 ```
 
 ### Bottom Sheet
@@ -49,12 +50,12 @@ No builder here, create traditionally.
 ```java
 BottomSheetDialog dialog = new CountryPickerSheetDialog(context);
 dialog.setOnSelectedListener(new CountryPicker.OnSelectedListener() {
-  @Override
-  public void onSelected(@NonNull Country country) {
-    // do something
-  }
+    @Override
+    public void onSelected(@NonNull Country country) {
+        // do something
+    }
 });
-dialog.show()
+dialog.show();
 ```
 
 ## Custom Flags

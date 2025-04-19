@@ -28,7 +28,7 @@ android {
 dependencies {
     ktlintRuleset(libs.rulebook.ktlint)
 
-    implementation(project(":$releaseArtifact"))
+    implementation(project(":$releaseArtifact-bottomsheet"))
     implementation(libs.material)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.multidex)

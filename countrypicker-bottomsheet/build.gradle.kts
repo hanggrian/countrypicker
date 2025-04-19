@@ -10,7 +10,7 @@ plugins {
 }
 
 android {
-    namespace = releaseGroup
+    namespace = "$releaseGroup.bottomsheet"
     testNamespace = "$namespace.test"
     buildFeatures.buildConfig = false
     testOptions.unitTests.isIncludeAndroidResources = true
@@ -19,12 +19,9 @@ android {
 dependencies {
     checkstyle(libs.rulebook.checkstyle)
 
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.constraintlayout)
-    implementation(libs.androidx.coordinatorlayout)
-    implementation(libs.androidx.cardview)
-    implementation(libs.androidx.recyclerview)
-    implementation(libs.fastscroll)
+    api(project(":$releaseArtifact"))
+
+    implementation(libs.material)
 
     testImplementation(libs.bundles.androidx.test)
 }

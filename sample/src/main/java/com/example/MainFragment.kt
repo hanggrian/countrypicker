@@ -7,9 +7,9 @@ import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import com.google.android.material.snackbar.Snackbar
 import com.hanggrian.countrypicker.CountryPickerDialog
-import com.hanggrian.countrypicker.CountryPickerSheetDialog
 import com.hanggrian.countrypicker.FlagDisplay
 import com.hanggrian.countrypicker.NameDisplay
+import com.hanggrian.countrypicker.bottomsheet.CountryPickerSheetDialog
 
 class MainFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
