@@ -23,10 +23,10 @@ import java.util.Objects;
 public class CountryPickerLayout extends LinearLayoutCompat {
     private final CountryPickerAdapter adapter;
 
-    private final CardView cardView;
+    private final CardView card;
     private final Toolbar toolbar;
-    private final CountrySearchView searchView;
-    private final RecyclerView recyclerView;
+    private final CountrySearchView search;
+    private final RecyclerView list;
     private final MenuItem locateItem;
 
     private final TextWatcher textWatcher =
@@ -71,12 +71,12 @@ public class CountryPickerLayout extends LinearLayoutCompat {
         adapter = new CountryPickerAdapter(context);
 
         LayoutInflater.from(context).inflate(R.layout.countrypicker, this, true);
-        cardView = findViewById(R.id.cardView);
-        toolbar = findViewById(R.id.toolbar);
-        searchView = findViewById(R.id.searchBar);
-        recyclerView = findViewById(R.id.recyclerView);
+        card = findViewById(R.id.countrypicker_card);
+        toolbar = findViewById(R.id.countrypicker_toolbar);
+        search = findViewById(R.id.countrypicker_search);
+        list = findViewById(R.id.countrypicker_list);
 
-        cardView.setCardElevation(8);
+        card.setCardElevation(8);
 
         toolbar.inflateMenu(R.menu.countrypicker_menu);
         final Menu menu = toolbar.getMenu();
@@ -105,30 +105,15 @@ public class CountryPickerLayout extends LinearLayoutCompat {
             locateItem.setIcon(tintedIcon);
         }
 
-        searchView.getInput().addTextChangedListener(textWatcher);
-        searchView.setOnQueryTextListener(queryListener);
+        search.getInput().addTextChangedListener(textWatcher);
+        search.setOnQueryTextListener(queryListener);
 
-        recyclerView.setAdapter(adapter);
+        list.setAdapter(adapter);
     }
 
     @NonNull
     public CountryPickerAdapter getAdapter() {
-        return (CountryPickerAdapter) Objects.requireNonNull(recyclerView.getAdapter());
-    }
-
-    @NonNull
-    public Toolbar getToolbar() {
-        return toolbar;
-    }
-
-    @NonNull
-    public CountrySearchView getSearchBar() {
-        return searchView;
-    }
-
-    @NonNull
-    public RecyclerView getRecyclerView() {
-        return recyclerView;
+        return (CountryPickerAdapter) Objects.requireNonNull(list.getAdapter());
     }
 
     private static int getColorAttr(Context context, int attrId) {

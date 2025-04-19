@@ -56,7 +56,7 @@ public final class CountrySearchView extends SearchView {
 
     final MarginLayoutParams textLp = (MarginLayoutParams) mSearchSrcTextView.getLayoutParams();
     textLp.leftMargin =
-        getResources().getDimensionPixelSize(R.dimen.countrypicker_searchbar_gap);
+        getResources().getDimensionPixelSize(R.dimen.countrypicker_search_gap);
 
     // Buttons are wider in Google Search app.
     mCloseButton.setScaleType(ImageView.ScaleType.CENTER);

@@ -4,11 +4,13 @@ import android.app.Dialog;
 import android.content.Context;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.RecyclerView;
 import com.hanggrian.countrypicker.Country;
 import com.hanggrian.countrypicker.CountryPicker;
 import com.hanggrian.countrypicker.CountryPickerLayout;
 import com.hanggrian.countrypicker.FlagDisplay;
 import com.hanggrian.countrypicker.NameDisplay;
+import com.hanggrian.countrypicker.R;
 import java.util.Arrays;
 import java.util.List;
 
@@ -35,7 +37,7 @@ public final class CountryPickerImpl implements CountryPicker {
 
     @Override
     public void setItems(@NonNull List<Country> countries) {
-        picker.getRecyclerView().getRecycledViewPool().clear();
+        picker.<RecyclerView>findViewById(R.id.countrypicker_list).getRecycledViewPool().clear();
         picker.getAdapter().setCountries(countries);
     }
 
@@ -52,7 +54,7 @@ public final class CountryPickerImpl implements CountryPicker {
 
     @Override
     public void setFlagDisplay(@NonNull FlagDisplay display) {
-        picker.getRecyclerView().getRecycledViewPool().clear();
+        picker.<RecyclerView>findViewById(R.id.countrypicker_list).getRecycledViewPool().clear();
         picker.getAdapter().setFlagDisplay(display);
     }
 
@@ -64,19 +66,21 @@ public final class CountryPickerImpl implements CountryPicker {
 
     @Override
     public void setNameDisplay(@NonNull NameDisplay display) {
-        picker.getRecyclerView().getRecycledViewPool().clear();
+        picker.<RecyclerView>findViewById(R.id.countrypicker_list).getRecycledViewPool().clear();
         picker.getAdapter().setNameDisplay(display);
     }
 
     @Override
     public void setOnSelectedListener(
-        @Nullable final CountryPickerLayout.OnSelectedListener listener) {
+        @Nullable final CountryPickerLayout.OnSelectedListener listener
+    ) {
         picker.getAdapter().setListener(
             listener == null
                 ? null
                 : country -> {
                 listener.onSelected(country);
                 dialog.dismiss();
-            });
+            }
+        );
     }
 }

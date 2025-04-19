@@ -7,6 +7,7 @@ import android.view.View;
 import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.hanggrian.countrypicker.Country;
@@ -32,9 +33,12 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
         super(context, theme);
 
         picker = new CountryPickerImpl(this, context);
-        picker.getLayout().getToolbar().setBackgroundColor(
-            getColorAttr(context, com.google.android.material.R.attr.colorSurfaceVariant)
-        );
+        picker
+            .getLayout()
+            .<CardView>findViewById(com.hanggrian.countrypicker.R.id.countrypicker_card)
+            .setCardBackgroundColor(
+                getColorAttr(context, com.google.android.material.R.attr.colorSurfaceVariant)
+            );
 
         // root layout to avoid picker content being pushed because height is too small
         final FrameLayout root = new FrameLayout(context);
@@ -47,11 +51,13 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
 
         final BottomSheetBehavior<?> behavior = BottomSheetBehavior.from((View) root.getParent());
         behavior.setPeekHeight(getDisplayMetrics().heightPixels * 2 / 3);
-        getLayout().getSearchBar().getInput().setOnFocusChangeListener((view, hasFocus) -> {
-            if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
-                behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
-            }
-        });
+        getLayout()
+            .findViewById(com.hanggrian.countrypicker.R.id.countrypicker_search)
+            .setOnFocusChangeListener((view, hasFocus) -> {
+                if (behavior.getState() != BottomSheetBehavior.STATE_EXPANDED) {
+                    behavior.setState(BottomSheetBehavior.STATE_EXPANDED);
+                }
+            });
     }
 
     /**

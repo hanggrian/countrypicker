@@ -5,9 +5,9 @@
   android:layout_height="match_parent">
 
   <androidx.cardview.widget.CardView
-    android:id="@+id/cardView"
+    android:id="@+id/countrypicker_card"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/countrypicker_searchbar_height"
+    android:layout_height="@dimen/countrypicker_search_height"
     android:layout_alignParentTop="true"
     android:layout_marginStart="?listPreferredItemPaddingStart"
     android:layout_marginLeft="?listPreferredItemPaddingLeft"
@@ -17,14 +17,14 @@
     app:cardCornerRadius="8dp">
 
     <androidx.appcompat.widget.Toolbar
-      android:id="@+id/toolbar"
+      android:id="@+id/countrypicker_toolbar"
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       app:contentInsetLeft="-8dp"
       app:contentInsetStart="-8dp">
 
       <androidx.appcompat.widget.CountrySearchView
-        android:id="@+id/searchBar"
+        android:id="@+id/countrypicker_search"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:defaultQueryHint="Search country"
@@ -33,10 +33,10 @@
   </androidx.cardview.widget.CardView>
 
   <com.l4digital.fastscroll.FastScrollRecyclerView
-    android:id="@+id/recyclerView"
+    android:id="@+id/countrypicker_list"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_below="@id/cardView"
+    android:layout_below="@id/countrypicker_card"
     android:layout_alignParentBottom="true"
     android:scrollbars="none"
     app:bubbleColor="?colorPrimary"

@@ -22,7 +22,7 @@
       app:title="Where are you from?">
 
       <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar"
+        android:id="@+id/countrypicker_toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         app:layout_collapseMode="pin"/>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <public name="countrypicker_card" type="id"/>
+  <public name="countrypicker_toolbar" type="id"/>
+  <public name="countrypicker_search" type="id"/>
+  <public name="countrypicker_list" type="id"/>
+</resources>

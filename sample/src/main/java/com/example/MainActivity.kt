@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        toolbar = findViewById(R.id.toolbar)
+        toolbar = findViewById(R.id.countrypicker_toolbar)
         setSupportActionBar(toolbar)
         supportFragmentManager
             .beginTransaction()
