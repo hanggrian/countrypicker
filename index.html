@@ -1,15 +1,14 @@
 <!doctype html>
-<html lang="en-us">
+<html>
     <head>
         <META http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <meta charset="utf-8">
+        <meta charset="UTF-8">
         <title>countrypicker</title>
         <meta content="width=device-width, initial-scale=1" name="viewport">
         <meta content="#159957" name="theme-color">
         <link href="styles/main.css" rel="stylesheet">
         <link href="styles/dark.css" rel="stylesheet">
         <link href="styles/normalize.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700" rel="stylesheet">
         <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
         <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-groovy.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-java.min.js"></script>
         <!--Primary meta tags-->
@@ -23,18 +22,17 @@
         </section>
         <section class="main-content">
             <p>
-                <a href="https://travis-ci.com/github/hendraanggrian/countrypicker/"><img alt="Travis CI" src="https://img.shields.io/travis/com/hendraanggrian/material/countrypicker"></a>
-<a href="https://codecov.io/gh/hendraanggrian/countrypicker/"><img alt="Codecov" src="https://img.shields.io/codecov/c/github/hendraanggrian/countrypicker"></a>
-<a href="https://repo1.maven.org/maven2/com/hendraanggrian/material/countrypicker/"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.hendraanggrian.material/countrypicker"></a>
-<a href="https://s01.oss.sonatype.org/content/repositories/snapshots/com/hendraanggrian/material/countrypicker/"><img alt="Nexus Snapshot" src="https://img.shields.io/nexus/s/com.hendraanggrian.material/countrypicker?server=https%3A%2F%2Fs01.oss.sonatype.org"></a>
-<a href="https://developer.android.com/studio/releases/platforms/#4.1"><img alt="Android SDK" src="https://img.shields.io/badge/sdk-16%2B-informational"></a>
+                <a href="https://app.circleci.com/pipelines/github/hanggrian/countrypicker/"><img alt="CircleCI" src="https://img.shields.io/circleci/build/gh/hanggrian/countrypicker"></a>
+<a href="https://app.codecov.io/gh/hanggrian/countrypicker/"><img alt="Codecov" src="https://img.shields.io/codecov/c/gh/hanggrian/countrypicker"></a>
+<a href="https://central.sonatype.com/artifact/com.hanggrian.countrypicker/countrypicker/"><img alt="Maven Central" src="https://img.shields.io/maven-central/v/com.hanggrian.countrypicker/countrypicker"></a>
+<a href="https://developer.android.com/tools/releases/platforms/#5.0"><img alt="Android SDK" src="https://img.shields.io/badge/android-21%2B-34a853"></a>
             </p>
 
             <h1>CountryPicker</h1>
 
             <p>
-                <img alt="Dialog preview." src="https://github.com/hendraanggrian/countrypicker/raw/assets/preview_dialog.png">
-<img alt="Bottom sheet dialog." src="https://github.com/hendraanggrian/countrypicker/raw/assets/preview_sheet.png">
+                <img alt="" src="https://github.com/hendraanggrian/countrypicker/raw/assets/preview_dialog.gif" title="Dialog preview">
+<img alt="" src="https://github.com/hendraanggrian/countrypicker/raw/assets/preview_bottomsheet.gif" title="Bottom sheet dialog">
             </p>
 
             <p>Material design components to pick country.</p>
@@ -50,30 +48,31 @@
             <h2>Download</h2>
 
             <pre><code class="language-groovy">repositories {
-    google()
     mavenCentral()
+    google()
 }
 dependencies {
-    implementation "com.hendraanggrian.material:countrypicker:$version"
+    // base dialogs
+    implementation "com.hanggrian.countrypicker:countrypicker:$version"
+
+    // material bottom sheets
+    implementation "com.hanggrian.countrypicker:countrypicker-bottomsheet:$version"
 }
 </code></pre>
 
             <h2>Usage</h2>
-
-            <h3>Dialog</h3>
 
             <p>
                 Use <code>CountryPickerDialog.Builder</code> to build or show <code>CountryPickerDialog</code>.
             </p>
 
             <pre><code class="language-java">new CountryPickerDialog.Builder(context)
-  .setOnSelectedListener(new CountryPicker.OnSelectedListener() {
-    @Override
-    public void onSelected(@NonNull Country country) {
-      // do something
-    }
-  })
-  .show();
+    .setOnSelectedListener(new CountryPicker.OnSelectedListener() {
+        @Override
+        public void onSelected(@NonNull Country country) {
+            // do something
+        }
+    }).show();
 </code></pre>
 
             <h3>Bottom Sheet</h3>
@@ -82,12 +81,12 @@ dependencies {
 
             <pre><code class="language-java">BottomSheetDialog dialog = new CountryPickerSheetDialog(context);
 dialog.setOnSelectedListener(new CountryPicker.OnSelectedListener() {
-  @Override
-  public void onSelected(@NonNull Country country) {
-    // do something
-  }
+    @Override
+    public void onSelected(@NonNull Country country) {
+        // do something
+    }
 });
-dialog.show()
+dialog.show();
 </code></pre>
 
             <h2>Custom Flags</h2>
@@ -104,7 +103,7 @@ for all available country codes.
             </p>
 
             <footer class="site-footer">
-                <span class="site-footer-owner"><a href="https://github.com/hendraanggrian/countrypicker/">countrypicker</a> is maintained by <a href="https://github.com/hendraanggrian/">Hendra Anggrian</a></span><span class="site-footer-credits">Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/jasonlong/cayman-theme/">jasonlong</a></span>
+                <span class="site-footer-owner"><a href="https://github.com/hanggrian/countrypicker/">countrypicker</a> is maintained by <a href="https://github.com/hanggrian/">Hendra Anggrian</a></span><span class="site-footer-credits">Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/jasonlong/cayman-theme/">jasonlong</a></span>
             </footer>
         </section>
     </body>
