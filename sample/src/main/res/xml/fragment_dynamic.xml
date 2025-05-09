@@ -5,7 +5,7 @@
       android:dialogTitle="Flag Display Behavior"
       android:entries="@array/flag_entries"
       android:entryValues="@array/all_values"
-      android:icon="@drawable/baseline_flag_24"
+      android:icon="@drawable/fill_flag"
       android:key="flag_display"
       android:title="Flag Display"/>
 
@@ -13,7 +13,7 @@
       android:dialogTitle="Name Display Behavior"
       android:entries="@array/name_entries"
       android:entryValues="@array/all_values"
-      android:icon="@drawable/baseline_dialpad_24"
+      android:icon="@drawable/fill_dialpad"
       android:key="name_display"
       android:title="Name Display"/>
   </androidx.preference.PreferenceCategory>

@@ -4,7 +4,7 @@
   xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="match_parent"
   android:layout_height="match_parent"
-  tools:context=".MainActivity">
+  tools:context=".dynamic.DynamicActivity">
 
   <com.google.android.material.appbar.AppBarLayout
     android:layout_width="match_parent"
@@ -22,7 +22,7 @@
       app:title="Where are you from?">
 
       <androidx.appcompat.widget.Toolbar
-        android:id="@+id/countrypicker_toolbar"
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         app:layout_collapseMode="pin"/>

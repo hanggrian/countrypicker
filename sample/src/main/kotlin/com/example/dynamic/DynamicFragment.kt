@@ -1,19 +1,20 @@
-package com.example
+package com.example.dynamic
 
 import android.content.SharedPreferences
 import android.os.Bundle
 import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
+import com.example.R
 import com.google.android.material.snackbar.Snackbar
 import com.hanggrian.countrypicker.CountryPickerDialog
 import com.hanggrian.countrypicker.FlagDisplay
 import com.hanggrian.countrypicker.NameDisplay
 import com.hanggrian.countrypicker.bottomsheet.CountryPickerSheetDialog
 
-class MainFragment : PreferenceFragmentCompat() {
+class DynamicFragment : PreferenceFragmentCompat() {
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        addPreferencesFromResource(R.xml.fragment_main)
+        addPreferencesFromResource(R.xml.fragment_dynamic)
         val preferences = preferenceScreen.sharedPreferences!!
         val flagDisplayPreference = findPreference<ListPreference>(PREFERENCE_FLAG_DISPLAY)!!
         val nameDisplayPreference = findPreference<ListPreference>(PREFERENCE_NAME_DISPLAY)!!

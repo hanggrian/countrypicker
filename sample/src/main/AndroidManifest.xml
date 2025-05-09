@@ -6,17 +6,25 @@
     android:name="androidx.multidex.MultiDexApplication"
     android:allowBackup="true"
     android:supportsRtl="true"
-    android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar"
     android:title="CountryPicker Sample"
     tools:ignore="MissingApplicationIcon">
+
     <activity
-      android:name=".MainActivity"
+      android:name=".dynamic.DynamicActivity"
       android:exported="true"
-      android:windowSoftInputMode="adjustResize">
+      android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+
+    <!-- https://dribbble.com/shots/4512095-Onboarding-Registration-UI/ -->
+    <!-- https://dribbble.com/shots/3530529-Upcoming-Registration-Design/ -->
+    <activity
+      android:name=".static.StaticActivity"
+      android:exported="true"
+      android:theme="@style/Theme.Static"
+      android:windowSoftInputMode="adjustResize"/>
   </application>
 </manifest>
