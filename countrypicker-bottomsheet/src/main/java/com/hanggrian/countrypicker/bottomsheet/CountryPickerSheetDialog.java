@@ -37,13 +37,13 @@ public class CountryPickerSheetDialog extends BottomSheetDialog implements Count
             .getLayout()
             .<CardView>findViewById(com.hanggrian.countrypicker.R.id.countrypicker_card)
             .setCardBackgroundColor(
-                getColorAttr(context, com.google.android.material.R.attr.colorSurfaceVariant)
+                getColorAttr(context, com.google.android.material.R.attr.colorSurface)
             );
 
         // root layout to avoid picker content being pushed because height is too small
         final FrameLayout root = new FrameLayout(context);
         root.setBackgroundColor(
-            getColorAttr(context, com.google.android.material.R.attr.colorSurface)
+            getColorAttr(context, android.R.attr.background)
         );
         root.setLayoutParams(new FrameLayout.LayoutParams(MATCH_PARENT, MATCH_PARENT));
         root.addView(picker.getLayout());

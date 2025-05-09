@@ -1,4 +1,4 @@
-package com.example
+package com.example.dynamic
 
 const val PREFERENCE_FLAG_DISPLAY = "flag_display"
 const val PREFERENCE_NAME_DISPLAY = "name_display"

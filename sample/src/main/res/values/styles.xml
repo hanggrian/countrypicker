@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+
+  <style name="Theme.Static" parent="Theme.Material3.Dark.NoActionBar">
+    <item name="colorPrimary">#e95084</item>
+    <item name="colorSecondary">#fbae4a</item>
+  </style>
+
+  <style name="Widget.Field" parent="android:Widget">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:background">@drawable/bg_field</item>
+    <item name="android:paddingTop">16dp</item>
+    <item name="android:paddingBottom">16dp</item>
+    <item name="android:textAppearance">@style/TextAppearance.Material3.BodyLarge</item>
+  </style>
+</resources>

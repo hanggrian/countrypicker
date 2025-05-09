@@ -1,12 +1,15 @@
 [![CircleCI](https://img.shields.io/circleci/build/gh/hanggrian/countrypicker)](https://app.circleci.com/pipelines/github/hanggrian/countrypicker/)
 [![Codecov](https://img.shields.io/codecov/c/gh/hanggrian/countrypicker)](https://app.codecov.io/gh/hanggrian/countrypicker/)
 [![Maven Central](https://img.shields.io/maven-central/v/com.hanggrian.countrypicker/countrypicker)](https://central.sonatype.com/artifact/com.hanggrian.countrypicker/countrypicker/)
-[![Android SDK](https://img.shields.io/badge/android-21%2B-34a853)](https://developer.android.com/tools/releases/platforms/#5.0)
+[![Android SDK](https://img.shields.io/badge/android-21%2B-34a853)](https://developer.android.com/tools/releases/platforms/#5.0) \
+[![Figma](https://img.shields.io/badge/design-figma-f24e1e)](https://www.figma.com/community/file/1502658681774912727/)
+[![Layers](https://img.shields.io/badge/showcase-layers-000)](https://layers.to/layers/cmamfenj6000cjo0cwdp38uem/)
+[![Pinterest](https://img.shields.io/badge/pin-pinterest-bd081c)](https://www.pinterest.com/pin/1107322627133852252/)
 
 # CountryPicker
 
 ![](https://github.com/hendraanggrian/countrypicker/raw/assets/preview_dialog.gif "Dialog preview")
-![](https://github.com/hendraanggrian/countrypicker/raw/assets/preview_bottomsheet.gif "Bottom sheet dialog")
+![](https://github.com/hendraanggrian/countrypicker/raw/assets/preview_bottomsheet.gif "Bottom sheet dialog preview")
 
 Material design components to pick country.
 
