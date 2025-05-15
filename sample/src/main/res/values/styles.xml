@@ -1,17 +1,50 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 
-  <style name="Theme.Static" parent="Theme.Material3.Dark.NoActionBar">
-    <item name="colorPrimary">#e95084</item>
-    <item name="colorSecondary">#fbae4a</item>
+  <style name="Theme.Static" parent="Theme.Material3.Light.NoActionBar">
+    <item name="colorPrimary">#ff6870</item>
+    <item name="colorSecondary">#ff6870</item>
+  </style>
+
+  <style name="Widget.Progress" parent="android:Widget">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="indicatorTrackGapSize">0dp</item>
+    <item name="indicatorColor">?colorPrimary</item>
+    <item name="trackThickness">8dp</item>
   </style>
 
   <style name="Widget.Field" parent="android:Widget">
     <item name="android:layout_width">match_parent</item>
     <item name="android:layout_height">wrap_content</item>
-    <item name="android:background">@drawable/bg_field</item>
     <item name="android:paddingTop">16dp</item>
     <item name="android:paddingBottom">16dp</item>
     <item name="android:textAppearance">@style/TextAppearance.Material3.BodyLarge</item>
+  </style>
+
+  <style name="Widget.ModeCard" parent="android:Widget">
+    <item name="android:layout_width">128dp</item>
+    <item name="android:layout_height">128dp</item>
+    <item name="android:layout_margin">8dp</item>
+    <item name="cardCornerRadius">16dp</item>
+  </style>
+
+  <style name="Widget.ModeContainer" parent="android:Widget">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">match_parent</item>
+    <item name="android:gravity">center</item>
+    <item name="android:orientation">vertical</item>
+  </style>
+
+  <style name="Widget.ModeImage" parent="android:Widget">
+    <item name="android:layout_width">48dp</item>
+    <item name="android:layout_height">48dp</item>
+  </style>
+
+  <style name="Widget.ModeText" parent="android:Widget.TextView">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginTop">8dp</item>
+    <item name="android:textAppearance">@style/TextAppearance.Material3.BodyMedium</item>
   </style>
 </resources>

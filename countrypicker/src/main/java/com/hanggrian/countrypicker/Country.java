@@ -314,7 +314,8 @@ public enum Country {
         final Configuration config = context.getResources().getConfiguration();
         return new Locale(Build.VERSION.SDK_INT < N
             ? config.locale.getLanguage()
-            : config.getLocales().get(0).getLanguage(), isoCode);
+            : config.getLocales().get(0).getLanguage(), isoCode
+        );
     }
 
     @Nullable
@@ -346,8 +347,8 @@ public enum Country {
 
     /**
      * See <a href="https://en.wikipedia.org/wiki/Regional_Indicator_Symbol">
-     *     https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
-     *     </a>.
+     * https://en.wikipedia.org/wiki/Regional_Indicator_Symbol
+     * </a>.
      */
     private static final SparseIntArray SYMBOLS = new SparseIntArray(26);
 

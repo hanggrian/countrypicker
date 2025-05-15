@@ -3,8 +3,8 @@
 [![Maven Central](https://img.shields.io/maven-central/v/com.hanggrian.countrypicker/countrypicker)](https://central.sonatype.com/artifact/com.hanggrian.countrypicker/countrypicker/)
 [![Android SDK](https://img.shields.io/badge/android-21%2B-34a853)](https://developer.android.com/tools/releases/platforms/#5.0) \
 [![Figma](https://img.shields.io/badge/design-figma-f24e1e)](https://www.figma.com/community/file/1502658681774912727/)
-[![Layers](https://img.shields.io/badge/showcase-layers-000)](https://layers.to/layers/cmamfenj6000cjo0cwdp38uem/)
-[![Pinterest](https://img.shields.io/badge/pin-pinterest-bd081c)](https://www.pinterest.com/pin/1107322627133852252/)
+[![Layers](https://img.shields.io/badge/showcase-layers-000)](https://layers.to/layers/cmap9dtl3000ajp0drie6r7eh/)
+[![Pinterest](https://img.shields.io/badge/pin-pinterest-bd081c)](https://www.pinterest.com/pin/1107322627133948607/)
 
 # CountryPicker
 

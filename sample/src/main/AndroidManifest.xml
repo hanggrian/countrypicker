@@ -12,19 +12,23 @@
     <activity
       android:name=".dynamic.DynamicActivity"
       android:exported="true"
-      android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar">
+      android:theme="@style/Theme.Material3.DynamicColors.DayNight.NoActionBar"/>
+
+    <!-- https://dribbble.com/shots/6770513-Queo-Parking-Platform-Registration-Form-Step-2/ -->
+    <!-- https://dribbble.com/shots/20890241-PIXO-User-registration/ -->
+    <activity
+      android:name=".static.RegistrationActivity"
+      android:exported="true"
+      android:theme="@style/Theme.Static"
+      android:windowSoftInputMode="adjustResize">
       <intent-filter>
         <action android:name="android.intent.action.MAIN"/>
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-
-    <!-- https://dribbble.com/shots/4512095-Onboarding-Registration-UI/ -->
-    <!-- https://dribbble.com/shots/3530529-Upcoming-Registration-Design/ -->
     <activity
-      android:name=".static.StaticActivity"
+      android:name=".static.CompleteActivity"
       android:exported="true"
-      android:theme="@style/Theme.Static"
-      android:windowSoftInputMode="adjustResize"/>
+      android:theme="@style/Theme.Static"/>
   </application>
 </manifest>

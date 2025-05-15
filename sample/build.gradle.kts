@@ -33,6 +33,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.multidex)
     implementation(libs.androidx.preference)
+    implementation(libs.roundedimageview)
 }
 
 tasks.withType<KotlinCompile>().configureEach {

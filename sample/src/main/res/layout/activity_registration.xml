@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:context=".static.RegistrationActivity"
+  tools:ignore="HardcodedText,ContentDescription,MergeRootFrame">
+
+  <com.google.android.material.progressindicator.LinearProgressIndicator
+    style="@style/Widget.Progress"
+    android:fitsSystemWindows="true"
+    android:progress="40"/>
+
+  <LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="32dp"
+      android:layout_marginTop="128dp"
+      android:layout_marginEnd="32dp"
+      android:orientation="vertical">
+
+      <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/outline_close"/>
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="Creating an account"
+        android:textAppearance="@style/TextAppearance.Material3.TitleLarge"/>
+
+      <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Select country code and fill your phone number"
+        android:textAppearance="@style/TextAppearance.Material3.BodyLarge"/>
+    </LinearLayout>
+
+    <LinearLayout
+      android:id="@+id/container"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:orientation="vertical"
+      android:padding="32dp">
+
+      <EditText
+        android:id="@+id/editText"
+        style="@style/Widget.Field"
+        android:autofillHints="username"
+        android:focusable="false"
+        android:hint="Country"
+        android:inputType="none"/>
+
+      <EditText
+        style="@style/Widget.Field"
+        android:layout_marginTop="16dp"
+        android:autofillHints="phone"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        android:text="755-2099"/>
+    </LinearLayout>
+
+    <FrameLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_gravity="bottom"
+      android:fitsSystemWindows="true">
+
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:layout_marginStart="32dp"
+        android:text="Skip"
+        android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+        android:textColor="#ffa657"/>
+
+      <androidx.cardview.widget.CardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center|end"
+        android:layout_margin="16dp"
+        app:cardCornerRadius="32dp"
+        app:cardElevation="4dp">
+
+        <LinearLayout
+          android:id="@+id/button_container"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@android:color/darker_gray"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:padding="16dp">
+
+          <ImageView
+            android:id="@+id/button_image"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center"
+            android:enabled="false"
+            android:src="@drawable/outline_next"
+            app:tint="@android:color/white"/>
+
+          <TextView
+            android:id="@+id/button_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:layout_marginEnd="8dp"
+            android:text="Next"
+            android:textAppearance="@style/TextAppearance.Material3.TitleMedium"
+            android:textColor="@android:color/white"/>
+        </LinearLayout>
+      </androidx.cardview.widget.CardView>
+    </FrameLayout>
+  </LinearLayout>
+</FrameLayout>
